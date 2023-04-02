@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
         int factArg = 0;
         int fact{1};
         bool odpowiedz = false;
-        factArg = QInputDialog::getInt(0, "Kalkulator silni", "Silnia", 1,-2147483647, 2145483647, 1, &odpowiedz);
+        factArg = QInputDialog::getInt(0, "Kalkulator silni", "Silnia", 1,0, 2145483647, 1, &odpowiedz);
         if(odpowiedz == false)
             break;
         cout << "Uzytkownik wprowadzil wartosc: " << factArg << endl;
