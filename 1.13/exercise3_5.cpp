@@ -2,6 +2,9 @@
 #include <vector>
 #include <utility>
 #include <QString>
+#include <QtWidgets>
+#include <random>
+#include <ctime>
 using namespace Qt;
 using namespace std;
 
@@ -93,7 +96,7 @@ public:
         tekstowe_dane.resize(rozmiar_y);
         for(auto& elem : tekstowe_dane)
         {
-            elem.fill('S', rozmiar_x);
+            elem.fill(' ', rozmiar_x);
         }
     }
 
@@ -128,15 +131,94 @@ public:
 };
 
 
-int main()
+class game_manager {
+private:
+    Mapa mapa;
+    int ilosc_graczy;
+    vector<QString> imiona_Graczy;
+
+    default_random_engine dre;
+    uniform_int_distribution<int> id;
+public:
+    game_manager(int rozmiar_planszy_x, int rozmiar_planszy_y, int iloscPol) : mapa(rozmiar_planszy_x, rozmiar_planszy_y), dre(time(nullptr)) , id(0, iloscPol)
+    {
+        bool akceptacja = false;
+        ilosc_graczy = QInputDialog::getInt(nullptr, "Ilosc graczy", "Podaj ilosc graczy: " , 0, 0, 10, 1, &akceptacja);
+
+        // Jak sie nie zgodzi
+        if(!akceptacja)
+            throw runtime_error("Nie to nie!");
+
+        for(int i = 0; i < ilosc_graczy; ++i)
+        {
+            QString imie = QInputDialog::getText(nullptr, "Gracz", "Wprowadz imie gracza numer " + QString::number(i+1));
+            imiona_Graczy.push_back(imie);
+        }
+
+        // Wybieramy jame i wyjscie
+        int index_jamy = id(dre);
+        int index_wyjscia;
+        // GDYBY WYDARZYLA SIE POWTORKA
+        do {
+            index_wyjscia = id(dre);
+        } while(index_wyjscia == index_jamy);
+
+        int podzielone_pole = 360/iloscPol;
+        for(int i = 1, x = 5, y = rozmiar_planszy_y/2, kat = 0; i <= iloscPol; ++i, kat += podzielone_pole)
+        {
+            int dystans_x = 6+iloscPol/3;
+            int dystans_y = 4;
+
+            if(kat >= 0 && kat < 90) {
+                // Pierwsza cwiartka
+
+                // - nic
+
+            } else if(kat >= 90 && kat < 180) {
+                // Druga cwiartka
+                dystans_y *= -1;
+
+            } else if(kat >= 180 && kat < 270) {
+                // Trzecia cwiartka
+                dystans_x *= -1;
+                dystans_y *= -1;
+
+            } else if (kat >= 270 && kat < 360) {
+                // Czwarta cwiartka
+                dystans_x *= -1;
+            } else {
+                // Pierwsza cwiartka
+            }
+
+            x += dystans_x;
+            y -= dystans_y;
+
+            if(i == index_jamy) {
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::jama));
+            } else if(i == index_wyjscia) {
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::wygrana));
+            } else {
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
+            }
+
+
+
+
+
+        }
+    }
+
+    void pokaz_mape()
+    {
+        system("clear");
+        cout << mapa.daj_Jako_Tekst();
+    }
+};
+
+int main(int argc, char* argv[])
 {
-    Mapa mapa(30, 20);
+    QApplication app(argc, argv);
 
-    Pole pole(2323, 5, 5, rodzaj_Pola::zwykly);
-    mapa.dodaj_Pole(std::move(pole));
-
-    cout << mapa.daj_Jako_Tekst() << "\n\n\n";
-
-    mapa[2323].ustaw_tekst("Hello there!");
-    cout << mapa.daj_Jako_Tekst();
+    game_manager manager(80, 40, 8);
+    manager.pokaz_mape();
 }
