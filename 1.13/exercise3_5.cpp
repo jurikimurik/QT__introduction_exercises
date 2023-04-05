@@ -176,7 +176,7 @@ private:
     }
 
 public:
-    game_manager(int rozmiar_planszy_x, int rozmiar_planszy_y, int iloscPol) : mapa(rozmiar_planszy_x, rozmiar_planszy_y), dre(time(nullptr)) , id(0, iloscPol)
+    game_manager(int rozmiar_planszy_x, int rozmiar_planszy_y, int iloscPol) : mapa(rozmiar_planszy_x, rozmiar_planszy_y), dre(time(nullptr)) , id(1, iloscPol)
     {
         bool akceptacja = false;
         ilosc_graczy = QInputDialog::getInt(nullptr, "Ilosc graczy", "Podaj ilosc graczy: " , 0, 0, 10, 1, &akceptacja);
@@ -277,6 +277,8 @@ public:
         int move_id = para_danych.first.pozycja_id + para_danych.second;
         if(move_id > mapa.daj_ilosc_pol()) {
             move_id %= mapa.daj_ilosc_pol();
+            if(move_id == 0)
+                move_id++;
         }
 
         // Sprzatamy wizualna czesc starego pola
@@ -353,6 +355,6 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    game_manager manager(80, 30, 12);
+    game_manager manager(80, 30, 3);
     while(!manager.runda());
 }
