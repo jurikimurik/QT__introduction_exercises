@@ -75,9 +75,25 @@ private:
     vector<QString> tekstowe_dane;
     pair<size_t, size_t> rozmiar;
 
+    void oczyszcz_dane()
+    {
+        tekstowe_dane.resize(rozmiar.second);
+        for(auto& elem : tekstowe_dane)
+        {
+            elem.fill(' ', rozmiar.first);
+        }
+    }
+
+public:
+    Mapa(int rozmiar_x, int rozmiar_y) : rozmiar(make_pair(rozmiar_x, rozmiar_y)) {
+        oczyszcz_dane();
+    }
+
     // Zajmuje sie odswiezaniem danych tekstowych i wypisywaniem pol
     void refresh()
     {
+        oczyszcz_dane();
+
         for(const auto& elem : pola)
         {
             auto xy = elem.daj_koordynaty();
@@ -97,12 +113,11 @@ private:
         }
     }
 
-public:
-    Mapa(int rozmiar_x, int rozmiar_y) : rozmiar(make_pair(rozmiar_x, rozmiar_y)) {
-        tekstowe_dane.resize(rozmiar_y);
-        for(auto& elem : tekstowe_dane)
+    void przywroc_nazwy()
+    {
+        for(auto& elem : pola)
         {
-            elem.fill(' ', rozmiar_x);
+            elem.przywroc_standardowy_tekst();
         }
     }
 
@@ -141,10 +156,7 @@ public:
 
     void refresh_map()
     {
-        for(auto& elem : pola)
-        {
-            elem.przywroc_standardowy_tekst();
-        }
+
     }
 };
 
@@ -284,10 +296,11 @@ public:
     // Zwraca TRUE, jezeli ktos wygral lub WSZYSCY przegrali.
     bool runda()
     {
+        mapa.refresh();
         pokaz_mape();
 
+        mapa.przywroc_nazwy();
 
-        mapa.refresh_map();
         vector<Player*> gracze_do_usuniecia;
         for(auto& elem : gracze)
         {
@@ -318,6 +331,8 @@ public:
             }
         }
 
+
+
         // Wszyscy przegrali
         if(gracze.size() == 0)
         {
@@ -334,6 +349,6 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    game_manager manager(80, 40, 12);
+    game_manager manager(80, 30, 12);
     while(!manager.runda());
 }
