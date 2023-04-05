@@ -224,6 +224,50 @@ public:
     }
 
 
+
+    // Zwraca TRUE, jezeli ktos wygral lub WSZYSCY przegrali.
+    bool runda()
+    {
+        vector<Player&> gracze_do_usuniecia;
+        for(auto& elem : gracze)
+        {
+            int wynik = 0;
+            if(wynik == 1)
+            {
+                cout << "Gracz " << elem.imie << " wygral! Brawo!" << endl;
+                return true;
+            } else if(wynik == -1) {
+                cout << "Gracz " << elem.imie << " wypada z gry! Jaki wstyd!" << endl;
+                // NIE MOZNA USUWAC TUTAJ, BO REFERENCJA BEDZIE NIEPRAWIDLOWA
+                gracze_do_usuniecia.push_back(elem);
+            }
+        }
+
+        // TERAZ JUZ MOZNA USUWAC NAPRAWDE GRACZY (JEZELI SA TACY)
+        if(gracze_do_usuniecia.size() > 0)
+        {
+            for(int x = 0; x < gracze_do_usuniecia.size(); ++x)
+            {
+                for(int y = 0; y < gracze.size(); ++y)
+                {
+                    if(gracze_do_usuniecia[x] == gracze[y])
+                    {
+                        gracze.erase(y);
+                    }
+                }
+            }
+        }
+
+        // Wszyscy przegrali
+        if(gracze.size() == 0)
+        {
+            cout << "Wszyscy przegrali! Jaki wstyd!" << endl;
+            return true;
+        } else {
+            // Nikt nie wygral
+             return false;
+        }
+    }
 };
 
 int main(int argc, char* argv[])
