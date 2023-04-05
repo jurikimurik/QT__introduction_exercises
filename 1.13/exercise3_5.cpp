@@ -128,6 +128,16 @@ public:
         // Nie ma takiego id? Wyrzuc blad
         throw runtime_error("Nie ma takiego Pola!");
     }
+
+    int daj_ilosc_pol() const {
+        return pola.size();
+    }
+};
+
+struct Player {
+    QString imie;
+    bool czy_komp;
+    int pozycja_id;
 };
 
 
@@ -135,7 +145,7 @@ class game_manager {
 private:
     Mapa mapa;
     int ilosc_graczy;
-    vector<QString> imiona_Graczy;
+    vector<Player> gracze;
 
     default_random_engine dre;
     uniform_int_distribution<int> id;
@@ -151,8 +161,12 @@ public:
 
         for(int i = 0; i < ilosc_graczy; ++i)
         {
-            QString imie = QInputDialog::getText(nullptr, "Gracz", "Wprowadz imie gracza numer " + QString::number(i+1));
-            imiona_Graczy.push_back(imie);
+            QString imie = QInputDialog::getText(nullptr, "Gracz", "Wprowadz imie gracza numer" + QString::number(i+1) + " (K - komputer) ");
+            if(imie != "K") {
+                gracze.push_back(Player{imie, false});
+            } else {
+                gracze.push_back(Player{"Komputer  " + QString::number(i), true});
+            }
         }
 
         // Wybieramy jame i wyjscie
@@ -200,11 +214,6 @@ public:
             } else {
                 mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
             }
-
-
-
-
-
         }
     }
 
@@ -213,6 +222,8 @@ public:
         system("clear");
         cout << mapa.daj_Jako_Tekst();
     }
+
+
 };
 
 int main(int argc, char* argv[])
