@@ -5,10 +5,12 @@
 #include <QtWidgets>
 #include <random>
 #include <ctime>
+#include <string>
 using namespace Qt;
 using namespace std;
 
 QTextStream cout(stdout);
+QTextStream cin(stdin);
 
 enum class rodzaj_Pola {
     zwykly,
@@ -60,6 +62,10 @@ public:
 
     int get_Id() const {
         return id;
+    }
+
+    rodzaj_Pola get_rodzaj_pola() const {
+        return rP;
     }
 };
 
@@ -132,13 +138,26 @@ public:
     int daj_ilosc_pol() const {
         return pola.size();
     }
+
+    void refresh_map()
+    {
+        for(auto& elem : pola)
+        {
+            elem.przywroc_standardowy_tekst();
+        }
+    }
 };
 
 struct Player {
     QString imie;
     bool czy_komp;
-    int pozycja_id;
+    int pozycja_id = 0;
 };
+
+bool operator == (const Player& p1, const Player& p2)
+{
+    return p1.imie == p2.imie && p1.czy_komp == p2.czy_komp && p1.pozycja_id == p2.pozycja_id;
+}
 
 
 class game_manager {
@@ -223,15 +242,56 @@ public:
         cout << mapa.daj_Jako_Tekst();
     }
 
+    pair<Player&, int> rzucz_kosci(Player& gracz)
+    {
+        cout << "Gracz " << gracz.imie << " rzuca kosci!" << endl;
+        if(!gracz.czy_komp) {
+            cout << "<RETURN> zeby rzucic koscie!" << endl;
 
+            cin.readLine();
+        }
+
+        uniform_int_distribution<int> kosci_id(1, 6);
+
+
+        int rzut_1 = kosci_id(dre);
+
+        int rzut_2 = kosci_id(dre);
+        cout << "Wyrzucil: " << rzut_1 << " oraz " << rzut_2 << endl;
+
+        return make_pair(ref(gracz), rzut_1+rzut_2);
+    }
+
+    int przemieszcz_gracza(pair<Player&, int> para_danych)
+    {
+        int move_id = para_danych.first.pozycja_id + para_danych.second;
+        if(move_id > mapa.daj_ilosc_pol()) {
+            move_id %= mapa.daj_ilosc_pol();
+        }
+
+        para_danych.first.pozycja_id = move_id;
+        mapa[move_id].ustaw_tekst(para_danych.first.imie);
+
+        rodzaj_Pola rp = mapa[move_id].get_rodzaj_pola();
+        if(rp == rodzaj_Pola::jama)
+            return -1;
+        else if(rp == rodzaj_Pola::wygrana)
+            return 1;
+        else
+            return 0;
+    }
 
     // Zwraca TRUE, jezeli ktos wygral lub WSZYSCY przegrali.
     bool runda()
     {
-        vector<Player&> gracze_do_usuniecia;
+        pokaz_mape();
+
+
+        mapa.refresh_map();
+        vector<Player*> gracze_do_usuniecia;
         for(auto& elem : gracze)
         {
-            int wynik = 0;
+            int wynik = przemieszcz_gracza(rzucz_kosci(elem));
             if(wynik == 1)
             {
                 cout << "Gracz " << elem.imie << " wygral! Brawo!" << endl;
@@ -239,7 +299,7 @@ public:
             } else if(wynik == -1) {
                 cout << "Gracz " << elem.imie << " wypada z gry! Jaki wstyd!" << endl;
                 // NIE MOZNA USUWAC TUTAJ, BO REFERENCJA BEDZIE NIEPRAWIDLOWA
-                gracze_do_usuniecia.push_back(elem);
+                gracze_do_usuniecia.push_back(&elem);
             }
         }
 
@@ -250,9 +310,9 @@ public:
             {
                 for(int y = 0; y < gracze.size(); ++y)
                 {
-                    if(gracze_do_usuniecia[x] == gracze[y])
+                    if(*gracze_do_usuniecia[x] == gracze[y])
                     {
-                        gracze.erase(y);
+                        gracze.erase(gracze.begin()+y);
                     }
                 }
             }
@@ -274,6 +334,6 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    game_manager manager(80, 40, 8);
-    manager.pokaz_mape();
+    game_manager manager(80, 40, 12);
+    while(!manager.runda());
 }
