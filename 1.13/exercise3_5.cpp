@@ -6,6 +6,8 @@
 #include <random>
 #include <ctime>
 #include <string>
+#include <thread>
+#include <chrono>
 using namespace Qt;
 using namespace std;
 
@@ -113,14 +115,6 @@ public:
         }
     }
 
-    void przywroc_nazwy()
-    {
-        for(auto& elem : pola)
-        {
-            elem.przywroc_standardowy_tekst();
-        }
-    }
-
     void dodaj_Pole(Pole&& pole) {
         pola.push_back(pole);
     }
@@ -153,11 +147,6 @@ public:
     int daj_ilosc_pol() const {
         return pola.size();
     }
-
-    void refresh_map()
-    {
-
-    }
 };
 
 struct Player {
@@ -180,6 +169,12 @@ private:
 
     default_random_engine dre;
     uniform_int_distribution<int> id;
+
+    void czekaj(int sekundy)
+    {
+        this_thread::sleep_for(chrono::seconds(sekundy));
+    }
+
 public:
     game_manager(int rozmiar_planszy_x, int rozmiar_planszy_y, int iloscPol) : mapa(rozmiar_planszy_x, rozmiar_planszy_y), dre(time(nullptr)) , id(0, iloscPol)
     {
@@ -248,10 +243,12 @@ public:
         }
     }
 
+
     void pokaz_mape()
     {
+        mapa.refresh();
         system("clear");
-        cout << mapa.daj_Jako_Tekst();
+        cout << mapa.daj_Jako_Tekst() << flush;
     }
 
     pair<Player&, int> rzucz_kosci(Player& gracz)
@@ -271,6 +268,7 @@ public:
         int rzut_2 = kosci_id(dre);
         cout << "Wyrzucil: " << rzut_1 << " oraz " << rzut_2 << endl;
 
+        czekaj(2);
         return make_pair(ref(gracz), rzut_1+rzut_2);
     }
 
@@ -281,12 +279,18 @@ public:
             move_id %= mapa.daj_ilosc_pol();
         }
 
+        // Sprzatamy wizualna czesc starego pola
+        if(para_danych.first.pozycja_id != 0)
+            mapa[para_danych.first.pozycja_id].przywroc_standardowy_tekst();
+
         para_danych.first.pozycja_id = move_id;
         mapa[move_id].ustaw_tekst(para_danych.first.imie);
 
         rodzaj_Pola rp = mapa[move_id].get_rodzaj_pola();
-        if(rp == rodzaj_Pola::jama)
+        if(rp == rodzaj_Pola::jama) {
+            mapa[move_id].przywroc_standardowy_tekst();
             return -1;
+        }
         else if(rp == rodzaj_Pola::wygrana)
             return 1;
         else
@@ -296,15 +300,13 @@ public:
     // Zwraca TRUE, jezeli ktos wygral lub WSZYSCY przegrali.
     bool runda()
     {
-        mapa.refresh();
         pokaz_mape();
-
-        mapa.przywroc_nazwy();
 
         vector<Player*> gracze_do_usuniecia;
         for(auto& elem : gracze)
         {
             int wynik = przemieszcz_gracza(rzucz_kosci(elem));
+            pokaz_mape();
             if(wynik == 1)
             {
                 cout << "Gracz " << elem.imie << " wygral! Brawo!" << endl;
@@ -314,7 +316,9 @@ public:
                 // NIE MOZNA USUWAC TUTAJ, BO REFERENCJA BEDZIE NIEPRAWIDLOWA
                 gracze_do_usuniecia.push_back(&elem);
             }
+            czekaj(3);
         }
+        //mapa.przywroc_nazwy();
 
         // TERAZ JUZ MOZNA USUWAC NAPRAWDE GRACZY (JEZELI SA TACY)
         if(gracze_do_usuniecia.size() > 0)
