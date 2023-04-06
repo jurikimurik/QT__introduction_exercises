@@ -249,11 +249,11 @@ public:
             y -= dystans_y;
 
             if(i == index_jamy) {
-                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::jama));
             } else if(i == index_wyjscia) {
                 mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::wygrana));
             } else {
-                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::wygrana));
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
             }
         }
     }
@@ -376,10 +376,14 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
+    int rozmiar_x = QInputDialog::getInt(nullptr, "Rozmiar X", "Wprowadz rozmiar planszy X: ", 80, 0);
+    int rozmiar_y = QInputDialog::getInt(nullptr, "Rozmiar Y", "Wprowadz rozmiar planszy Y: ", 30, 0);
+    int ilosc_pol = QInputDialog::getInt(nullptr, "Pola", "Wprowadz ilosc pol: ", 12, 1);
+
     bool powtorka = true;
     while(powtorka)
     {
-        game_manager manager(80, 30, 12);
+        game_manager manager(rozmiar_x, rozmiar_y, ilosc_pol);
         while(!manager.runda());
 
         cout << "Druga partyjka? (y/n) " << flush;
