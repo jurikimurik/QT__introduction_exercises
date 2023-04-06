@@ -302,7 +302,20 @@ public:
 
         // Sprzatamy wizualna czesc starego pola
         if(para_danych.first.pozycja_id != 0)
-            mapa[para_danych.first.pozycja_id].przywroc_standardowy_tekst();
+        {
+            QString str = mapa[para_danych.first.pozycja_id].daj_tekst();
+
+            // Trzy mozliwosci
+            str.remove(para_danych.first.imie + "/");
+            str.remove("/" + para_danych.first.imie);
+            str.remove(para_danych.first.imie);
+
+            if(str.size() == 0)
+                mapa[para_danych.first.pozycja_id].przywroc_standardowy_tekst();
+            else
+                mapa[para_danych.first.pozycja_id].ustaw_tekst(str);
+        }
+
 
         para_danych.first.pozycja_id = move_id;
         try {
