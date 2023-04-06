@@ -8,11 +8,16 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <map>
 using namespace Qt;
 using namespace std;
 
 QTextStream cout(stdout);
 QTextStream cin(stdin);
+
+struct Player;
+
+map<Player, int> wygrani;
 
 enum class rodzaj_Pola {
     zwykly,
@@ -156,6 +161,11 @@ struct Player {
     int pozycja_id = 0;
 };
 
+bool operator < (const Player& p1, const Player& p2)
+{
+    return p1.imie < p2.imie;
+}
+
 bool operator == (const Player& p1, const Player& p2)
 {
     return p1.imie == p2.imie && p1.czy_komp == p2.czy_komp && p1.pozycja_id == p2.pozycja_id;
@@ -235,11 +245,11 @@ public:
             y -= dystans_y;
 
             if(i == index_jamy) {
-                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::jama));
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
             } else if(i == index_wyjscia) {
                 mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::wygrana));
             } else {
-                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::zwykly));
+                mapa.dodaj_Pole(Pole(i, x, y, rodzaj_Pola::wygrana));
             }
         }
     }
@@ -313,6 +323,12 @@ public:
             if(wynik == 1)
             {
                 cout << "Gracz " << elem.imie << " wygral! Brawo!" << endl;
+                if(elem.imie.toStdString().find("Komputer") != string::npos)
+                {
+                    wygrani[Player{"Komputer", true}]++;
+                } else {
+                     wygrani[elem]++;
+                }
                 return true;
             } else if(wynik == -1) {
                 cout << "Gracz " << elem.imie << " wypada z gry! Jaki wstyd!" << endl;
@@ -368,6 +384,15 @@ int main(int argc, char* argv[])
         if(znak == 'n')
              powtorka = false;
     }
+
+
+    QString info_wygranych;
+    for(const auto& elem : wygrani)
+    {
+        info_wygranych +=  elem.first.imie + " - " + QString::number(elem.second) + "\n";
+    }
+    if(wygrani.size() > 0)
+        QMessageBox::information(nullptr, "Wygrani", info_wygranych, "Ok");
 
 
 }
