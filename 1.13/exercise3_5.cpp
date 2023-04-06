@@ -56,6 +56,10 @@ public:
         napis = jaki;
     }
 
+    QString daj_tekst() const {
+        return napis;
+    }
+
     void przywroc_standardowy_tekst() {
         if(rP == rodzaj_Pola::zwykly)
             napis = QString::number(id);
@@ -301,7 +305,16 @@ public:
             mapa[para_danych.first.pozycja_id].przywroc_standardowy_tekst();
 
         para_danych.first.pozycja_id = move_id;
-        mapa[move_id].ustaw_tekst(para_danych.first.imie);
+        try {
+            cout << std::stoi(mapa[move_id].daj_tekst().toStdString());
+            mapa[move_id].ustaw_tekst(para_danych.first.imie);
+        }
+        catch (std::exception &e) {
+            QString tekst_w_polu = mapa[move_id].daj_tekst();
+            mapa[move_id].ustaw_tekst(tekst_w_polu + "/" + para_danych.first.imie);
+        }
+
+
 
         rodzaj_Pola rp = mapa[move_id].get_rodzaj_pola();
         if(rp == rodzaj_Pola::jama) {
