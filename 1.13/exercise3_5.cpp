@@ -152,6 +152,7 @@ public:
 struct Player {
     QString imie;
     bool czy_komp;
+    bool czy_auto = false;
     int pozycja_id = 0;
 };
 
@@ -355,6 +356,18 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    game_manager manager(80, 30, 3);
-    while(!manager.runda());
+    bool powtorka = true;
+    while(powtorka)
+    {
+        game_manager manager(80, 30, 3);
+        while(!manager.runda());
+
+        cout << "Druga partyjka? (y/n) " << flush;
+        QChar znak;
+        cin >> znak;
+        if(znak == 'n')
+             powtorka = false;
+    }
+
+
 }
