@@ -9,6 +9,7 @@
 #include <thread>
 #include <chrono>
 #include <map>
+#include <iomanip>
 using namespace Qt;
 using namespace std;
 
@@ -189,6 +190,9 @@ private:
 public:
     game_manager(int rozmiar_planszy_x, int rozmiar_planszy_y, int iloscPol) : mapa(rozmiar_planszy_x, rozmiar_planszy_y), dre(time(nullptr)) , id(1, iloscPol)
     {
+        // Oczyszczamy strumienie
+        cin.reset();
+
         bool akceptacja = false;
         ilosc_graczy = QInputDialog::getInt(nullptr, "Ilosc graczy", "Podaj ilosc graczy: " , 0, 0, 10, 1, &akceptacja);
 
@@ -375,13 +379,13 @@ int main(int argc, char* argv[])
     bool powtorka = true;
     while(powtorka)
     {
-        game_manager manager(80, 30, 3);
+        game_manager manager(80, 30, 12);
         while(!manager.runda());
 
         cout << "Druga partyjka? (y/n) " << flush;
-        QChar znak;
-        cin >> znak;
-        if(znak == 'n')
+        QString odp;
+        cin.readLineInto(&odp);
+        if(odp == "n")
              powtorka = false;
     }
 
