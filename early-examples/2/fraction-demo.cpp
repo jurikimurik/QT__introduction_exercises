@@ -11,5 +11,8 @@ int main()
 
     cout << ulamek.toString() << " oraz " << ulamek_drugi.toString() << endl;
 
-    cout << ulamek.add(ulamek_drugi).toString() << endl;
+    cout << ulamek.toString() << " + " << ulamek_drugi.toString() << " = " << ulamek.add(ulamek_drugi).toString() << endl;
+    cout << ulamek.toString() << " - " << ulamek_drugi.toString() << " = " << ulamek.subtract(ulamek_drugi).toString() << endl;
+    cout << ulamek.toString() << " * " << ulamek_drugi.toString() << " = " << ulamek.multiply(ulamek_drugi).toString() << endl;
+    cout << ulamek.toString() << " / " << ulamek_drugi.toString() << " = " << ulamek.divide(ulamek_drugi).toString() << endl;
 }

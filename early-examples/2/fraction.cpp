@@ -44,8 +44,6 @@ double Fraction::toDouble()
 
 Fraction Fraction::add(const Fraction& other)
 {
-    QTextStream cout(stdout);
-
     int wspolna_liczba = NWL(m_Denominator, other.m_Denominator);
 
     // Wspolny mianownik + domnazamy licznik
@@ -55,6 +53,41 @@ Fraction Fraction::add(const Fraction& other)
 
     int liczba_numerator = other.m_Numerator * (wspolna_liczba / other.m_Denominator);
     m_Numerator += liczba_numerator;
+
+    skroc_ulamek(*this);
+    return *this;
+}
+
+
+Fraction Fraction::subtract(const Fraction& other)
+{
+    int wspolna_liczba = NWL(m_Denominator, other.m_Denominator);
+
+    // Wspolny mianownik + domnazamy licznik
+    int wspolczynnik = wspolna_liczba / m_Denominator;
+    m_Denominator *= wspolczynnik;
+    m_Numerator *= wspolczynnik;
+
+    int liczba_numerator = other.m_Numerator * (wspolna_liczba / other.m_Denominator);
+    m_Numerator -= liczba_numerator;
+
+    skroc_ulamek(*this);
+    return *this;
+}
+
+Fraction Fraction::multiply(const Fraction& other)
+{
+    m_Numerator *= other.m_Numerator;
+    m_Denominator *= other.m_Denominator;
+
+    skroc_ulamek(*this);
+    return *this;
+}
+
+Fraction Fraction::divide(const Fraction& other)
+{
+    m_Numerator *= other.m_Denominator;
+    m_Denominator *= other.m_Numerator;
 
     skroc_ulamek(*this);
     return *this;
