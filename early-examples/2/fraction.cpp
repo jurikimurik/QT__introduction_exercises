@@ -18,6 +18,14 @@ int NWL(int a, int b)
     return a/NWD(a, b)*b;
 }
 
+void skroc_ulamek(Fraction& ulamek)
+{
+    int nwd = NWD(ulamek.m_Numerator, ulamek.m_Denominator);
+
+    ulamek.m_Numerator /= nwd;
+    ulamek.m_Denominator /= nwd;
+}
+
 void Fraction::set(int numerator, int denominator)
 {
     m_Numerator = numerator;
@@ -36,5 +44,18 @@ double Fraction::toDouble()
 
 Fraction Fraction::add(const Fraction& other)
 {
+    QTextStream cout(stdout);
 
+    int wspolna_liczba = NWL(m_Denominator, other.m_Denominator);
+
+    // Wspolny mianownik + domnazamy licznik
+    int wspolczynnik = wspolna_liczba / m_Denominator;
+    m_Denominator *= wspolczynnik;
+    m_Numerator *= wspolczynnik;
+
+    int liczba_numerator = other.m_Numerator * (wspolna_liczba / other.m_Denominator);
+    m_Numerator += liczba_numerator;
+
+    skroc_ulamek(*this);
+    return *this;
 }
