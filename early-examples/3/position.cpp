@@ -4,5 +4,5 @@ Position::Position(string name, string description) : m_Name(name), m_Descriptio
 
 string Position::toString()
 {
-    return m_Description;
+    return m_Name + ": " + m_Description;
 }

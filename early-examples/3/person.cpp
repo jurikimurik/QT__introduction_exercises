@@ -6,3 +6,9 @@ string Person::toString()
 {
     return m_Name + ", " + m_employer.toString() + ", " + m_position.toString();
 }
+
+void Person::setPosition(Employer newC, Position newP)
+{
+    m_employer = newC;
+    m_position = newP;
+}
