@@ -15,7 +15,7 @@ private:
 public:
     bool hire(Person& newHire, Position pos);
     Employer(string name, string market);
-    string toString();
+    string toString() const;
 };
 
 #endif // EMPLOYER_H

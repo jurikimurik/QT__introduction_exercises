@@ -1,19 +1,42 @@
 #include "person.h"
 #include <QTextStream>
+#include <vector>
+#include <random>
 using namespace Qt;
-
 
 
 int main()
 {
-    Employer GwiezdnaFlota("Flota Gwiezdna", "Kosmos");
-    Employer Borg("Borg", "Nieznany dzial");
 
-    Person Jean_Lue_Picard("Jean-Lue Picard"), Wesley_Crusher("Wesley Crusher");
+    vector<Person> persony = {Person("Jean-Lue Picard"), Person("Wesley Crusher"), Person("Bakou Le-le"), Person("Karol Krolewicz")};
 
-    Jean_Lue_Picard.setPosition(GwiezdnaFlota, Position("Tester mieczy", "Testuje mieczy laserowe"));
-    Wesley_Crusher.setPosition(Borg, Position("Duch", "Wedruje w nieznane."));
+    vector<Position> stanowiska_gwiezdne = {Position("Tester mieczy", "Testuje mieczy laserowe"), Position ("Szturmowiec", "Stara sie strzelac"),
+                                            Position ("Dzedai", "Zdadziecki dzedai na naszej stronie")};
 
-    cout << Jean_Lue_Picard.toString() << endl;
-    cout << Wesley_Crusher.toString() << endl;
+    vector<Position> stanowskia_borg = {Position("Duch", "Wedruje w nieznane."), Position("Wojownik", "Wielki wojownik duchowy"),
+                                        Position("Mag", "Strzela kulkami. Wow!")};
+
+    vector<Employer> zatrudniaczy = {Employer("Flota Gwiezdna", "Kosmos"), Employer("Borg", "Nieznany dzial")};
+
+    std::default_random_engine dre(std::time(nullptr));
+    for(auto& elem : persony)
+    {
+        std::uniform_int_distribution zatr_rand(0ul, zatrudniaczy.size()-1);
+        std::uniform_int_distribution stan_rand(0ul, stanowiska_gwiezdne.size()-1);
+
+        if(zatr_rand(dre) == 0)
+        {
+            elem.setPosition(zatrudniaczy[0], stanowiska_gwiezdne[stan_rand(dre)]);
+        } else {
+            elem.setPosition(zatrudniaczy[1], stanowskia_borg[stan_rand(dre)]);
+        }
+    }
+
+    for(const auto& elem : persony)
+    {
+        cout << elem.toString() << endl;
+    }
+
+
 }
+

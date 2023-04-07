@@ -2,7 +2,7 @@
 
 Position::Position(string name, string description) : m_Name(name), m_Description(description) {}
 
-string Position::toString()
+string Position::toString() const
 {
     return m_Name + ": " + m_Description;
 }

@@ -15,7 +15,7 @@ private:
 public:
     Person(string name);
 
-    string toString();
+    string toString() const;
     void setPosition(Employer newC, Position newP);
 
     Position getPosition() const

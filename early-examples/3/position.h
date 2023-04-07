@@ -10,7 +10,7 @@ private:
     string m_Description;
 public:
     Position(string name, string description);
-    string toString();
+    string toString() const;
 };
 
 #endif // POSITION_H
