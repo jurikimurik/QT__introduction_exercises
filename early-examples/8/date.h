@@ -9,10 +9,10 @@ class Date
 {
 private:
     int DaysSinceBaseDate;
-    static const int begin_year = 0;
+    static const int begin_year = 1;
 public:
     Date();
-    Date(int y, int d);
+    Date(int y, int m, int d);
     void set(int y, int m, int d);
     string toString(bool breaf);
     void setToToday();
