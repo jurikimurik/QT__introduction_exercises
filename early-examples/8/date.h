@@ -25,9 +25,10 @@ public:
     static string monthName(int month);             // V
     static int yearDays(int year);                  // V
     static int monthDays(int month, int year);      // V
+
 private:
     static int ymd2dsbd(int y, int m, int d);       // V
-    bool getYMD(int& y, int& m, int& d);
+    bool getYMD(int& y, int& m, int& d);            // V
 };
 
 #endif // DATE_H

@@ -43,8 +43,10 @@ int Date::ymd2dsbd(int y, int m, int d)
     // LATA - ZALICZONE
     for(int x = begin_year; x < y; ++x)
     {
-        if(leapYear(x))
+        if(leapYear(x)){
             days_count += date_data::daysInTheLeapYear;
+        }
+
         else
             days_count += date_data::daysInTheYear;
     }
@@ -65,3 +67,42 @@ int Date::ymd2dsbd(int y, int m, int d)
     return days_count;
 }
 
+
+//-------------PRIVATE----------------
+bool Date::getYMD(int &y, int &m, int &d)
+{
+    // Poczatkowa inicjalizacja
+    y = begin_year;
+    m = 1;
+    d = 1;
+
+    int liczba_dni = DaysSinceBaseDate;
+    for(int i = begin_year; liczba_dni > 366; ++i, ++y)
+    {
+        if(leapYear(i))
+        {
+            liczba_dni -= 366;
+        } else {
+            liczba_dni -= 365;
+        }
+    }
+
+    for(int i = 1; i < date_data::monthDays.size(); ++i, ++m)
+    {
+        int ile_odjac;
+        if(leapYear(y))
+            ile_odjac = date_data::monthDaysInLeapYear.at(i-1);
+        else
+            ile_odjac = date_data::monthDays.at(i-1);
+
+        if(liczba_dni - ile_odjac < 0)
+            break;
+        else
+            liczba_dni -= ile_odjac;
+    }
+
+
+    d += liczba_dni;
+
+    return true;
+}
