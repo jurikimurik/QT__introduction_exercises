@@ -1,11 +1,15 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <iostream>
+#include "date_data.h"
+using namespace std;
 
 class Date
 {
 private:
     int DaysSinceBaseDate;
+    static const int begin_year = 0;
 public:
     Date();
     Date(int y, int d);
@@ -17,7 +21,6 @@ public:
     bool equals(const Date& d);
     int daysBetween(const Date& d);
     Date addDays(int days);
-    bool leapYear(int year);
     static bool leapYear(int year);
     static string monthName(int month);
     static int yearDays(int year);
