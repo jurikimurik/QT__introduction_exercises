@@ -37,6 +37,13 @@ double Hondurota::drive(double speed, int minutes)
     double fuel_consuming_per_minute = miles_per_minute / m_MPG;
     while(minutes > 0)
     {
+        // Podczas NIE-optymalnej predkosci, zuzycie paliwa wzrasta
+        if(m_Speed > m_optimalSpeed)
+        {
+            double wspolczynnik = ((m_Speed - m_optimalSpeed) / 100.0 + 1.0);
+            fuel_consuming_per_minute *= wspolczynnik;
+        }
+
         m_Fuel -= fuel_consuming_per_minute;
         m_Odometer += miles_per_minute;
 

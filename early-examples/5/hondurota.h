@@ -15,6 +15,8 @@ private:
     double m_TankCapacity;
     double m_MPG;
     double m_Speed;
+
+    static const int m_optimalSpeed = 70;
 public:
     Hondurota(double fuel, double odom, double capacity, double mpg);
     double addFuel(double gal);
