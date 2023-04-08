@@ -11,8 +11,8 @@ private:
     int DaysSinceBaseDate;
     static const int begin_year = 1;
 public:
-    Date();
-    Date(int y, int m, int d);
+    Date();                                         // V
+    Date(int y, int m, int d);                      // V
     void set(int y, int m, int d);
     string toString(bool breaf);
     void setToToday();
@@ -21,12 +21,12 @@ public:
     bool equals(const Date& d);
     int daysBetween(const Date& d);
     Date addDays(int days);
-    static bool leapYear(int year);
-    static string monthName(int month);
-    static int yearDays(int year);
-    static int monthDays(int month, int year);
+    static bool leapYear(int year);                 // V
+    static string monthName(int month);             // V
+    static int yearDays(int year);                  // V
+    static int monthDays(int month, int year);      // V
 private:
-    static int ymd2dsbd(int y, int m, int d);
+    static int ymd2dsbd(int y, int m, int d);       // V
     bool getYMD(int& y, int& m, int& d);
 };
 

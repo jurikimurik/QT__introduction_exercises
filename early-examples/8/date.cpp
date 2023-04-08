@@ -1,9 +1,9 @@
 #include "date.h"
 using namespace std;
 
-Date::Date()
-{
-
+Date::Date() : DaysSinceBaseDate(0) {}
+Date::Date(int y, int m, int d) {
+    DaysSinceBaseDate = ymd2dsbd(y, m, d);
 }
 
 //------------STATIC-PUBLIC--------------
@@ -64,3 +64,4 @@ int Date::ymd2dsbd(int y, int m, int d)
 
     return days_count;
 }
+
