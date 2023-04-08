@@ -18,10 +18,10 @@ public:
     string toString(bool breaf) const;              // V
     void setToToday();                              // V
     string getWeekDay() const;                      // V
-    bool lessThan(const Date& d) const;
-    bool equals(const Date& d) const;
-    int daysBetween(const Date& d) const;
-    Date addDays(int days);
+    bool lessThan(const Date& d) const;             // V
+    bool equals(const Date& d) const;               // V
+    int daysBetween(const Date& d) const;           // V
+    Date addDays(int days);                         // V
     static bool leapYear(int year);                 // V
     static string monthName(int month);             // V
     static int yearDays(int year);                  // V

@@ -35,6 +35,23 @@ string Date::getWeekDay() const {
     return date_data::weekNames.at(indeks_dnia);
 }
 
+bool Date::lessThan(const Date& d) const {
+    return DaysSinceBaseDate < d.DaysSinceBaseDate;
+}
+
+bool Date::equals(const Date& d) const {
+    return DaysSinceBaseDate == d.DaysSinceBaseDate;
+}
+
+int Date::daysBetween(const Date &d) const {
+    return std::abs(DaysSinceBaseDate - d.DaysSinceBaseDate);
+}
+
+Date Date::addDays(int days) {
+    DaysSinceBaseDate += days;
+    return *this;
+}
+
 //------------STATIC-PUBLIC--------------
 bool Date::leapYear(int year)
 {
@@ -116,7 +133,7 @@ bool Date::getYMD(int &y, int &m, int &d) const
         }
     }
 
-    for(int i = 1; i < date_data::monthDays.size(); ++i, ++m)
+    for(unsigned long i = 1; i < date_data::monthDays.size(); ++i, ++m)
     {
         int ile_odjac;
         if(leapYear(y))
