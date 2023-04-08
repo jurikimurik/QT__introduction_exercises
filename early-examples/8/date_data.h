@@ -16,6 +16,11 @@ inline std::vector<const int> monthDaysInLeapYear = {
     31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
+inline std::vector<const std::string> weekNames = { "poniedzialek",
+                                                   "wtorek", "sroda",
+                                                   "czwartek", "piatek",
+                                                   "sobota", "niedziela"};
+
 static const int daysInTheYear = 365;
 static const int daysInTheLeapYear = 366;
 

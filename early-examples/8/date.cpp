@@ -6,6 +6,35 @@ Date::Date(int y, int m, int d) {
     DaysSinceBaseDate = ymd2dsbd(y, m, d);
 }
 
+//------------PUBLIC---------------------
+void Date::set(int y, int m, int d)
+{
+    DaysSinceBaseDate = ymd2dsbd(y, m, d);
+}
+
+string Date::toString(bool breaf) const
+{
+    int y, m, d;
+    getYMD(y, m, d);
+
+    if(breaf)
+        return to_string(y) + "/" + to_string(m) + "/" + to_string(d);
+    else
+        return getWeekDay() + ": " + to_string(d) + " " + monthName(m) + " "
+               + to_string(y) + " rok";
+}
+
+void Date::setToToday() {
+    time_t now(time(nullptr));
+    struct tm *tp = localtime(&now);
+    set(1900 + tp->tm_year, 1 + tp ->tm_mon, tp->tm_mday);
+}
+
+string Date::getWeekDay() const {
+    int indeks_dnia = DaysSinceBaseDate % 7;
+    return date_data::weekNames.at(indeks_dnia);
+}
+
 //------------STATIC-PUBLIC--------------
 bool Date::leapYear(int year)
 {
@@ -69,7 +98,7 @@ int Date::ymd2dsbd(int y, int m, int d)
 
 
 //-------------PRIVATE----------------
-bool Date::getYMD(int &y, int &m, int &d)
+bool Date::getYMD(int &y, int &m, int &d) const
 {
     // Poczatkowa inicjalizacja
     y = begin_year;

@@ -2,6 +2,7 @@
 #define DATE_H
 
 #include <iostream>
+#include <ctime>
 #include "date_data.h"
 using namespace std;
 
@@ -13,13 +14,13 @@ private:
 public:
     Date();                                         // V
     Date(int y, int m, int d);                      // V
-    void set(int y, int m, int d);
-    string toString(bool breaf);
-    void setToToday();
-    string getWeekDay();
-    bool lessThan(const Date& d);
-    bool equals(const Date& d);
-    int daysBetween(const Date& d);
+    void set(int y, int m, int d);                  // V
+    string toString(bool breaf) const;              // V
+    void setToToday();                              // V
+    string getWeekDay() const;                      // V
+    bool lessThan(const Date& d) const;
+    bool equals(const Date& d) const;
+    int daysBetween(const Date& d) const;
     Date addDays(int days);
     static bool leapYear(int year);                 // V
     static string monthName(int month);             // V
@@ -28,7 +29,7 @@ public:
 
 private:
     static int ymd2dsbd(int y, int m, int d);       // V
-    bool getYMD(int& y, int& m, int& d);            // V
+    bool getYMD(int& y, int& m, int& d) const;      // V
 };
 
 #endif // DATE_H
