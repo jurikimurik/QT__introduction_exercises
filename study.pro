@@ -8,10 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        early-examples/3/employer.cpp \
-        early-examples/3/main.cpp \
-        early-examples/3/person.cpp \
-        early-examples/3/position.cpp
+        early-examples/3/position.cpp \
+        early-examples/5/hondurota-test.cpp \
+        early-examples/5/hondurota.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,4 +25,5 @@ HEADERS += \
     early-examples/3/employer.h \
     early-examples/3/person.h \
     early-examples/3/position.h \
+    early-examples/5/hondurota.h \
     early-examples/thing/thing.h
