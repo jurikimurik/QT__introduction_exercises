@@ -1,7 +1,8 @@
 #include "hondurota.h"
 #include <sstream>
+using namespace std;
 
-Hondurota::Hondurota(double fuel, double odom, double capacity, double mpg) :
+Hondurota::Hondurota(double fuel, double odom, double capacity, double mpg) :dre(time(nullptr)),
     m_Fuel(fuel), m_Odometer(odom), m_TankCapacity(capacity), m_MPG(mpg), m_Speed(0) {}
 
 double Hondurota::addFuel(double gal)
@@ -60,4 +61,24 @@ QString Hondurota::toString() const {
          << "Zuzycie na mile: " << m_MPG << ", "
          << "Szybkosc teraz: " << m_Speed << ", ";
     return QString::fromStdString(strm.str());
+}
+
+double Hondurota::highwayDrive(double distance, double speedLimit)
+{
+    uniform_int_distribution id(0, 100);
+    int losowosc = id(dre);
+    QTextStream cout(stdout);
+
+    if(losowosc > 70 && losowosc < 90)
+    {
+        cout << "Z powodu warunkow pogodowych, zmniejszona predkosc na autostradzie." << Qt::endl;
+        speedLimit *= 0.75;
+    } else if(losowosc >= 90 && losowosc <= 100)
+    {
+        cout << "Wypadek na autostradzie. Predkosc drastycznie zmniejszona." << Qt::endl;
+        speedLimit *= 0.20;
+    }
+
+
+    return distance / (speedLimit / 60);
 }
