@@ -10,7 +10,8 @@ CONFIG += c++17 cmdline
 SOURCES += \
         early-examples/3/position.cpp \
         early-examples/5/hondurota-test.cpp \
-        early-examples/5/hondurota.cpp
+        early-examples/5/hondurota.cpp \
+        early-examples/date.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,4 +27,5 @@ HEADERS += \
     early-examples/3/person.h \
     early-examples/3/position.h \
     early-examples/5/hondurota.h \
+    early-examples/date.h \
     early-examples/thing/thing.h
