@@ -29,9 +29,6 @@ double Hondurota::drive(double speed, int minutes)
     // Rozpedzamy samochod
     m_Speed = speed;
 
-    //Ile mieliscmy przejechac
-    int minutes_need = minutes;
-
     // Przeliczniki
     double miles_per_minute = speed / 60;
     double fuel_consuming_per_minute = miles_per_minute / m_MPG;
@@ -49,7 +46,7 @@ double Hondurota::drive(double speed, int minutes)
 
         if(m_Fuel <= 0) {
             m_Fuel = 0;
-            cout << "Skonczylo sie paliwo na " << minutes_need - minutes << " minucie! O nie!" << Qt::endl;
+            cout << "Skonczylo sie paliwo!" << Qt::endl;
             break;
         }
 
@@ -72,6 +69,9 @@ QString Hondurota::toString() const {
 
 double Hondurota::highwayDrive(double distance, double speedLimit)
 {
+    if(m_Fuel <= 0)
+        return 0;
+
     uniform_int_distribution id(0, 100);
     int losowosc = id(dre);
     QTextStream cout(stdout);
@@ -85,7 +85,29 @@ double Hondurota::highwayDrive(double distance, double speedLimit)
         cout << "Wypadek na autostradzie. Predkosc drastycznie zmniejszona." << Qt::endl;
         speedLimit *= 0.20;
     }
+    // Predkosciowe odchylenie
+    uniform_int_distribution speed_deflection(-5, 5);
+    int minutes = distance / (speedLimit / 60);
+    int speed = m_Speed + speedLimit;
+    while(minutes > 0)
+    {
+        if(m_Fuel == 0) {
+            break;
+        }
+
+        int odchylenie = speed_deflection(dre);
+        if(speed + odchylenie > speedLimit + 40)
+            odchylenie = 0;
+        else if(speed + odchylenie < 0)
+            while((odchylenie = speed_deflection(dre)) >= 0);
+
+        speed += odchylenie;
+
+        drive(speed, 1);
+        minutes--;
+    }
 
 
+    m_Speed = 0;
     return distance / (speedLimit / 60);
 }
