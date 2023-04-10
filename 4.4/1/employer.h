@@ -16,6 +16,8 @@ private:
     QList<Person*> m_OpeningList;
 
 public:
+    Employer(QString name);
+
     bool hire(Person& newHire, Position forPosition);
 };
 

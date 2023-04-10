@@ -5,9 +5,11 @@
 class Position
 {
 private:
-    QString m_PostionName;
+    QString m_PositionName;
     QString m_PositionDescription;
 public:
+    Position(QString positionName = "Bezrobotny", QString positionDescription = "Nie ma pracy. Tyle.");
+
     QString getPositionName();
     QString getPositionDescription();
 };
