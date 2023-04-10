@@ -1,6 +1,6 @@
 #include "person.h"
 
-Person::Person(QString name, bool isEmloyed, Employer* employer) :
+Person::Person(QString name, bool isEmloyed) :
     m_Name(name), m_Employed(isEmloyed) {}
 
 

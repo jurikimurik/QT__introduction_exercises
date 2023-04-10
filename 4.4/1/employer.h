@@ -3,8 +3,10 @@
 
 #include <QString>
 #include <QList>
+#include <utility>
 #include "person.h"
 #include "position.h"
+
 
 class Person;
 
@@ -12,8 +14,7 @@ class Employer
 {
 private:
     QString m_Name;
-    QList<Person*> m_EmployeeList;
-    QList<Person*> m_OpeningList;
+    QList<std::pair<Person&, Position>> m_EmployeeList;
 
 public:
     Employer(QString name);

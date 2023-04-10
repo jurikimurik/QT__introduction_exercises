@@ -5,7 +5,6 @@
 #include "position.h"
 #include "employer.h"
 
-class Employer;
 
 class Person
 {
@@ -13,7 +12,7 @@ private:
     QString m_Name;
     bool m_Employed;
 public:
-    Person(QString name, bool isEmloyed = false, Employer* employer = nullptr);
+    Person(QString name, bool isEmloyed = false);
 
     QString getName();
 };
