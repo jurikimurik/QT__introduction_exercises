@@ -41,3 +41,14 @@ void Employer::showPositions()
              << ", opis: " << elem.getDescription() << Qt::endl;
     }
 }
+
+QList<Position*> Employer::findJobs() {
+    QList<Position*> lista;
+    for(auto &elem: m_PositionList)
+    {
+        if(elem.getPerson() == nullptr)
+            lista.push_back(&elem);
+    }
+
+    return lista;
+}

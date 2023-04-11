@@ -17,4 +17,16 @@ int main()
     zatrudniacz.fire(darth_wader);
 
     zatrudniacz.showPositions();
+
+    auto wolne_stanowiska = zatrudniacz.findJobs();
+    for(auto& elem : wolne_stanowiska)
+    {
+        cout << elem->getName() << " - " << elem->getDescription() << endl;
+    }
+
+    Person karaluch("Karaluch");
+    karaluch.apply(wolne_stanowiska.at(0));
+
+    zatrudniacz.showPositions();
+
 }

@@ -24,6 +24,8 @@ public:
     void newPosition(QString name, QString description) {
         m_PositionList.push_back(Position(name, description));
     }
+
+    QList<Position*> findJobs();
 };
 
 #endif // EMPLOYER_H

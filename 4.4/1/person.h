@@ -3,6 +3,8 @@
 
 #include <QString>
 
+class Position;
+
 class Person
 {
 private:
@@ -18,6 +20,8 @@ public:
     void setEmployed(bool isEmployed) {
         m_Employed = isEmployed;
     }
+
+    bool apply(Position* position);
 };
 
 #endif // PERSON_H
