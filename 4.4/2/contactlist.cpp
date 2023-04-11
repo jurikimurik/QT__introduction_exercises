@@ -1,5 +1,5 @@
 #include "contactlist.h"
-
+#include <QTextStream>
 ContactList::ContactList()
 {
 
@@ -20,11 +20,13 @@ void ContactList::remove(Contact c)
 
 QStringList ContactList::getPhoneList(int category)
 {
+    QTextStream cout(stdout);
     QList<QString> kontakty;
 
     for(const auto& elem : m_ContactList)
     {
         QStringList podzielony = elem.toString().split(Contact::separator);
+
         if(podzielony.at((int)TYPE::Category) == QString::number(category))
         {
             QString napis = podzielony.at((int)TYPE::FirstName) + " " + podzielony.at((int)TYPE::SecondName) + " " + podzielony.at((int)TYPE::PhoneNumber);

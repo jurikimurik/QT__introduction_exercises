@@ -9,14 +9,29 @@ QTextStream cout(stdout);
 
 int main()
 {
+    ContactList ksiazka;
+
     ContactFactory fabryka("data.txt");
-
     int i = 100;
-    while(i > 0)
+    while(i-- > 0)
     {
-
-        Contact nowy = fabryka.getRandomContact();
-        cout << nowy.toString() << endl;
-        --i;
+        ksiazka.add(fabryka.getRandomContact());
     }
+
+
+
+    for(int i = 1; i < 10; ++i)
+    {
+        cout << "\t\tKategoria " << i << ": " << endl;
+        cout << "\tNumery telefonow: \n";
+        for(const auto& elem :  ksiazka.getPhoneList(i)) {
+            cout << elem << endl;
+        };
+        cout << "\tAdresy pocztowe: \n";
+        for(const auto& elem :  ksiazka.getMailingList(i)) {
+            cout << elem << endl;
+        };
+    }
+
+
 }

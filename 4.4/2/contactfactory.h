@@ -10,9 +10,6 @@
 class ContactFactory
 {
 private:
-
-    static int madeContacts;
-
     std::ifstream plik;
     std::vector<std::string> categories, firstNames, secondNames,
         streetAdresses, zipCodes, cities, phones;

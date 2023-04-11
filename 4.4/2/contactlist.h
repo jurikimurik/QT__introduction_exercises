@@ -17,6 +17,10 @@ public:
 
     QStringList getPhoneList(int category);
     QStringList getMailingList(int category);
+
+    QList<Contact> getContactList() {
+        return m_ContactList;
+    }
 };
 
 #endif // CONTACTLIST_H

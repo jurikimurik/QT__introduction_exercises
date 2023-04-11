@@ -1,9 +1,9 @@
 #include "contactfactory.h"
 #include <iostream>
 #include <random>
+#include <algorithm>
+#include <chrono>
 using namespace std;
-
-int ContactFactory::madeContacts = 1;
 
 ContactFactory::ContactFactory(string nazwaPliku) : plik(nazwaPliku)
 {
@@ -43,15 +43,25 @@ void ContactFactory::showDatabase() const {
 }
 
 Contact ContactFactory::getRandomContact() const {
-    default_random_engine dre(madeContacts);
+    std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
     vector<QString> dane;
 
     for(const auto& wsk : wskazniki)
     {
         uniform_int_distribution id(0,(int) wsk->size()-1);
-        dane.push_back(QString::fromStdString(wsk->at(id(dre))));
-    }
+        QString linijka = QString::fromStdString(wsk->at(id(dre)));
 
-    madeContacts++;
-    return Contact(stoi(dane[0].toStdString()), dane[1], dane[2], dane[3], dane[4], dane[5], dane[6]);
+        uniform_int_distribution number(0, 9);
+        auto pos = find(linijka.begin(), linijka.end(), QChar('*'));
+        while(pos != linijka.end())
+        {
+            *pos = QString::number(number(dre))[0];
+
+            pos = find(linijka.begin(), linijka.end(), QChar('*'));
+        }
+
+        dane.push_back(linijka);
+    }
+    Contact kontakt(stoi(dane[0].toStdString()), dane[1], dane[2], dane[3], dane[4], dane[5], dane[6]);
+    return kontakt;
 }
