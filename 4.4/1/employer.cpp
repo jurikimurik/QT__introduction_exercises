@@ -2,10 +2,19 @@
 
 bool Employer::hire(Person* newHire, Position forPosition)
 {
-    forPosition.setPerson(newHire);
-    m_PositionList.push_back(forPosition);
+    srand(time(nullptr));
 
-    return true;
+    int losowosc = rand() % 3;
+    if(losowosc != 0)
+    {
+        forPosition.setPerson(newHire);
+        m_PositionList.push_back(forPosition);
+
+        return true;
+    } else {
+        return false;
+    }
+
 }
 
 void Employer::fire(Person& personToFire)

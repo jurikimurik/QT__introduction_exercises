@@ -6,7 +6,7 @@ int main()
 {
     QTextStream cout(stdout);
 
-    Employer zatrudniacz("StarLord INC.");
+    /*Employer zatrudniacz("StarLord INC.");
 
     Person darth_wader("Darth Wader");
     zatrudniacz.hire(&darth_wader, Position("Sprzatacz", "Sprzatacz pomieszczen gospodarczych"));
@@ -25,8 +25,13 @@ int main()
     }
 
     Person karaluch("Karaluch");
-    karaluch.apply(wolne_stanowiska.at(0));
+    if(!wolne_stanowiska.empty())
+        karaluch.apply(wolne_stanowiska.at(0));
 
     zatrudniacz.showPositions();
 
+    if(darth_wader.getPosition() == nullptr)
+    {
+        cout << darth_wader.getName() << " nie jest nigdzie zatrudniony!" << endl;
+    }*/
 }
