@@ -9,6 +9,7 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     4.4/2/contact.cpp \
+    4.4/2/contactfactory.cpp \
     4.4/2/contactlist.cpp \
     4.4/2/test.cpp
 
@@ -22,4 +23,5 @@ DISTFILES += \
 
 HEADERS += \
     4.4/2/contact.h \
+    4.4/2/contactfactory.h \
     4.4/2/contactlist.h
