@@ -13,4 +13,8 @@ int main()
 
     Person han_solo("Han Solo");
     zatrudniacz.hire(&han_solo, Position("Nauczyciel strzelania", "Jego zadaniem jest nauka strzelania dla szturmowcow."));
+
+    zatrudniacz.fire(darth_wader);
+
+    zatrudniacz.showPositions();
 }
