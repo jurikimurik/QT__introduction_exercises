@@ -25,6 +25,10 @@ public:
         m_PositionList.push_back(Position(name, description));
     }
 
+    void newPosition(Position position) {
+        m_PositionList.push_back(position);
+    }
+
     QList<Position*> findJobs();
 };
 
