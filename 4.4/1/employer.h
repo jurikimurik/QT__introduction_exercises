@@ -1,25 +1,26 @@
 #ifndef EMPLOYER_H
 #define EMPLOYER_H
 
-#include <QString>
 #include <QList>
-#include <utility>
-#include "person.h"
+#include <QString>
 #include "position.h"
-
-
-class Person;
+#include "person.h"
 
 class Employer
 {
 private:
     QString m_Name;
-    QList<std::pair<Person&, Position>> m_EmployeeList;
-
+    QList<Position> m_PositionList;
 public:
-    Employer(QString name);
+    Employer(QString name) : m_Name(name) {}
 
-    bool hire(Person& newHire, Position forPosition);
+    bool hire(Person* newHire, Position forPosition);
+
+    void fire(Person& personToFire);
+
+    void newPosition(QString name, QString description) {
+        m_PositionList.push_back(Position(name, description));
+    }
 };
 
 #endif // EMPLOYER_H

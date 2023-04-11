@@ -2,16 +2,28 @@
 #define POSITION_H
 
 #include <QString>
+#include "person.h"
+
 class Position
 {
 private:
-    QString m_PositionName;
-    QString m_PositionDescription;
+    QString m_Name;
+    QString m_Descriprion;
+    Person* m_Person = nullptr;
 public:
-    Position(QString positionName = "Bezrobotny", QString positionDescription = "Nie ma pracy. Tyle.");
+    Position(QString name = "Bezrobotny", QString description = "Po prostu nie ma pracy! Tfu!") :
+        m_Name(name), m_Descriprion(description) {}
 
-    QString getPositionName();
-    QString getPositionDescription();
+    Person getPerson() {
+        return *m_Person;
+    }
+    void setPerson(Person* person) {
+        if(m_Person != nullptr)
+            m_Person->setEmployed(false);
+
+        person->setEmployed(true);
+        m_Person = person;
+    }
 };
 
 #endif // POSITION_H
