@@ -8,10 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    4.4/1/employer.cpp \
-    4.4/1/person.cpp \
-    4.4/1/position.cpp \
-    4.4/1/test.cpp
+    4.4/2/contact.cpp \
+    4.4/2/contactlist.cpp \
+    4.4/2/test.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -22,6 +21,5 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
-    4.4/1/employer.h \
-    4.4/1/person.h \
-    4.4/1/position.h
+    4.4/2/contact.h \
+    4.4/2/contactlist.h
