@@ -20,4 +20,8 @@ int main()
     Fraction fromDouble(8.072);
     cout << fromInt.toString() << endl;
     cout << fromDouble.toString() << endl;
+
+    cout << ulamek.toString() << endl;
+    cout << (ulamek + 23).toString() << endl;
+    cout << (ulamek - 5.633).toString() << endl;
 }

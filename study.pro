@@ -8,8 +8,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    5/3.1/fraction-demo.cpp \
-    5/3.1/fraction.cpp
+    5/12/1/constoverload-client.cpp \
+    5/12/1/point3.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -20,4 +20,4 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
-    5/3.1/fraction.h
+    5/12/1/point3.h
