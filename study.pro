@@ -7,7 +7,8 @@ CONFIG += c++17 cmdline
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += 5/12/4/cryptography.cpp
+SOURCES += 5/12/5/crypto-client.cpp \
+    5/12/5/crypto.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -17,4 +18,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     exercise1.10.1.2.cpp
 
-HEADERS +=
+HEADERS += \
+    5/12/5/crypto.h
