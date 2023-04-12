@@ -15,4 +15,9 @@ int main()
     cout << ulamek.toString() << " - " << ulamek_drugi.toString() << " = " << (ulamek - ulamek_drugi).toString() << endl;
     cout << ulamek.toString() << " * " << ulamek_drugi.toString() << " = " << (ulamek * ulamek_drugi).toString() << endl;
     cout << ulamek.toString() << " / " << ulamek_drugi.toString() << " = " << (ulamek / ulamek_drugi).toString() << endl;
+
+    Fraction fromInt(78);
+    Fraction fromDouble(8.072);
+    cout << fromInt.toString() << endl;
+    cout << fromDouble.toString() << endl;
 }
