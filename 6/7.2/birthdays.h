@@ -3,14 +3,17 @@
 
 #include <vector>
 #include <string>
+#include "birthday.h"
 class Birthdays
 {
 private:
     std::string m_NazwaPliku;
-    std::vector<std::string> urodziny_tekstowo;
+    std::vector<Birthday> urodziny_wszystkich;
 
 public:
-    Birthdays();
+    Birthdays(std::string nazwaPliku);
+
+    QStringList dajUrodzinyWszystkich() const;
 };
 
 #endif // BIRTHDAYS_H

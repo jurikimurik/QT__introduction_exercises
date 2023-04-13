@@ -14,6 +14,8 @@ public:
     Birthday(std::string imie, std::string data);
 
     QDate getAsDate() const;
+
+    QString toString() const;
 };
 
 #endif // BIRTHDAY_H

@@ -1,14 +1,16 @@
 #include <QTextStream>
-#include "birthday.h"
+#include "birthdays.h"
+#include <QDate>
 using namespace std;
 using namespace Qt;
 QTextStream cout(stdout);
 
 int main()
 {
-    Birthday urodziny_moje("Ja", 16, 8, 2002);
-    Birthday urodziny_moje_inaczej("Ja", "2002-08-16");
+    Birthdays baza_danych("birthdays.dat");
 
-    cout << urodziny_moje.getAsDate().toString() << endl;
-    cout << urodziny_moje_inaczej.getAsDate().toString() << endl;
+    for(const auto& elem : baza_danych.dajUrodzinyWszystkich())
+    {
+        cout << elem << endl;
+    }
 }
