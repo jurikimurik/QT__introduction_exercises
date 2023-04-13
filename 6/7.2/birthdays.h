@@ -14,6 +14,10 @@ public:
     Birthdays(std::string nazwaPliku);
 
     QStringList dajUrodzinyWszystkich() const;
+
+    QStringList dajNajblizszeUrodziny(int ilosc_dni = 30) const;
+    bool dodajUrodziny(Birthday urodziny);
+    QString szukajUrodziny(std::string imieInazwisko) const;
 };
 
 #endif // BIRTHDAYS_H

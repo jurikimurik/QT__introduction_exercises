@@ -14,10 +14,13 @@ public:
     Birthday(std::string imie, std::string data);
 
     QDate getAsDate() const;
+    QString getName() const;
 
     QString toString() const;
 
     bool operator< (const Birthday& innego_urodziny) const;
+
+    bool operator== (const Birthday& innego_urodziny) const;
 };
 
 #endif // BIRTHDAY_H
