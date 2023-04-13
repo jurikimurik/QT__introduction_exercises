@@ -19,7 +19,7 @@ Birthdays::Birthdays(string nazwaPliku)
             break;
         Qnapis = QString::fromStdString(napis);
         auto rozbite = Qnapis.split(":");
-        urodziny_wszystkich.push_back(Birthday(rozbite[0].toStdString(), rozbite[1].toStdString()));
+        urodziny_wszystkich.insert(Birthday(rozbite[0].toStdString(), rozbite[1].toStdString()));
     }
 }
 

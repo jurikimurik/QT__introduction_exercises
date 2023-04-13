@@ -16,6 +16,8 @@ public:
     QDate getAsDate() const;
 
     QString toString() const;
+
+    bool operator< (const Birthday& innego_urodziny) const;
 };
 
 #endif // BIRTHDAY_H

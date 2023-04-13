@@ -19,3 +19,8 @@ QString Birthday::toString() const {
     return QString::fromStdString(m_imieINazwisko) + " : " + QString::number(m_D) + " "
            + QString::number(m_M) + " " + QString::number(m_Y);
 }
+
+bool Birthday::operator< (const Birthday& innego_urodziny) const
+{
+    return !(getAsDate() < innego_urodziny.getAsDate());
+}
