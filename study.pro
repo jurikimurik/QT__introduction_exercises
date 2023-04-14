@@ -7,10 +7,11 @@ CONFIG += c++17 cmdline
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += 6/7.2/birthdays-test.cpp \
-    6/7.2/argumentlist.cpp \
-    6/7.2/birthday.cpp \
-    6/7.2/birthdays.cpp
+SOURCES += \
+    6/9.1/card-tester.cpp \
+    6/9.1/card.cpp \
+    6/9.1/carddeck.cpp \
+    6/9.1/cardhand.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,6 +22,6 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
-    6/7.2/argumentlist.h \
-    6/7.2/birthday.h \
-    6/7.2/birthdays.h
+    6/9.1/carddeck.h \
+    6/9.1/cardhand.h
+    6/9.1/card.h
