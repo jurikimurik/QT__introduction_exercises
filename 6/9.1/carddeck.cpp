@@ -1,4 +1,7 @@
 #include "carddeck.h"
+#include <random>
+#include <chrono>
+#include <algorithm>
 
 CardDeck::CardDeck()
 {
@@ -31,7 +34,21 @@ QString CardDeck::toString() const
     return napis;
 }
 
-//CardHand CardDeck::deal(int handSize);
+CardHand CardDeck::deal(int handSize)
+{
+    std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
+    CardHand rekaw;
+
+    std::shuffle(this->begin(), this->end(), dre);
+    for(int i = 0; i < handSize && !this->empty(); ++i)
+    {
+
+        rekaw.push_back(this->front());
+        this->remove(0);
+    }
+
+    return rekaw;
+}
 
 
 
