@@ -3,6 +3,7 @@
 
 
 #include <QStringList>
+#include <QMap>
 
 class Card
 {
@@ -11,6 +12,7 @@ private:
     int m_SuitNbr;
     static QStringList s_Faces;
     static QStringList s_Suits;
+    static QMap<QString, int> s_Points;
 public:
     Card(int faceNbr, int suitNbr);
     QString toString() const;
