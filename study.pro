@@ -11,10 +11,7 @@ SOURCES += \
     6/10.2/educational.cpp \
     6/10.2/entertainment.cpp \
     6/10.2/film.cpp \
-    6/9.1/card-tester.cpp \
-    6/9.1/card.cpp \
-    6/9.1/carddeck.cpp \
-    6/9.1/cardhand.cpp
+    6/10.2/tester.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,17 +22,6 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
-    6/10.1/Accessory.h \
-    6/10.1/Alternator.h \
-    6/10.1/AutoPart.h \
-    6/10.1/BodyPart.h \
-    6/10.1/EnginePart.h \
-    6/10.1/Fender.h \
-    6/10.1/Radiator.h \
-    6/10.1/SeatBelt.h \
     6/10.2/educational.h \
     6/10.2/entertainment.h \
-    6/10.2/film.h \
-    6/9.1/carddeck.h \
-    6/9.1/cardhand.h
-    6/9.1/card.h
+    6/10.2/film.h

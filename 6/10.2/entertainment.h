@@ -24,7 +24,7 @@ private:
     FilmTypes m_Type;
     MPAARatings m_Rating;
 public:
-    Entertainment(Qstring title, QString dir, QString len, QDate relDate, int type, int rtng);
+    Entertainment(QString title, QString dir, QString len, QDate relDate, int type, int rtng);
     Entertainment(QStringList propList);
     QString toString(bool labeled, QString sepChar);
 };
