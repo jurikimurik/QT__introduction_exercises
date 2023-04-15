@@ -15,7 +15,7 @@ private:
     Important jak_wazny;
 public:
     EnginePart(QString nazwa, int id, int cena, Important waznosc);
-    virtual QString toString();
+    virtual QString toString() = 0;
     virtual int getCena();
 
 };

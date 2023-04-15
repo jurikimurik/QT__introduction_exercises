@@ -13,7 +13,7 @@ private:
     AccessoryType m_Typ;
 public:
     BodyPart(QString nazwa, int id,  int cena, int size, AccessoryType typ);
-    virtual QString toString();
+    virtual QString toString() = 0;
     virtual int getCena();
 
 };

@@ -13,7 +13,7 @@ public:
 
     int getId();
     PartType getPartType();
-    virtual QString toString();
+    virtual QString toString() = 0;
     virtual int getCena();
 };
 
