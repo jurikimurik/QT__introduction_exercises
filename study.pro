@@ -22,6 +22,14 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
+    6/10.1/Accessory.h \
+    6/10.1/Alternator.h \
+    6/10.1/AutoPart.h \
+    6/10.1/BodyPart.h \
+    6/10.1/EnginePart.h \
+    6/10.1/Fender.h \
+    6/10.1/Radiator.h \
+    6/10.1/SeatBelt.h \
     6/9.1/carddeck.h \
     6/9.1/cardhand.h
     6/9.1/card.h
