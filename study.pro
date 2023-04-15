@@ -8,6 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    6/10.2/educational.cpp \
+    6/10.2/entertainment.cpp \
+    6/10.2/film.cpp \
     6/9.1/card-tester.cpp \
     6/9.1/card.cpp \
     6/9.1/carddeck.cpp \
@@ -30,6 +33,9 @@ HEADERS += \
     6/10.1/Fender.h \
     6/10.1/Radiator.h \
     6/10.1/SeatBelt.h \
+    6/10.2/educational.h \
+    6/10.2/entertainment.h \
+    6/10.2/film.h \
     6/9.1/carddeck.h \
     6/9.1/cardhand.h
     6/9.1/card.h
