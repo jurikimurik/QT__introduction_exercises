@@ -9,7 +9,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     6/10.3/library.cpp \
-    6/10.3/libraryClient.cpp
+    6/10.3/libraryClient.cpp \
+    6/10.3/libraryui.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -20,4 +21,5 @@ DISTFILES += \
     exercise1.10.1.2.cpp
 
 HEADERS += \
-    6/10.3/library.h
+    6/10.3/library.h \
+    6/10.3/libraryui.h
