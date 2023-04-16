@@ -11,6 +11,7 @@ SOURCES += \
     6/10.2/educational.cpp \
     6/10.2/entertainment.cpp \
     6/10.2/film.cpp \
+    6/10.2/filmlist.cpp \
     6/10.2/tester.cpp
 
 # Default rules for deployment.
@@ -24,4 +25,5 @@ DISTFILES += \
 HEADERS += \
     6/10.2/educational.h \
     6/10.2/entertainment.h \
-    6/10.2/film.h
+    6/10.2/film.h \
+    6/10.2/filmlist.h

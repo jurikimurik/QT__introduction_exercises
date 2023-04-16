@@ -4,7 +4,7 @@ Educational::Educational(QString title, QString dir, QString len, QDate relDate,
     : Film(QString(), title, dir, len.toInt(), relDate), m_Subject(subject), m_GradeLevel(grdLvl) {}
 
 Educational::Educational(QStringList propList)
-    : Film(propList.at(0), propList.at(1), propList.at(2), propList.at(3).toInt(), QDate::fromString(propList.at(4)))
+    : Film(propList.at(0), propList.at(1), propList.at(2), propList.at(3).toInt(), QDate::fromString(propList.at(4), "dd.MM.yyyy"))
 {
     m_Subject = propList.at(5);
     m_GradeLevel = propList.at(6).toInt();

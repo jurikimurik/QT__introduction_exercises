@@ -27,6 +27,8 @@ public:
     Entertainment(QString title, QString dir, QString len, QDate relDate, int type, int rtng);
     Entertainment(QStringList propList);
     QString toString(bool labeled, QString sepChar);
+
+
 };
 
 #endif // ENTERTAINMENT_H

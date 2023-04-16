@@ -13,6 +13,8 @@ private:
     int m_FilmLength;
     QDate m_ReleaseDate;
 
+    static int sm_FilmsCounter;
+
 public:
     Film(QString id, QString title, QString dir, int length, QDate relDate);
     Film(QStringList propList);
