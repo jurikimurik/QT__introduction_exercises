@@ -2,13 +2,13 @@
 
 void FilmList::addFilm(Film *film)
 {
-    m_FilmList.push_back(film);
+    push_back(film);
 }
 
 QString FilmList::toString()
 {
     QString nazwy = "Oto jest lista filmow: \n";
-    for(auto& elem : m_FilmList)
+    for(auto& elem : *this)
     {
         nazwy += elem->toString(true, ",") + "\n";
     }
@@ -17,7 +17,7 @@ QString FilmList::toString()
 
 Film* FilmList::findFilm(QString id)
 {
-    for(auto& elem : m_FilmList)
+    for(auto& elem : *this)
     {
         QString filmId = elem->toString(false, ",").split(",").at(0);
         if(filmId == id)
@@ -31,9 +31,9 @@ Film* FilmList::findFilm(QString id)
 
 QString FilmList::getID(QString title)
 {
-    for(auto& elem : m_FilmList)
+    for(auto& elem : *this)
     {
-        QString filmTitle = elem->toString(false, ",").split(",").at(1);
+        QString filmTitle = elem->toString(true, ",").split(",").at(1);
         if(filmTitle == title)
         {
             return elem->toString(true, ",").split(",").at(0);
@@ -46,7 +46,7 @@ QString FilmList::getID(QString title)
 
 void FilmList::removeFilm(QString filmID)
 {
-    m_FilmList.removeIf([filmID](Film* wsk) {
+    this->removeIf([filmID](Film* wsk) {
         QString filmPtrId = wsk->toString(true, ",").split(",").at(0);
         return filmPtrId == filmID;
     });

@@ -4,10 +4,8 @@
 #include <QVector>
 #include "film.h"
 
-class FilmList
+class FilmList : public QList<Film*>
 {
-private:
-    QVector<Film*> m_FilmList;
 public:
     QString toString();
     Film* findFilm(QString id);

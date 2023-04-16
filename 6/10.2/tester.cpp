@@ -39,5 +39,9 @@ int main()
     cout << "\tPo dodaniu filmow rozrywkowych: " << endl;
     cout << listaFilmow.toString() << endl;
 
+    listaFilmow.removeFilm(listaFilmow.getID("John Wick 5"));
+    cout << "\tPo usunieciu Johna Wicka: " << endl;
+    cout << listaFilmow.toString() << endl;
+
 
 }
