@@ -26,8 +26,8 @@ public:
     QStringList promptReferenceBook();
     QStringList promptTextBook();
     QStringList promptDvd();
-  //QStringList promptFilm();
-  //QStringList promptDataBase();
+    QStringList promptFilm();
+    QStringList promptDataBase();
     Choices nextTask();
     void prepareToQuit(bool& saved);
 

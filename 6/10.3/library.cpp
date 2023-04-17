@@ -34,6 +34,54 @@ QString Dvd::toString(QString sep) const {
     return QString("%1%2%3%2%4%2%5%2%6").arg(RefItem::toString(sep)).arg(sep).arg(m_Author).arg(m_Publisher).arg(QString::number(m_FilmDuration)).arg(QString::number(m_ProductionYear));
 }
 //------------------------------------------------------
+Film::Film(QStringList &propList) : Dvd(propList), m_Category(static_cast<Category>(propList.takeFirst().toInt()))
+{}
+
+QString Film::toString(QString sep) const {
+    return QString("%1%2%3").arg(Dvd::toString(sep)).arg(sep).arg(categoryString());
+}
+
+QString Film::categoryString() const {
+    switch(m_Category) {
+    case Science: return "Nauka";
+    case IT: return "Informatyka";
+    case Language: return "Nauka jezyka";
+    case Action: return "Akcja";
+    case Sci_Fi: return "Naukowo-fantastyczny";
+    case Adventure: return "Przygodowy";
+    default: return "Brak";
+    }
+}
+
+QStringList Film::getCategories() {
+    return QStringList({"Nauka", "Informatyka", "Nauka jezyka", "Akcja",
+                        "Naukowo-fantastyczny", "Przygodowy"});
+}
+//------------------------------------------------------
+DataBase::DataBase(QStringList &plst) : Dvd(plst), m_Category(static_cast<Category>(plst.takeFirst().toInt())),
+    m_ShortDescription(plst.takeFirst()), m_isPasswordProtected((plst.takeFirst() == "Chroniony" ? true : false)), m_Password((plst.isEmpty() ? QString() : plst.takeFirst()))
+{}
+
+QString DataBase::toString(QString sep) const {
+    return QString("%1%2%3%2%4%2%5%2%6").arg(Dvd::toString(sep)).arg(sep).arg(categoryString()).arg(m_ShortDescription).arg((m_isPasswordProtected ? "Chroniony" : "Bez hasla")).arg(m_Password.size() > 0 ? m_Password : "Brak hasla");
+}
+
+QString DataBase::categoryString() const {
+    switch(m_Category) {
+    case FAMILY_HISTORY: return "Historia rodu";
+    case TELEPHONE_NUMBERS: return "Numery telefonow";
+    case ADDRESSES: return "Adresy";
+    case MAPS: return "Mapy";
+    case TOURISTS_GUIDE: return "Przewodnik turystyczny";
+    case BIBLIOGRAPHY: return "Bibliografia";
+    default: return "Brak";
+    }
+}
+
+QStringList DataBase::getCategories() {
+    return QStringList({"Historia rodu", "Numery telefonow", "Adresy", "Mapy", "Przewodnik turystyczny", "Bibliografia"});
+}
+//------------------------------------------------------
 Book::Book(QStringList &plst) : RefItem(plst), m_Author(plst.takeFirst()), m_Publisher(plst.takeFirst()), m_CopyrightYear(plst.takeFirst().toInt())
 {}
 

@@ -23,7 +23,6 @@ private:
 
 class Dvd : public RefItem {
 public:
-
     Dvd(QString type, QString isbn, QString title, QString author, QString pub, double duration, int prodYear, int numCopies = 1);
     Dvd(QStringList& propList);
     virtual QString toString(QString sep = "[::]") const;
@@ -31,12 +30,42 @@ public:
     QString getPublisher() const;
     double getFilmDuration() const;
     int getProductionYear() const;
-
 private:
     QString m_Author, m_Publisher;
     double m_FilmDuration;
     int m_ProductionYear;
+};
 
+class Film : public Dvd {
+public:
+    enum Category {NONE = -1, Science, IT, Language, Action, Sci_Fi, Adventure};
+    Film(QString type, QString isbn, QString title, QString author, QString pub, double duration, int prodYear, Category cat, int numCopies = 1);
+    Film(QStringList& propList);
+    QString toString(QString sep = "[::]") const;
+    Category getCategory() const;
+    QString categoryString() const;
+    static QStringList getCategories();
+private:
+    Category m_Category;
+};
+
+class DataBase : public Dvd {
+public:
+    enum Category {NONE = -1, FAMILY_HISTORY, TELEPHONE_NUMBERS, ADDRESSES, MAPS, TOURISTS_GUIDE, BIBLIOGRAPHY};
+    DataBase(QString type, QString isbn, QString title, QString author, QString pub, double duration, int prodYear, Category cat, QString desc, bool isPass, QString pass = QString(), int numCopies = 1);
+    DataBase(QStringList& propList);
+    QString toString(QString sep = "[::]") const;
+    Category getCategory() const;
+    QString categoryString() const;
+    static QStringList getCategories();
+    QString getDescription() const;
+    bool isProtected() const;
+    QString getPassword() const;
+private:
+    Category m_Category;
+    QString m_ShortDescription;
+    bool m_isPasswordProtected;
+    QString m_Password;
 };
 
 class Book : public RefItem {

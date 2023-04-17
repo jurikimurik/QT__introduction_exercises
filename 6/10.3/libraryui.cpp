@@ -17,7 +17,8 @@ LibraryUI::Choices LibraryUI::nextTask() {
     int choice;
     QString response;
     do {
-        cout << READ << ". Odczytaj dane z pliku.\n"
+        cout << "\n\n"
+             << READ << ". Odczytaj dane z pliku.\n"
              << ADD  << ". Dodaj egzemplarze do biblioteki.\n"
              << FIND << ". Wyszukaj i wyswietl egzemplarz.\n"
              << REMOVE << ". Usun egzemplarz z biblioteki.\n"
@@ -25,7 +26,7 @@ LibraryUI::Choices LibraryUI::nextTask() {
              << LIST << ". Wypisz liste egzemplarzy w pliku.\n"
              << QUIT << ". Wyjdz z programu.\n"
              << "Twoj wybor: " << flush;
-        response = cin.readLine();
+        response = (cin>>ws).readLine();
         choice = response.toInt();
     } while(choice < READ or choice > QUIT);
     return static_cast<Choices>(choice);
@@ -50,6 +51,13 @@ void LibraryUI::add(QStringList objdata) {
         break;
     case DVD:
         ref = new Dvd(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case FILM:
+        ref = new Film(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case DATADVD: ref = new DataBase(objdata);
         m_Lib->addRefItem(ref);
         break;
 
@@ -151,7 +159,7 @@ QStringList LibraryUI::promptDvd() {
     double length;
     QStringList retval(promptRefItem());
     QString str;
-    cout << "Autor: " << flush;
+    cout << "Studio: " << flush;
     retval << cin.readLine();
     cout << "Wydawca: " << flush;
     retval << cin.readLine();
@@ -173,6 +181,68 @@ QStringList LibraryUI::promptDvd() {
         }
     }
     retval << str;
+    return retval;
+}
+
+QStringList LibraryUI::promptFilm() {
+    int idx(0);
+    bool ok;
+    QString str;
+    QStringList retval(promptDvd());
+    QStringList cats(Film::getCategories());
+    while(true) {
+        cout << "Podaj indeks kategorii: ";
+        for(int i = 0; i < cats.size(); ++i)
+            cout << "\n\t(" << i << ") " << cats.at(i);
+        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
+        idx = cin.readLine().toInt(&ok);
+        if(ok) {
+            retval << str.setNum(idx);
+            break;
+        }
+    }
+
+    return retval;
+}
+
+QStringList LibraryUI::promptDataBase() {
+    int idx(0);
+    bool ok;
+    QString str;
+    QStringList retval(promptDvd());
+    QStringList cats(DataBase::getCategories());
+    while(true) {
+        cout << "Podaj indeks kategorii: ";
+        for(int i = 0; i < cats.size(); ++i)
+            cout << "\n\t(" << i << ") " << cats.at(i);
+        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
+        idx = cin.readLine().toInt(&ok);
+        if(ok) {
+            retval << str.setNum(idx);
+            break;
+        }
+    }
+
+    cout << "Wpisz krotki opis bazy danych: " << flush;
+    retval << cin.readLine();
+
+    while(true) {
+        cout << "Czy ustawione jest na nim haslo? (1 - tak, 0 - nie)" << flush;
+        cin >> idx;
+        if(idx == 0) {
+            retval << "Bez hasla";
+            break;
+        } else if(idx == 1) {
+            retval << "Chroniony";
+            break;
+        }
+    }
+
+    if(idx == 1) {
+        cout << "Wpisz haslo: " << flush;
+        retval << (cin>>ws).readLine();
+    }
+
     return retval;
 }
 
@@ -239,6 +309,10 @@ void LibraryUI::enterData() {
         break;
     case DVD: objdata = promptDvd();
         break;
+    case FILM: objdata = promptFilm();
+        break;
+    case DATADVD: objdata = promptDataBase();
+        break;
     default:
         qDebug() << "Podano zly typ w funkcji enterData()";
     }
@@ -255,7 +329,8 @@ QString LibraryUI::find()
     {
         if(elem->getISBN() == isbnToFind)
         {
-            cout << "Znaleziono!" << endl << flush;
+            cout << "Znaleziono!" << endl;
+            cout << elem->toString() << flush;
             return elem->toString();
         }
     }
