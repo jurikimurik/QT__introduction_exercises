@@ -26,14 +26,21 @@ int RefItem::getNumberOfCopies() const {
 QString RefItem::getISBN() const {
     return m_ISBN;
 }
+//------------------------------------------------------
+Dvd::Dvd(QStringList &plst) : RefItem(plst), m_Author(plst.takeFirst()), m_Publisher(plst.takeFirst()), m_FilmDuration(plst.takeFirst().toDouble()), m_ProductionYear(plst.takeFirst().toInt())
+{}
 
+QString Dvd::toString(QString sep) const {
+    return QString("%1%2%3%2%4%2%5%2%6").arg(RefItem::toString(sep)).arg(sep).arg(m_Author).arg(m_Publisher).arg(QString::number(m_FilmDuration)).arg(QString::number(m_ProductionYear));
+}
+//------------------------------------------------------
 Book::Book(QStringList &plst) : RefItem(plst), m_Author(plst.takeFirst()), m_Publisher(plst.takeFirst()), m_CopyrightYear(plst.takeFirst().toInt())
 {}
 
 QString Book::toString(QString sep) const {
     return  QString("%1%2%3%4%5%6%7").arg(RefItem::toString(sep)).arg(sep).arg(m_Author).arg(sep).arg(m_Publisher).arg(sep).arg(m_CopyrightYear);
 }
-
+//------------------------------------------------------
 ReferenceBook::ReferenceBook(QStringList &plst) : Book(plst), m_Category(static_cast<RefCategory>(plst.takeFirst().toInt()))  {}
 
 QString ReferenceBook::toString(QString sep) const {
@@ -56,7 +63,30 @@ QString ReferenceBook::categoryString() const {
 QStringList ReferenceBook::getRefCategories() {
     return QStringList({"Sztuka", "Architektura", "Informatyka", "Literatura", "Matematyka", "Muzyka", "Nauki scisle"});
 }
+//------------------------------------------------------
+TextBook::TextBook(QStringList &plst) : Book(plst), m_Category(static_cast<Category>(plst.takeFirst().toInt()))
+{}
 
+QString TextBook::toString(QString sep) const {
+    return QString("%1%2%3").arg(Book::toString(sep)).arg(sep).arg(categoryString());
+}
+
+QString TextBook::categoryString() const {
+    switch(m_Category) {
+    case IT: return "Informatyka";
+    case Art: return "Sztuka";
+    case Science: return "Nauki scisle";
+    case Language: return "Nauka jezyka";
+    case Mechanics: return "Mechanika";
+    default: return "Brak";
+    }
+}
+
+QStringList TextBook::getCategories() {
+    return QStringList({"Informatyka", "Sztuka", "Nauki scisle",
+                        "Nauka jezyka", "Mechanika"});
+}
+//------------------------------------------------------
 
 Library::~Library() {
     qDeleteAll(*this);

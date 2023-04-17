@@ -24,8 +24,8 @@ public:
     QStringList promptRefItem();
     QStringList promptBook();
     QStringList promptReferenceBook();
-  //QStringList promptTextBook();
-  //QStringList promptDvd();
+    QStringList promptTextBook();
+    QStringList promptDvd();
   //QStringList promptFilm();
   //QStringList promptDataBase();
     Choices nextTask();

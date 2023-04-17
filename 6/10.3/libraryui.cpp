@@ -44,6 +44,15 @@ void LibraryUI::add(QStringList objdata) {
         ref = new ReferenceBook(objdata);
         m_Lib->addRefItem(ref);
         break;
+    case TEXTBOOK:
+        ref = new TextBook(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+    case DVD:
+        ref = new Dvd(objdata);
+        m_Lib->addRefItem(ref);
+        break;
+
     default: qDebug() << "Zly typ w funkcji add()";
     }
 }
@@ -136,12 +145,63 @@ QStringList LibraryUI::promptBook() {
     return retval;
 }
 
+QStringList LibraryUI::promptDvd() {
+    static const int MINYEAR(1900), MAXYEAR(QDate::currentDate().year());
+    int year;
+    double length;
+    QStringList retval(promptRefItem());
+    QString str;
+    cout << "Autor: " << flush;
+    retval << cin.readLine();
+    cout << "Wydawca: " << flush;
+    retval << cin.readLine();
+    while(true) {
+        cout << "Dlugosc nagrania: " << flush;
+        length = cin.readLine().toDouble();
+        if(length > 0) {
+            str.setNum(length);
+            break;
+        }
+    }
+    retval << str;
+    while(true) {
+        cout << "Rok wydania: " << flush;
+        year = cin.readLine().toInt();
+        if(year >= MINYEAR && year <= MAXYEAR) {
+            str.setNum(year);
+            break;
+        }
+    }
+    retval << str;
+    return retval;
+}
+
 QStringList LibraryUI::promptReferenceBook() {
     int idx(0);
     bool ok;
     QString str;
     QStringList retval(promptBook());
     QStringList cats(ReferenceBook::getRefCategories());
+    while(true) {
+        cout << "Podaj indeks kategorii: ";
+        for(int i = 0; i < cats.size(); ++i)
+            cout << "\n\t(" << i << ") " << cats.at(i);
+        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
+        idx = cin.readLine().toInt(&ok);
+        if(ok) {
+            retval << str.setNum(idx);
+            break;
+        }
+    }
+    return retval;
+}
+
+QStringList LibraryUI::promptTextBook() {
+    int idx(0);
+    bool ok;
+    QString str;
+    QStringList retval(promptBook());
+    QStringList cats(TextBook::getCategories());
     while(true) {
         cout << "Podaj indeks kategorii: ";
         for(int i = 0; i < cats.size(); ++i)
@@ -174,6 +234,10 @@ void LibraryUI::enterData() {
     case BOOK: objdata = promptBook();
         break;
     case REFERENCEBOOK: objdata = promptReferenceBook();
+        break;
+    case TEXTBOOK: objdata = promptTextBook();
+        break;
+    case DVD: objdata = promptDvd();
         break;
     default:
         qDebug() << "Podano zly typ w funkcji enterData()";
