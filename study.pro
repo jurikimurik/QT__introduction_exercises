@@ -10,7 +10,8 @@ CONFIG += c++17 cmdline
 SOURCES += \
     6/10.3/library.cpp \
     6/10.3/libraryClient.cpp \
-    6/10.3/libraryui.cpp
+    6/10.3/libraryui.cpp \
+    6/10.3/refitemui.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -22,4 +23,5 @@ DISTFILES += \
 
 HEADERS += \
     6/10.3/library.h \
-    6/10.3/libraryui.h
+    6/10.3/libraryui.h \
+    6/10.3/refitemui.h
