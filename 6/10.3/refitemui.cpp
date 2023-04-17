@@ -10,7 +10,10 @@ using namespace Qt;
 inline QTextStream cout(stdout);
 inline QTextStream cin(stdin);
 
-RefItemUI::RefItemUI(RefItem* wsk) : m_Ptr(wsk)
+RefItemUI::RefItemUI()
+    {}
+
+RefItemUI::~RefItemUI()
     {}
 
 QStringList RefItemUI::prompt() {
@@ -42,7 +45,7 @@ QStringList RefItemUI::prompt() {
 }
 //-------------------------------------------------------------
 
-BookUI::BookUI(Book *wsk) : RefItemUI(wsk)
+BookUI::BookUI()
 {}
 
 QStringList BookUI::prompt() {
@@ -68,7 +71,7 @@ QStringList BookUI::prompt() {
 
 //-------------------------------------------------------------
 
-ReferenceBookUI::ReferenceBookUI(ReferenceBook *wsk) : BookUI(wsk)
+ReferenceBookUI::ReferenceBookUI()
 {}
 
 QStringList ReferenceBookUI::prompt() {
@@ -93,7 +96,7 @@ QStringList ReferenceBookUI::prompt() {
 
 //-------------------------------------------------------------
 
-TextBookUI::TextBookUI(TextBook *wsk) : BookUI(wsk)
+TextBookUI::TextBookUI()
 {}
 
 QStringList TextBookUI::prompt() {
@@ -118,7 +121,7 @@ QStringList TextBookUI::prompt() {
 
 //-------------------------------------------------------------
 
-DvdUI::DvdUI(Dvd *wsk) : RefItemUI(wsk)
+DvdUI::DvdUI()
 {}
 
 QStringList DvdUI::prompt() {
@@ -153,7 +156,7 @@ QStringList DvdUI::prompt() {
 }
 
 //-------------------------------------------------------------
-FilmUI::FilmUI(Film *wsk) : DvdUI(wsk)
+FilmUI::FilmUI()
 {}
 
 QStringList FilmUI::prompt() {
@@ -178,7 +181,7 @@ QStringList FilmUI::prompt() {
 }
 
 //-------------------------------------------------------------
-DataBaseUI::DataBaseUI(DataBase *wsk) : DvdUI(wsk)
+DataBaseUI::DataBaseUI()
 {}
 
 QStringList DataBaseUI::prompt() {

@@ -1,4 +1,5 @@
 #include "libraryui.h"
+#include "refitemui.h"
 #include <QTextStream>
 #include <QTextStream>
 #include <QString>
@@ -104,188 +105,6 @@ void LibraryUI::read() {
     }
 }
 
-QStringList LibraryUI::promptRefItem() {
-    const int MAXCOPIES(10);
-    const int ISBNLEN(13);
-    int copies;
-    QString str;
-    QStringList retval;
-    while(true) {
-        cout << "ISBN (" << ISBNLEN << "-cyfrowy): " << flush;
-        str = cin.readLine();
-        if(str.length() == ISBNLEN) {
-            retval << str;
-            break;
-        }
-    }
-    cout << "Tytul: " << flush;
-    retval << cin.readLine();
-    while(true) {
-        cout << "Liczba egzemplarzy: " << flush;
-        copies = cin.readLine().toInt();
-        if(copies > 0 and copies <= MAXCOPIES) {
-            str.setNum(copies);
-            break;
-        }
-    }
-    retval << str;
-    return retval;
-}
-
-QStringList LibraryUI::promptBook() {
-    static const int MINYEAR(1900), MAXYEAR(QDate::currentDate().year());
-    int year;
-    QStringList retval(promptRefItem());
-    QString str;
-    cout << "Autor: " << flush;
-    retval << cin.readLine();
-    cout << "Wydawca: " << flush;
-    retval << cin.readLine();
-    while(true) {
-        cout << "Data wydania: " << flush;
-        year = cin.readLine().toInt();
-        if(year >= MINYEAR and year <= MAXYEAR) {
-            str.setNum(year);
-            break;
-        }
-    }
-    retval << str;
-    return retval;
-}
-
-QStringList LibraryUI::promptDvd() {
-    static const int MINYEAR(1900), MAXYEAR(QDate::currentDate().year());
-    int year;
-    double length;
-    QStringList retval(promptRefItem());
-    QString str;
-    cout << "Studio: " << flush;
-    retval << cin.readLine();
-    cout << "Wydawca: " << flush;
-    retval << cin.readLine();
-    while(true) {
-        cout << "Dlugosc nagrania: " << flush;
-        length = cin.readLine().toDouble();
-        if(length > 0) {
-            str.setNum(length);
-            break;
-        }
-    }
-    retval << str;
-    while(true) {
-        cout << "Rok wydania: " << flush;
-        year = cin.readLine().toInt();
-        if(year >= MINYEAR && year <= MAXYEAR) {
-            str.setNum(year);
-            break;
-        }
-    }
-    retval << str;
-    return retval;
-}
-
-QStringList LibraryUI::promptFilm() {
-    int idx(0);
-    bool ok;
-    QString str;
-    QStringList retval(promptDvd());
-    QStringList cats(Film::getCategories());
-    while(true) {
-        cout << "Podaj indeks kategorii: ";
-        for(int i = 0; i < cats.size(); ++i)
-            cout << "\n\t(" << i << ") " << cats.at(i);
-        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
-        idx = cin.readLine().toInt(&ok);
-        if(ok) {
-            retval << str.setNum(idx);
-            break;
-        }
-    }
-
-    return retval;
-}
-
-QStringList LibraryUI::promptDataBase() {
-    int idx(0);
-    bool ok;
-    QString str;
-    QStringList retval(promptDvd());
-    QStringList cats(DataBase::getCategories());
-    while(true) {
-        cout << "Podaj indeks kategorii: ";
-        for(int i = 0; i < cats.size(); ++i)
-            cout << "\n\t(" << i << ") " << cats.at(i);
-        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
-        idx = cin.readLine().toInt(&ok);
-        if(ok) {
-            retval << str.setNum(idx);
-            break;
-        }
-    }
-
-    cout << "Wpisz krotki opis bazy danych: " << flush;
-    retval << cin.readLine();
-
-    while(true) {
-        cout << "Czy ustawione jest na nim haslo? (1 - tak, 0 - nie)" << flush;
-        cin >> idx;
-        if(idx == 0) {
-            retval << "Bez hasla";
-            break;
-        } else if(idx == 1) {
-            retval << "Chroniony";
-            break;
-        }
-    }
-
-    if(idx == 1) {
-        cout << "Wpisz haslo: " << flush;
-        retval << (cin>>ws).readLine();
-    }
-
-    return retval;
-}
-
-QStringList LibraryUI::promptReferenceBook() {
-    int idx(0);
-    bool ok;
-    QString str;
-    QStringList retval(promptBook());
-    QStringList cats(ReferenceBook::getRefCategories());
-    while(true) {
-        cout << "Podaj indeks kategorii: ";
-        for(int i = 0; i < cats.size(); ++i)
-            cout << "\n\t(" << i << ") " << cats.at(i);
-        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
-        idx = cin.readLine().toInt(&ok);
-        if(ok) {
-            retval << str.setNum(idx);
-            break;
-        }
-    }
-    return retval;
-}
-
-QStringList LibraryUI::promptTextBook() {
-    int idx(0);
-    bool ok;
-    QString str;
-    QStringList retval(promptBook());
-    QStringList cats(TextBook::getCategories());
-    while(true) {
-        cout << "Podaj indeks kategorii: ";
-        for(int i = 0; i < cats.size(); ++i)
-            cout << "\n\t(" << i << ") " << cats.at(i);
-        cout << "\n\t(-1)Zadna z powyzszych\t:::" << flush;
-        idx = cin.readLine().toInt(&ok);
-        if(ok) {
-            retval << str.setNum(idx);
-            break;
-        }
-    }
-    return retval;
-}
-
 // wybor odpowiedniej funkcji prompt i dodanie egzemplarza
 void LibraryUI::enterData() {
     QString typestr;
@@ -301,17 +120,17 @@ void LibraryUI::enterData() {
     }
     QStringList objdata;
     switch(TYPES.indexOf(typestr)) {
-    case BOOK: objdata = promptBook();
+    case BOOK: objdata = BookUI().prompt();
         break;
-    case REFERENCEBOOK: objdata = promptReferenceBook();
+    case REFERENCEBOOK: objdata = ReferenceBookUI().prompt();
         break;
-    case TEXTBOOK: objdata = promptTextBook();
+    case TEXTBOOK: objdata = TextBookUI().prompt();
         break;
-    case DVD: objdata = promptDvd();
+    case DVD: objdata = DvdUI().prompt();
         break;
-    case FILM: objdata = promptFilm();
+    case FILM: objdata = FilmUI().prompt();
         break;
-    case DATADVD: objdata = promptDataBase();
+    case DATADVD: objdata = DataBaseUI().prompt();
         break;
     default:
         qDebug() << "Podano zly typ w funkcji enterData()";

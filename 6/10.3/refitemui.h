@@ -7,10 +7,8 @@
 
 class RefItemUI
 {
-private:
-    RefItem* m_Ptr;
 public:
-    RefItemUI(RefItem* wsk);
+    RefItemUI();
     ~RefItemUI();
     QStringList prompt();
 };
@@ -18,21 +16,21 @@ public:
 class BookUI : public RefItemUI
 {
 public:
-    BookUI(Book* wsk);
+    BookUI();
     QStringList prompt();
 };
 
 class ReferenceBookUI : public BookUI
 {
 public:
-    ReferenceBookUI(ReferenceBook* wsk);
+    ReferenceBookUI();
     QStringList prompt();
 };
 
 class TextBookUI : public BookUI
 {
 public:
-    TextBookUI(TextBook* wsk);
+    TextBookUI();
     QStringList prompt();
 };
 
@@ -40,21 +38,21 @@ public:
 class DvdUI : public RefItemUI
 {
 public:
-    DvdUI(Dvd* wsk);
+    DvdUI();
     QStringList prompt();
 };
 
 class FilmUI : public DvdUI
 {
 public:
-    FilmUI(Film* wsk);
+    FilmUI();
     QStringList prompt();
 };
 
 class DataBaseUI : public DvdUI
 {
 public:
-    DataBaseUI(DataBase* wsk);
+    DataBaseUI();
     QStringList prompt();
 };
 
