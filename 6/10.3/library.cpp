@@ -141,7 +141,7 @@ Library::~Library() {
     clear();
 }
 
-Library::Library(const Library&) : QList<RefItem*>() {}
+Library::Library(const Library&) : QMap<QString, RefItem*>() {}
 
 Library& Library::operator= (const Library&) {
     return *this;
@@ -152,7 +152,7 @@ void Library::addRefItem(RefItem *&refitem)
     QString isbn(refitem->getISBN());
     RefItem* oldItem(findRefItem(isbn));
     if(oldItem == nullptr)
-        append(refitem);
+        insert(isbn, refitem);
     else {
         qDebug() << isbn << " Juz na liscie:\n"
                  << oldItem->toString()
@@ -166,44 +166,43 @@ void Library::addRefItem(RefItem *&refitem)
 }
 
 int Library::removeRefItem(QString isbn) {
-    RefItem* ref(findRefItem(isbn));
     int numCopies(-1);
-    if(ref) {
-        numCopies = ref->getNumberOfCopies() - 1;
+    auto pos = find(isbn);
+    if(pos != end()) {
+        numCopies =  (*pos)->getNumberOfCopies() - 1;
         if(numCopies == 0) {
-            removeAll(ref);
-            delete ref;
+            remove(isbn);
         } else
-            ref->setNumberOfCopies(numCopies);
+            (*pos)->setNumberOfCopies(numCopies);
     }
     return numCopies;
 }
 
 RefItem* Library::findRefItem(QString isbn) {
-    for(int i = 0; i < size(); ++i) {
-        if(at(i)->getISBN().trimmed() == isbn.trimmed())
-            return at(i);
-    }
-    return nullptr;
+    auto pos = find(isbn);
+    if(pos == end())
+        return nullptr;
+    else
+        return *pos;
 }
 
 bool Library::isInList(QString isbn) {
-    return findRefItem(isbn);
+    return (find(isbn) != end());
 }
 
 QString Library::toString(QString sep) const {
     QStringList reflst;
-    for(int i = 0; i < size(); ++i)
+    for(const auto& elem : *this)
     {
-        reflst << at(i)->toString();
+        reflst << elem->toString();
     }
     return reflst.join(sep);
 }
 
 QString Library::getItemString(QString isbn) {
-    RefItem* ref(findRefItem(isbn));
-    if(ref)
-        return ref->toString();
+    auto pos = find(isbn);
+    if(pos != end())
+        return (*pos)->toString();
     else
         return QString();
 }

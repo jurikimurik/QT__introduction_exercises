@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QList>
+#include <QMap>
 
 class RefItem {
 public:
@@ -107,7 +108,7 @@ private:
     Category m_Category;
 };
 
-class Library : public QList<RefItem*>
+class Library : public QMap<QString, RefItem*>
 {
 public:
     Library() {}
