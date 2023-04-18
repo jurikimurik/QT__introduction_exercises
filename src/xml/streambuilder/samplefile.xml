@@ -1,0 +1,12 @@
+<section id="xmlintro">
+    <title> Wprowadzenie do XML </title>
+    <p> To jest akapit </p>
+    <ul>
+        <li> To element listy nieuporządkowanej. </li>
+        <li c="textbook"> To pojawi się tylko w podręczniku </li>
+    </ul>
+    
+    <p> Spójrz na poniższy przykład kodu: </p>
+    <include src="testhello.cpp" mode="cpp"/>
+<p> A oto inny akapit </p>
+</section>

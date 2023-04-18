@@ -1,0 +1,43 @@
+1. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+2. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+3. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+4. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+5. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+6. Która metoda zostanie wywołana?
+   a. Shape::draw()
+   b. Square::draw()
+   c. błąd - metoda jet ukryta
+   d. błąd - metoda jet niedostępna
+   e. błąd - nie ma takiej metody
+
+

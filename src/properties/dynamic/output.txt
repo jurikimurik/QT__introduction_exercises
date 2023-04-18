@@ -1,0 +1,30 @@
+Stałe właściwości:
+objectName      d1
+someString      Waszyngton
+Dynamiczne właściwości:
+AcquiredProp    WartośćString
+Stałe właściwości:
+objectName      d2
+someString
+Dynamiczne właściwości:
+intProp       42
+realProp      3.14159
+dateProp      2012-01-04
+
+Teraz zapiszemy oba obiekty w pliku, zamkniemy plik,
+ponownie go otworzymy, odczytamy dane i użyjemy ich
+do utworzenia nowych obiektów DynoProps.
+
+Oto magazyny właściwości nowych obiektów.
+Stałe właściwości:
+objectName      d1
+someString      Waszyngton
+Dynamiczne właściwości:
+AcquiredProp      WartośćString
+Stałe właściwości:
+objectName      d2
+someString
+Dynamiczne właściwości:
+intProp       42
+realProp      3.14159
+dateProp      2012-01-04

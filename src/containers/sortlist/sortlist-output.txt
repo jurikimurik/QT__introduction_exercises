@@ -1,0 +1,6 @@
+namelist[0] = Ananas
+namelist[1] = baran
+namelist[2] = CzajkA
+namelist[3] = doberman
+namelist[4] = Doberman
+Posortowana lista StringList: Ananas, CzajkA, Doberman, baran, doberman

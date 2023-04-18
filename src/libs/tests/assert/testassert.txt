@@ -1,0 +1,19 @@
+********* Start testing of TestAssertEquals *********
+Config: Using QTest library 4.6.2, Qt 4.6.2
+PASS   : TestAssertEquals::initTestCase()
+QDEBUG : TestAssertEquals::test() Testujemy wartości logiczne
+QDEBUG : TestAssertEquals::test() "Jesteśmy w pliku: testassertequals.cpp  Linia: 15" 
+QDEBUG : TestAssertEquals::test() Testujemy obiekty QString 
+QDEBUG : TestAssertEquals::test() Testujemy obiekty QDate 
+QDEBUG : TestAssertEquals::test() "porównanie datestr: 2010-11-21 dateobj: N Lis 21 2010 variant: 2010-11-21" 
+XFAIL  : TestAssertEquals::test() Dalej!
+   Loc: [testassertequals.cpp(46)]
+QDEBUG : TestAssertEquals::test() Testujemy wartości int i double
+XFAIL  : TestAssertEquals::test() Dalej!
+   Loc: [testassertequals.cpp(59)]
+QDEBUG : TestAssertEquals::test() Testujemy wskaźniki
+FAIL!  : TestAssertEquals::test() 'nullpointer != 0' returned FALSE. ()
+   Loc: [testassertequals.cpp(63)]
+PASS   : TestAssertEquals::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped
+********* Finished testing of TestAssertEquals *********

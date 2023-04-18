@@ -1,0 +1,30 @@
+<html>
+<head>
+<title> Biblioteka DataObjects </title>
+</head>
+<body>
+
+<p> Biblioteka zawiera przykłady kodu oraz rozwiązania części zadań z książki. Wszystkie pliki nagłówkowe są uważane za "publiczne", podczas gdy pliki .cpp są uważane ze "prywatne" - studenci powinni sami zaimplementować te klasy na potrzeby niektórych zadań. W szczególności: </p> 
+
+<ul>
+<li> dataobject.h/cpp - studenci mają sami zaimplementować DataObject, więc mimo że prawie wszystkie inne klasy są zależne od DataObject, nie dostarczamy jej definicji studentom. Studenci mogą, jeśli tak im wygodnie, zacząć od pliku .h, lub samodzielnie stworzyć interfejs wystarczający do realizacji danego zadania. </li>
+
+<li> xmlimport.h/cpp - werska podobna do tej z xml/propchildren, jednak dostosowana do dataobject. 
+</li>
+
+<li> country.h, country.cpp, address.cpp, address.h - przykładowe obiekty dataobject z ograniczeniami </li>
+
+<li> dataobjecttablemodel.h, dataobjecttablemodel.cpp - most pomiędzy interfejsami QAbstractTableModel i DataObject. </li>
+
+<li> objectfactory.cpp, objectfactory.h - wykorzystywane przez xmlimport </li>
+
+
+<li> constraint.h/cpp - klasy ograniczeń - do opisu ograniczeń danych wejściowych. Być może zostaną wkrótce usunięte z dataobject, ponieważ nie korzystamy z nich w aplikacjach GUI. Nie są nam potrzebne, ponieważ widżety mogą korzystać z walidatorów QValidator. </li>
+
+<li> stdinreader.h/cpp - wykorzystywane przez testconstraint.h/cpp </li>
+
+</ul>
+
+
+</body>
+

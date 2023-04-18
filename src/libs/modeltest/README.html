@@ -1,0 +1,39 @@
+<html>
+<body>
+<p>
+ModelTest pozwala na wykrycie popularnych błędów w implementacjach <a href="http://qt-project.org/doc/qt-5.1/qtcore/qabstractitemmodel.html">QAbstractItemModel</a>.
+</p>
+<p>
+ModelTest kontynuuje sprawdzanie modelu w miarę, jak ten się zmienia, co pozwala na weryfikację stanu i natychmiastowe wychwycenie popularnych błędów, takich jak:</p>
+<ul>
+<li>Weryfikacja, że X wierszy zostało wstawione w odpowiednie miejsce po tym, jak sygnał rowsAboutToBeInserted() informuje o tym, że wstawione zostanie X wierszy.</li>
+<li>Rodzic pierwszego indeksu pierwszego wiersza to QModelIndex()</li>
+<li>Dwukrotne wywołanie index() z tymi samymi wartościami zwróci ten sam QModelIndex</li>
+<li>Jeśli rowCount() twierdzi, że istnieje X wierszy, model test sprawdzi, czy to prawda.
+<li>Wiele możliwych błędów wynikających z pomyłki o 1 przy numerowaniu indeksu</li>
+<li>hasChildren() zwraca true jeśli rowCount() jest większe od zero.</li>
+<li>and many more...</li>
+</ul>
+
+
+
+<p> Aby skorzystać z narzędzia ModelTest, wykonaj następujące kroki: </p>
+<ol>
+<li> Załącz plik pri na końcu Twojego pliku projektu pro przy użyciu polecenia include():
+<pre>
+include(../path/to/dir/modeltest.pri)
+</pre>
+</li>
+<li> Następnie w pliku źródłowym załącz "modeltest.sh" i utwórz instancję ModelTest z Twoim modelem. Dzięki temu test będzie działał tak samo długo jak Twój model. Na przykład:
+<pre>
+#include &lt;modeltest.h&gt;
+
+QDirModel *model = new QDirModel(this);
+new ModelTest(model, this);
+</pre>
+</li>
+<li> To wszystko. Kiedy test natknie się na problem, użyje asercji. Plik modeltest.cpp zawiera nieco wskazówek na temat naprawiania problemów zgłoszonych przez narzędzie testujące. </li>
+</ol>
+
+</body>
+</html>

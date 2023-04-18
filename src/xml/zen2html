@@ -1,0 +1,5 @@
+#!/bin/sh
+# Tłumaczy zen.xml na index.html.
+# Wymaga gnu xsltproc i docbook-xsl.
+# DOCBOOK=/usr/share/docbook-xsl
+xsltproc $DOCBOOK/html/onechunk.xsl zen.xml

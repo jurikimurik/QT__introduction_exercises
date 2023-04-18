@@ -1,0 +1,23 @@
+src/regexp> ./testphone 
+Wprowadź numer telefonu (lub q w celu wyjścia): 16175738000
+ poprawny: (USA/Kanada) +1 617-573-8000
+Wprowadź numer telefonu (lub q w celu wyjścia): 680111111111
+ poprawny: (Palau) + 680 (0)11-11-11-111
+Wprowadź numer telefonu (lub q w celu wyjścia): 777888888888
+ poprawny: (Nieznany - ale być może poprawny) + 777 (0)88-88-88-888
+Wprowadź numer telefonu (lub q w celu wyjścia): 86333333333
+ poprawny: (Chiny) + 86 (0)33-33-33-333
+Wprowadź numer telefonu (lub q w celu wyjścia): 962444444444
+ poprawny: (Jordania) + 962 (0)44-44-44-444
+Wprowadź numer telefonu (lub q w celu wyjścia): 56777777777
+ poprawny: (Chile) + 56 (0)77-77-77-777
+Wprowadź numer telefonu (lub q w celu wyjścia): 351666666666
+ poprawny: (Portugalia) + 351 (0)66-66-66-666
+Wprowadź numer telefonu (lub q w celu wyjścia): 31888888888
+ poprawny: (Holandia) + 31 (0)88-88-88-888
+Wprowadź numer telefonu (lub q w celu wyjścia): 20398478
+Nieznany format
+Wprowadź numer telefonu (lub q w celu wyjścia): 2828282828282
+Nieznany format
+Wprowadź numer telefonu (lub q w celu wyjścia): q
+src/regexp> 
