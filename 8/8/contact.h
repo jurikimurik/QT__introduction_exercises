@@ -30,7 +30,7 @@ public:
     static const char separator = '|';
 
     Contact(QObject* parent, int c, QString n, QString s, QString street, QString z, QString cit, QString phone) : QObject(parent),
-        category(c), firstName(n), secondName(s), streetAdress(street), zipCode(z), city(cit), phoneNumber(phone) {}
+        category(c), firstName(n), secondName(s), streetAdress(street), zipCode(z), city(cit), phoneNumber(phone) { setObjectName(firstName + " " + secondName); }
 
     QString toString() const
     {

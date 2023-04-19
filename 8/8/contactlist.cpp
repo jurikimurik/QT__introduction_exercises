@@ -2,7 +2,7 @@
 #include <QTextStream>
 ContactList::ContactList(QObject* parent) : QObject(parent)
 {
-
+    setObjectName("Lista Kontaktow");
 }
 
 void ContactList::add(Contact* c)
