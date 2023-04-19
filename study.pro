@@ -7,7 +7,9 @@ CONFIG += c++17 cmdline
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES +=
+SOURCES += \
+    8/2.2/bunch.cpp \
+    8/2.2/person.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -17,8 +19,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     exercise1.10.1.2.cpp
 
-LIBS += -L$$(CPPLIBS)
+LIBS += -L$$(CPPLIBS) \
+        $$(QTDIR)
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS +=
+HEADERS += \
+    8/2.2/person.h
