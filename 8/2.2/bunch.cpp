@@ -6,13 +6,19 @@ QTextStream cout(stdout);
 
 void showTree(QObject* theparent)
 {
+    static int odstep = 0;
     auto lista = theparent->children();
+
+    for(int i = 0; i < odstep; ++i)
+        cout << "  ";
+    cout << "QObject::" << theparent->objectName() << endl;
+
+    odstep++;
     for(auto& elem : lista)
     {
-        cout << "Skladowa: " << elem->objectName() << " - Rodzic: " << elem->parent()->objectName() << endl;
-        if(elem->children().size() > 0)
-            showTree(elem);
+        showTree(elem);
     }
+    odstep--;
 }
 
 // wyhoduj fromadke
@@ -32,8 +38,6 @@ void growBunch() {
     new Person("Alice");
 
     showTree(&bunch);
-
-
 
     qDebug() << "\nWyswietl liste za pomoca QObject::dumpObjectTree()" << endl;
     bunch.dumpObjectTree();
