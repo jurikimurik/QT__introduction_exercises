@@ -39,7 +39,7 @@ int PuzzleModel::value(int r, int c)
 
 int PuzzleModel::value(int pos)
 {
-    if(pos > 0 && pos < m_Positions.size())
+    if(pos >= 0 && pos < m_Positions.size())
     {
         return m_Positions.at(pos);
     } else {

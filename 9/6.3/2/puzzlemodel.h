@@ -23,6 +23,14 @@ public:
     bool neighboring(int r, int c);
     //gridChanged() signal;
 
+    int getRows() const {
+        return m_Rows;
+    }
+
+    int getCols() const {
+        return m_Cols;
+    }
+
     int getSize() const {
         return m_Rows*m_Cols;
     }

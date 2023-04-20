@@ -3,13 +3,23 @@
 PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
 {
     m_Layout = new QGridLayout(this);
-    for(int i = 0; i < model->getSize(); ++i)
-    {
-        auto ptr = new Tile(m_Model->value(i));
-        ptr->setText(ptr->objectName());
 
-        m_Buttons.addButton(ptr);
-        m_Layout->addWidget(ptr);
+
+    for(int y = 1; y <= model->getRows(); ++y)
+    {
+        for(int x = 1; x <= model->getCols(); ++x)
+        {
+            auto ptr = new Tile(m_Model->value(y, x));
+
+            if(m_Model->value(y, x) != model->getSize())
+                ptr->setText(ptr->objectName());
+            else
+                ptr->setEnabled(false);
+
+            m_Buttons.addButton(ptr);
+            m_Layout->addWidget(ptr, y, x);
+
+        }
     }
     setLayout(m_Layout);
 }
