@@ -11,6 +11,7 @@ SOURCES += \
     9/6.3/2/PuzzleView.cpp \
     9/6.3/2/puzzlemodel.cpp \
     9/6.3/2/puzzlewindow.cpp \
+    9/6.3/2/test.cpp \
     9/6.3/2/tile.cpp
 
 # Default rules for deployment.
