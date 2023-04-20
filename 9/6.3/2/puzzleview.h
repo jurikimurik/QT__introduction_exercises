@@ -17,7 +17,7 @@ private:
 public:
     PuzzleView(PuzzleModel* model);
     void refresh();
-    void tryToSlide(Tile *button);
+    void tryToSlide(QAbstractButton *button);
 };
 
 #endif // PUZZLEVIEW_H
