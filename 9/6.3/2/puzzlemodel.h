@@ -15,12 +15,17 @@ private:
     int m_Rows;
     int m_Cols;
 public:
-    PuzzleModel(QObject* parent, int rows, int cols);
+    PuzzleModel(int rows, int cols);
 
     int value(int r, int c);
+    int value(int pos);
     bool slide(int tilenum);
     bool neighboring(int r, int c);
-    //Signal gridChanged();
+    //gridChanged() signal;
+
+    int getSize() const {
+        return m_Rows*m_Cols;
+    }
 
     //DEBUG
     QString getPlaneInText();

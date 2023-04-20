@@ -13,7 +13,7 @@ void wypisz(QString co, bool czy_koniec = true)
 }
 
 
-PuzzleModel::PuzzleModel(QObject* parent, int rows, int cols) : QObject(parent), m_Rows(rows), m_Cols(cols)
+PuzzleModel::PuzzleModel(int rows, int cols) : m_Rows(rows), m_Cols(cols)
 {
     for(int i = 0; i < m_Rows*m_Cols; ++i)
     {
@@ -32,6 +32,16 @@ int PuzzleModel::value(int r, int c)
     if(index >= 0 && index < m_Positions.size())
     {
         return m_Positions.at(index);
+    } else {
+        return -1;
+    }
+}
+
+int PuzzleModel::value(int pos)
+{
+    if(pos > 0 && pos < m_Positions.size())
+    {
+        return m_Positions.at(pos);
     } else {
         return -1;
     }

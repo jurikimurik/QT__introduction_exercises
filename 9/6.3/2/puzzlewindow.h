@@ -2,6 +2,7 @@
 #define PUZZLEWINDOW_H
 
 #include <QMainWindow>
+#include "puzzleview.h"
 
 namespace Ui {
 class PuzzleWindow;

@@ -8,8 +8,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    9/6.3/2/PuzzleView.cpp \
     9/6.3/2/puzzlemodel.cpp \
+    9/6.3/2/puzzleview.cpp \
     9/6.3/2/puzzlewindow.cpp \
     9/6.3/2/test.cpp \
     9/6.3/2/tile.cpp
@@ -29,6 +29,7 @@ INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
     9/6.3/2/puzzlemodel.h \
+    9/6.3/2/puzzleview.h \
     9/6.3/2/puzzlewindow.h \
     9/6.3/2/tile.h
 
