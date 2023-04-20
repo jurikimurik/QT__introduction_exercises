@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QVariant>
 #include <QPalette>
+#include <QApplication>
 
 InputForm::InputForm(QWidget* parent)
 : QDialog(parent) {
@@ -78,4 +79,12 @@ void InputForm::updateUi() {
     m_colorButton->setPalette(p);
 
 
+}
+
+int main(int argc, char* argv[])
+{
+    QApplication app(argc, argv);
+    InputForm forma;
+    forma.show();
+    return app.exec();
 }

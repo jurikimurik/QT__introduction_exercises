@@ -1,7 +1,7 @@
 # common settings for testcases in libs
 CONFIG += debug
 
-CPPLIBS=$$(CPPLIBS)
+CPPLIBS=L$$(CPPLIBS)
 isEmpty( CPPLIBS ) {
     error("Musisz zdefiniować zmienną środowiskową CPPLIBS.")
 }
