@@ -12,26 +12,29 @@ PuzzleModel::PuzzleModel(QObject* parent, int rows, int cols) : QObject(parent),
         m_Positions.push_back(i+1);
     }
 
-    std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
+    //std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
+    std::default_random_engine dre(288);
     std::shuffle(m_Positions.begin(), m_Positions.end(), dre);
+}
+
+void wypisz(QString co, bool czy_koniec = true)
+{
+    qDebug() << co;
+    if(czy_koniec)
+        qDebug() << Qt::endl;
+    qDebug() << Qt::flush;
 }
 
 int PuzzleModel::value(int r, int c)
 {
     int index = (r-1)*m_Cols + (c-1);
-    if(index > 0) {
-        try {
-
-            return m_Positions.at(index);
-        } catch (std::exception& e)
-        {
-            return 0;
-        }
+    wypisz(QString("Indeks: ") + QString::number(index));
+    if(index >= 0 && index < m_Positions.size())
+    {
+        return m_Positions.at(index);
     } else {
-        return 0;
+        return -1;
     }
-
-
 }
 
 bool PuzzleModel::neighboring(int r, int c)
@@ -53,16 +56,20 @@ bool PuzzleModel::slide(int tilenum)
     int with_r = r;
     int with_c = c;
 
-    qDebug() << r << " " << c << " " << with_r << " " << with_c << " " << Qt::flush << Qt::endl;
+    wypisz(QString::number(r) + QString(" ") + QString::number(c));
 
 
     if(!neighboring(r+1, c)) {
+        wypisz("U dolu");
         with_r = r+1;
     } else if (!neighboring(r-1, c)) {
+        wypisz("U gory");
         with_r = r-1;
     } else if (!neighboring(r, c+1)) {
+        wypisz("Po prawej");
         with_c = c+1;
     } else if (!neighboring(r, c-1)) {
+        wypisz("Po lewej");
         with_c = c-1;
     }
 
@@ -70,10 +77,10 @@ bool PuzzleModel::slide(int tilenum)
         return false;
     }
 
-
+    qDebug() << r << " " << c << " " << with_r << " " << with_c << " " << Qt::flush << Qt::endl;
 
     int position_to = m_Positions.indexOf(value(with_r, with_c));
-     qDebug() << position << " " << position_to << Qt::flush << Qt::endl;
+    qDebug() << position << " " << position_to << Qt::flush;
     m_Positions.swapItemsAt(position, position_to);
     return true;
 }
