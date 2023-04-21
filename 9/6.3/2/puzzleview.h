@@ -20,6 +20,7 @@ public:
     void tryToSlide(QAbstractButton *button);
     void wygrana();
     void shuffle();
+    void exit();
 };
 
 #endif // PUZZLEVIEW_H

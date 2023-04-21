@@ -6,12 +6,16 @@
 void PuzzleView::wygrana() {
     auto but = QMessageBox::information(this, "Wygrana", "Wygrales! Brawo! Jeszcze jedna rundka?", QMessageBox::Yes | QMessageBox::No);
     if(but == QMessageBox::No)
-        exit(EXIT_SUCCESS);
+        exit();
     else {
         // Jezeli gramy znowu
         shuffle();
     }
 
+}
+
+void PuzzleView::exit() {
+    ::exit(EXIT_SUCCESS);
 }
 
 void PuzzleView::shuffle() {
@@ -46,16 +50,26 @@ PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
     // Laczymy klikniecie przycisku (jednej z liczb) z metoda
     connect(&m_Buttons, &QButtonGroup::buttonPressed, this, &PuzzleView::tryToSlide);
 
-    // Jeden dodatkowy przycisk
+    // Dwa dodatkowe przyciski
+        // - Wymieszaj
     auto butShuffle = new QPushButton("Wymieszaj", this);
     butShuffle->setMaximumHeight(50);
     butShuffle->setMaximumWidth(100);
+        // - Wyjscie
+    auto butExit = new QPushButton("Wyjdż", this);
+    butExit->setMaximumHeight(50);
+    butExit->setMaximumWidth(100);
 
     // Dodajemy przycisk na widok
-    m_Layout->addWidget(butShuffle, m_Model->getRows(), model->getCols()+1);
+    int ilosc_wierszy = m_Model->getRows();
+    if(ilosc_wierszy-1 > 0)
+        m_Layout->addWidget(butShuffle, ilosc_wierszy-1, model->getCols()+1);
+    m_Layout->addWidget(butExit, ilosc_wierszy, model->getCols()+1);
 
     // Laczymy przycisk shuffle z funkcja wymieszaj
     connect(butShuffle, &QPushButton::pressed, this, &PuzzleView::shuffle);
+    // Laczymy przycisk exit z funkcja wyjscia
+    connect(butExit, &QPushButton::pressed, this, &PuzzleView::exit);
 }
 
 // Odswiezamy widok
