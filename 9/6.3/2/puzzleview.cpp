@@ -8,6 +8,7 @@ void PuzzleView::wygrana() {
     if(but == QMessageBox::No)
         exit(EXIT_SUCCESS);
     else {
+        // Jezeli gramy znowu
         shuffle();
     }
 
@@ -57,11 +58,14 @@ PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
     connect(butShuffle, &QPushButton::pressed, this, &PuzzleView::shuffle);
 }
 
+// Odswiezamy widok
 void PuzzleView::refresh()
 {
+    // Odswiezamy widok tylko przyciski, ktore sa w grupie
     QList<QAbstractButton*> buttons = m_Buttons.buttons();
     for(int i = 0; i < m_Model->getSize(); ++i)
     {
+        // Dzialamy na pojedynczym przycisku po kolei
         auto ptr = buttons.at(i);
 
         QString toName = QString::number(m_Model->value(i));
@@ -81,8 +85,10 @@ void PuzzleView::refresh()
 
 void PuzzleView::tryToSlide(QAbstractButton *button)
 {
+    // Jezeli sie uda zmienic xy przycisku
     if(m_Model->slide(button->objectName().toInt()))
     {
+        // Odswiez dane oraz sprawdz wygrana
         refresh();
         if(m_Model->checkWin())
             PuzzleView::wygrana();

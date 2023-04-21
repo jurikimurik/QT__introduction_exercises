@@ -3,6 +3,7 @@
 #include <chrono>
 #include <algorithm>
 
+// Sluzy tylko do debugowania
 #include <QDebug>
 void wypisz(QString co, bool czy_koniec = true)
 {
@@ -36,6 +37,7 @@ void PuzzleModel::shuffle()
 
 int PuzzleModel::value(int r, int c)
 {
+    // Obliczamy indeks na podstawie r i c
     int index = (r-1)*m_Cols + (c-1);
     if(index >= 0 && index < m_Positions.size())
     {
@@ -55,6 +57,8 @@ int PuzzleModel::value(int pos)
     }
 }
 
+// Sprawdzamy czy jest w danym miejscu puste miejsce
+//  - (ktore ma wartosc maksyalna tak naprawde).
 bool PuzzleModel::neighboring(int r, int c)
 {
     if(value(r, c) == m_Positions.size())
@@ -65,8 +69,10 @@ bool PuzzleModel::neighboring(int r, int c)
     }
 }
 
+
 bool PuzzleModel::slide(int tilenum)
 {
+    // Probujemy przesunac
     int position = m_Positions.indexOf(tilenum);
     int r = (position / m_Cols) + 1;
     int c = position - (r-1)*m_Cols + 1;
@@ -74,6 +80,8 @@ bool PuzzleModel::slide(int tilenum)
     int with_r = r;
     int with_c = c;
 
+
+    // Sprawdzamy kazda sytuacje
     if(!neighboring(r+1, c)) {
         with_r = r+1;
     } else if (!neighboring(r-1, c)) {
@@ -93,6 +101,7 @@ bool PuzzleModel::slide(int tilenum)
     return true;
 }
 
+// Dla debugowania
 QString PuzzleModel::getPlaneInText()
 {
     QString str;
@@ -108,6 +117,7 @@ QString PuzzleModel::getPlaneInText()
     return str;
 }
 
+// Sprawdzenie wygranej (nie wliczamy w sortowanie przycisku pustego)
 bool PuzzleModel::checkWin() const {
     auto copy = m_Positions;
     copy.removeOne(copy.size());
