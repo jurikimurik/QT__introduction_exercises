@@ -21,7 +21,15 @@ PuzzleModel::PuzzleModel(int rows, int cols) : m_Rows(rows), m_Cols(cols)
     }
 
     std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
-    std::shuffle(m_Positions.begin(), m_Positions.end(), dre);
+    // Zeby 1 zawsze bylo na miejscu pierwszym
+    std::shuffle(m_Positions.begin()+1, m_Positions.end(), dre);
+}
+
+void PuzzleModel::shuffle()
+{
+    std::default_random_engine dre(std::chrono::system_clock::now().time_since_epoch().count());
+    // Zeby 1 zawsze bylo na miejscu pierwszym
+    std::shuffle(m_Positions.begin()+1, m_Positions.end(), dre);
 }
 
 
@@ -98,6 +106,12 @@ QString PuzzleModel::getPlaneInText()
     }
 
     return str;
+}
+
+bool PuzzleModel::checkWin() const {
+    auto copy = m_Positions;
+    copy.removeOne(copy.size());
+    return std::is_sorted(copy.begin(), copy.end());
 }
 
 

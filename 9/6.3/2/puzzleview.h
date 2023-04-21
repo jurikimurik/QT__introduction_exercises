@@ -18,6 +18,7 @@ public:
     PuzzleView(PuzzleModel* model);
     void refresh();
     void tryToSlide(QAbstractButton *button);
+    void wygrana();
 };
 
 #endif // PUZZLEVIEW_H

@@ -35,6 +35,10 @@ public:
         return m_Rows*m_Cols;
     }
 
+    bool checkWin() const;
+
+    void shuffle();
+
     //DEBUG
     QString getPlaneInText();
 };

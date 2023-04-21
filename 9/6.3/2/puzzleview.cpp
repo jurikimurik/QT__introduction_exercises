@@ -1,8 +1,18 @@
 #include "puzzleview.h"
 
 #include <QDebug>
+#include <QMessageBox>
 
-// LOAD BUTTONS
+void PuzzleView::wygrana() {
+    auto but = QMessageBox::information(this, "Wygrana", "Wygrales! Brawo! Jeszcze jedna rundka?", QMessageBox::Yes | QMessageBox::No);
+    if(but == QMessageBox::No)
+        exit(EXIT_SUCCESS);
+    else {
+        m_Model->shuffle();
+        refresh();
+    }
+
+}
 
 PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
 {
@@ -51,9 +61,10 @@ void PuzzleView::refresh()
 
 void PuzzleView::tryToSlide(QAbstractButton *button)
 {
-    qDebug() << button->objectName() << Qt::endl << Qt::flush;
     if(m_Model->slide(button->objectName().toInt()))
     {
         refresh();
+        if(m_Model->checkWin())
+            PuzzleView::wygrana();
     }
 }
