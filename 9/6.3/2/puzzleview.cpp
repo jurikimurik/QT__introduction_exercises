@@ -8,15 +8,22 @@ void PuzzleView::wygrana() {
     if(but == QMessageBox::No)
         exit(EXIT_SUCCESS);
     else {
-        m_Model->shuffle();
-        refresh();
+        shuffle();
     }
 
 }
 
+void PuzzleView::shuffle() {
+    m_Model->shuffle();
+    refresh();
+}
+
 PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
 {
+
     m_Layout = new QGridLayout(this);
+
+    //Ustawiamy przyciski na widoku
     for(int y = 1; y <= model->getRows(); ++y)
     {
         for(int x = 1; x <= model->getCols(); ++x)
@@ -34,7 +41,20 @@ PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
     }
     setLayout(m_Layout);
 
+
+    // Laczymy klikniecie przycisku (jednej z liczb) z metoda
     connect(&m_Buttons, &QButtonGroup::buttonPressed, this, &PuzzleView::tryToSlide);
+
+    // Jeden dodatkowy przycisk
+    auto butShuffle = new QPushButton("Wymieszaj", this);
+    butShuffle->setMaximumHeight(50);
+    butShuffle->setMaximumWidth(100);
+
+    // Dodajemy przycisk na widok
+    m_Layout->addWidget(butShuffle, m_Model->getRows(), model->getCols()+1);
+
+    // Laczymy przycisk shuffle z funkcja wymieszaj
+    connect(butShuffle, &QPushButton::pressed, this, &PuzzleView::shuffle);
 }
 
 void PuzzleView::refresh()
