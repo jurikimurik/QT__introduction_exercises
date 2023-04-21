@@ -8,9 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    9/8/main.cpp \
-    9/8/order.cpp \
-    9/8/orderform.cpp
+    9/8/2/order.cpp \
+    9/8/2/orderwindow.cpp \
+    9/8/2/test.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,5 +26,8 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-    9/8/order.h \
-    9/8/orderform.h
+    9/8/2/order.h \
+    9/8/2/orderwindow.h
+
+FORMS += \
+    9/8/2/orderwindow.ui
