@@ -9,6 +9,7 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     9/8/2/order.cpp \
+    9/8/2/orderlist.cpp \
     9/8/2/orderwindow.cpp \
     9/8/2/test.cpp
 
@@ -27,6 +28,7 @@ INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
     9/8/2/order.h \
+    9/8/2/orderlist.h \
     9/8/2/orderwindow.h
 
 FORMS += \

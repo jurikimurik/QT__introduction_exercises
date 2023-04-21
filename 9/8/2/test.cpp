@@ -1,5 +1,5 @@
-#include "order.h"
-#include <QDebug>
+#include "orderlist.h"
+#include "orderwindow.h"
 #include <QApplication>
 using namespace Qt;
 
@@ -7,14 +7,10 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    auto frytki = new Order("Frytki", QDate::currentDate(),2,5.32,&app);
-    qDebug() << frytki->toString() << Qt::flush;
+    OrderWindow wind;
+    wind.show();
 
-    auto pizza = new Order(&app);
-    pizza->setName("Pizza Americano");
-    pizza->setDate(QDate::currentDate());
-    pizza->setQuantity(2);
-    pizza->setPrice(23.45);
+    int retval = app.exec();
+    return retval;
 
-    qDebug() << pizza->toString() << Qt::flush;
 }

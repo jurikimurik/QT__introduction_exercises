@@ -1,12 +1,13 @@
 #include "order.h"
 
-Order::Order(QObject* parent) : QObject(parent)
+Order::Order()
 {}
 
-Order::Order(QString name, QDate date, int quantity, double price, QObject *parent) :
-    QObject(parent), m_Name(name), m_Date(date), m_Quantity(quantity), m_Price(price),
-    m_TotalPrice(quantity*price)
-{}
+Order::Order(QString name, QDate date, int quantity, double price) :
+    m_Name(name), m_Date(date), m_Quantity(quantity), m_Price(price)
+{
+    m_TotalPrice = m_Quantity * m_Price;
+}
 
 
 void Order::setName(QString name) {
@@ -25,6 +26,10 @@ void Order::setPrice(double price) {
     m_Price = price;
 
     m_TotalPrice = m_Quantity * m_Price;
+}
+
+double Order::getTotalPrice() const {
+    return m_TotalPrice;
 }
 
 QString Order::toString() const {
