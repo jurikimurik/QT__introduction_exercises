@@ -2,6 +2,8 @@
 
 #include <QDebug>
 
+// LOAD BUTTONS
+
 PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
 {
     m_Layout = new QGridLayout(this);
@@ -27,7 +29,24 @@ PuzzleView::PuzzleView(PuzzleModel* model) : m_Model(model)
 
 void PuzzleView::refresh()
 {
+    QList<QAbstractButton*> buttons = m_Buttons.buttons();
+    for(int i = 0; i < m_Model->getSize(); ++i)
+    {
+        auto ptr = buttons.at(i);
 
+        QString toName = QString::number(m_Model->value(i));
+        ptr->setObjectName(toName);
+        ptr->setText(toName);
+
+
+        if(ptr->objectName() != QString::number(m_Model->getSize()))
+            ptr->setEnabled(true);
+        else {
+            ptr->setEnabled(false);
+            ptr->setText(QString());
+        }
+
+    }
 }
 
 void PuzzleView::tryToSlide(QAbstractButton *button)
