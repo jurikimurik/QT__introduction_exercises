@@ -5,7 +5,7 @@
 #include "ui_ksl.h"
 #include <QList>
 #include <QPair>
-class QObjectBrowserAction;
+#include "../../src/libs/objectbrowser/qobjectbrowseraction.h"
 
 class KeySequenceLabel : public Ui_KSL
 {
@@ -26,6 +26,8 @@ private slots:
     void onactionQuit_triggered();
 private:
     QObjectBrowserAction* m_browserAction;
+
+    int m_paints;
 };
 
 #endif // KEYSEQUENCELABEL_H

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+
 namespace Ui {
 class Ui_KSL;
 }
@@ -15,7 +16,7 @@ public:
     explicit Ui_KSL(QWidget *parent = nullptr);
     ~Ui_KSL();
 
-private:
+protected:
     Ui::Ui_KSL *ui;
 };
 
