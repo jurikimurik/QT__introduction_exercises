@@ -1,0 +1,11 @@
+#include "ui_ksl.h"
+#include <QApplication>
+using namespace Qt;
+
+int main(int argc, char* argv[])
+{
+    QApplication app(argc, argv);
+    Ui_KSL okno;
+    okno.show();
+    return app.exec();
+}
