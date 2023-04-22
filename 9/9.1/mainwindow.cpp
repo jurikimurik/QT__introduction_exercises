@@ -61,6 +61,11 @@ void MainWindow::on_startButton_clicked() {
     //inicjalizuj system oceniania
     m_correctChars = 0;
 
+    //ustawiamy odpowiednio QTimer
+    m_timer = new QTimer(this);
+    m_timer->setSingleShot(true);
+    m_timer->setInterval(m_inputTime);
+
     // rozpocznij próby
     processTrial();
 }
@@ -78,7 +83,8 @@ void MainWindow::processTrial() {
     m_totTrials++;
     ui->nextButton->setText(QString("String %1").arg(m_trials));
     //rozpocznij wyświetlanie
-    QTimer::singleShot(m_expInterval, this, SLOT(timerDisplayRandStr()));
+    connect(m_timer, &QTimer::timeout, this, &MainWindow::timerDisplayRandStr);
+    m_timer->start();
 }
 
 
@@ -88,6 +94,9 @@ void MainWindow::timerDisplayRandStr() {
     ui->responseString->setEnabled(true);
     ui->responseString->setFocus();
     ui->nextButton->setEnabled(true);
+    //odliczanie czasu
+    connect(m_timer, &QTimer::timeout, this, &MainWindow::on_nextButton_clicked);
+    m_timer->start();
 }
 
 //end
@@ -98,6 +107,9 @@ void MainWindow::on_responseString_returnPressed() {
 
 
 void MainWindow::on_nextButton_clicked() {
+    disconnect(m_timer, &QTimer::timeout, this, &MainWindow::on_nextButton_clicked);
+    m_timer->stop();
+
     int goodChars(m_randStr.numCorrectChars(ui->responseString->text()));
     int lenTarget(ui->lengthLCD->value());
     m_correctChars += goodChars;
@@ -116,9 +128,18 @@ void MainWindow::on_nextButton_clicked() {
         ui->nextButton->hide();
         //Włącz ustawienia
         ui->groupBox->setEnabled(true);
+        //Usun obiekt QTimer
+        delete m_timer;
     }
     else
         processTrial();
 }
 
+
+
+void MainWindow::on_timeSlider_valueChanged(int value)
+{
+    ui->timeLCD->display(value);
+    m_inputTime = value;
+}
 

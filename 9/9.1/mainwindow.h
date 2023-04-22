@@ -25,6 +25,8 @@ private slots:
     void on_lengthSlider_valueChanged(int value);
     void on_exposureSlider_valueChanged(int value);
     void timerDisplayRandStr();
+    void on_timeSlider_valueChanged(int value);
+
 private:
     int m_expInterval;
     RandomString m_randStr;
@@ -32,6 +34,9 @@ private:
     int m_correctChars;
     int m_totTrials;
     int m_totCorrectChars;
+
+    QTimer* m_timer;
+    int m_inputTime;
 };
 //end
 #endif // MAINWINDOW_H
