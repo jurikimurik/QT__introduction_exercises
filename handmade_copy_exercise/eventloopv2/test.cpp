@@ -1,4 +1,5 @@
 #include "ui_ksl.h"
+#include "keysequencelabel.h"
 #include <QApplication>
 using namespace Qt;
 
