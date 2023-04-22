@@ -8,9 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    handmade_copy_exercise/eventloopv2/ui_ksl.cpp \
-    handmade_copy_exercise/eventloopv2/test.cpp \
-    handmade_copy_exercise/eventloopv2/keysequencelabel.cpp
+    9/9.1/main.cpp \
+    9/9.1/mainwindow.cpp \
+    9/9.1/randomstring.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,9 +27,9 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-    handmade_copy_exercise/eventloopv2/ui_ksl.h \
-    handmade_copy_exercise/eventloopv2/keysequencelabel.h
+    9/9.1/mainwindow.h \
+    9/9.1/randomstring.h
 
 
 FORMS += \
-    handmade_copy_exercise/eventloopv2/ui_ksl.ui
+    9/9.1/mainwindow.ui
