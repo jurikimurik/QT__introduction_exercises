@@ -1,8 +1,0 @@
-src/ctorpoly> ./a.out
-w konstruktorze A
-foo() A
-w konstruktorze B
-w konstruktorze C
-Po zakończeniu konstrukcji:
-foo() C
-src/ctorpoly>

@@ -1,5 +1,0 @@
-Ten program korzysta z hierarchii Shape
-
-PROSTOKĄT Wysokość = 4.1 Szerokość = 5.2 pole = 21.32
-KOŁO Promień = 6.1 pole = 116.899
-KWADRAT Wysokość = 5.1 pole = 26.01

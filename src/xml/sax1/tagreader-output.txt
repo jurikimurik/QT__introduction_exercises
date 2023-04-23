@@ -1,9 +1,0 @@
-
-\section(id=xmlintro){    
-    \title{ Wprowadzenie do XML  }    
-    \para{ To jest akapit  }    
-    \ul{        
-        \li{ To element listy nieuporządkowanej. }        
-        \li(c=textbook){ To pojawi się tylko w podręczniku }    }    
-    \p{ Spójrz na poniższy przykład kodu: }    
-    \include(src=xmlsamplecode.cpp){}}
