@@ -1,6 +1,8 @@
 #include "blackjack.h"
 #include "ui_blackjack.h"
 
+#include <QDebug>
+
 BlackJack::BlackJack(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::BlackJack), HW1(new HandView(this)), HW2(new HandView(this)), stos(new Deck(this))
 {
@@ -10,6 +12,8 @@ BlackJack::BlackJack(QWidget *parent) :
     ui->spinBox->setValue(stos->size());
 
     connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
+
+    connect(HW1->m_karty, &Hand::handChanged, this, &BlackJack::signalEmmitted);
 }
 
 BlackJack::~BlackJack()
@@ -31,4 +35,9 @@ void BlackJack::buttonMenuClicked(QAction *action)
         HW2->addCard(stos->pick());
     }
 
+}
+
+void BlackJack::signalEmmitted()
+{
+    qDebug() << "SYGNAL EMITOWANY!" << Qt::endl << Qt::flush;
 }

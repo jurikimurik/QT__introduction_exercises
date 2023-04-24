@@ -3,13 +3,16 @@
 
 #include "card.h"
 
-class Hand : public QVector<Card*>
+class Hand : public QObject, public QVector<Card*>
 {
+    Q_OBJECT
 public:
-    Hand();
-    Hand(Card* karta);
-    Hand(QVector<Card*> stos);
+    Hand(QObject* parent = nullptr);
+    Hand(Card* karta, QObject* parent = nullptr);
+    Hand(QVector<Card*> stos, QObject* parent = nullptr);
     Hand& operator <<(Card* card);
+signals:
+    void handChanged();
 };
 
 #endif // HAND_H

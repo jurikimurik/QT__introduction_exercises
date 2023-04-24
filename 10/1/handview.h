@@ -18,6 +18,8 @@ public:
     void setModel(Hand* hand);
     int getValue();
 
+    Hand* m_karty;
+
 public slots:
     void addCard(Card* karta);
     void clearHand();
@@ -26,7 +28,7 @@ public slots:
 private:
     Ui::HandView *ui;
 
-    Hand* m_karty;
+
 };
 
 #endif // HANDVIEW_H

@@ -5,8 +5,8 @@
 
 HandView::HandView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::HandView),
-    m_karty(new Hand())
+    m_karty(new Hand()),
+    ui(new Ui::HandView)
 {
     ui->setupUi(this);
 }
@@ -34,7 +34,7 @@ int HandView::getValue()
 
 void HandView::addCard(Card* karta)
 {
-    m_karty->push_back(karta);
+    *m_karty << karta;
     karta->label()->setObjectName("label");
 
     ui->groupBox->layout()->addWidget(karta->label());
