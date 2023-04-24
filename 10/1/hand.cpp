@@ -1,5 +1,8 @@
 #include "hand.h"
 
+Hand::Hand()
+{}
+
 Hand::Hand(Card *karta)
 {
     push_back(karta);

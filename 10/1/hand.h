@@ -6,6 +6,7 @@
 class Hand : public QVector<Card*>
 {
 public:
+    Hand();
     Hand(Card* karta);
     Hand(QVector<Card*> stos);
     Hand& operator <<(Card* card);

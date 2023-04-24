@@ -5,7 +5,8 @@
 
 HandView::HandView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::HandView)
+    ui(new Ui::HandView),
+    m_karty(new Hand())
 {
     ui->setupUi(this);
 }
@@ -13,6 +14,22 @@ HandView::HandView(QWidget *parent) :
 HandView::~HandView()
 {
     delete ui;
+}
+
+void HandView::setModel(Hand *hand)
+{
+    delete m_karty;
+    m_karty = hand;
+}
+
+int HandView::getValue()
+{
+    int suma;
+    for(const auto& elem: *m_karty)
+    {
+        suma += elem->value();
+    }
+    return suma;
 }
 
 void HandView::addCard()

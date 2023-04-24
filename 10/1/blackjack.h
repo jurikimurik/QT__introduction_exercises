@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "handview.h"
+#include "deck.h"
 
 namespace Ui {
 class BlackJack;
@@ -15,6 +16,8 @@ class BlackJack : public QMainWindow
 public:
     explicit BlackJack(QWidget *parent = nullptr);
     ~BlackJack();
+    void deal();
+    void loadSettings();
 
 public slots:
     void buttonMenuClicked(QAction * action);
@@ -24,6 +27,8 @@ private:
 
     HandView* HW1;
     HandView* HW2;
+
+    Deck stos;
 };
 
 #endif // BLACKJACK_H
