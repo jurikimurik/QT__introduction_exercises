@@ -24,8 +24,8 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
     if(ui->actionDobierz == action || ui->actionRozdaj == action)
     {
-        HW1->addCard();
-        HW2->addCard();
+        HW1->addCard(new Card("A Trefl"));
+        HW2->addCard(new Card("J Pik"));
     }
 
 }

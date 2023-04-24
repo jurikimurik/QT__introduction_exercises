@@ -24,7 +24,7 @@ void HandView::setModel(Hand *hand)
 
 int HandView::getValue()
 {
-    int suma;
+    int suma = 0;
     for(const auto& elem: *m_karty)
     {
         suma += elem->value();
@@ -32,12 +32,12 @@ int HandView::getValue()
     return suma;
 }
 
-void HandView::addCard()
+void HandView::addCard(Card* karta)
 {
-    auto label = new QLabel("Tu bedzie karta", ui->groupBox);
-    label->setObjectName("label");
+    m_karty->push_back(karta);
+    karta->label()->setObjectName("label");
 
-    ui->groupBox->layout()->addWidget(label);
+    ui->groupBox->layout()->addWidget(karta->label());
 }
 
 void HandView::clearHand()

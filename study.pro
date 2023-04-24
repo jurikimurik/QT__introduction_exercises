@@ -43,3 +43,4 @@ FORMS += \
     10/1/handview.ui \
     10/1/blackjack.ui
 
+RESOURCES = cards2.qrc

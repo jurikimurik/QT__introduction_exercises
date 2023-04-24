@@ -14,19 +14,12 @@ void debuguj(T co)
 
 int main(int argc, char* argv[])
 {
-    /*QApplication app(argc, argv);
+    QApplication app(argc, argv);
     BlackJack window;
+
+
     window.show();
-    return app.exec();*/
+    return app.exec();
 
-    auto wsk1 = new Card("A Trefl");
-    auto wsk2 = new Card("9 Karo");
 
-    Hand hand(wsk1);
-    hand << wsk2;
-
-    for(const auto& elem : hand)
-    {
-        debuguj(elem->toString());
-    }
 }

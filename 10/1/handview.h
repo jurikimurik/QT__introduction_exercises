@@ -19,7 +19,7 @@ public:
     int getValue();
 
 public slots:
-    void addCard();
+    void addCard(Card* karta);
     void clearHand();
 
 
