@@ -4,16 +4,17 @@
 #include "card.h"
 #include <QVector>
 
-class Deck : public QVector<Card*>
+class Deck : public QObject, public QVector<Card*>
 {
+    Q_OBJECT
 public:
-    Deck();
+    Deck(QObject* parent = nullptr);
     void shuffle();
     void reset();
     Card* pick();
     QString toString();
-protected:
-    int cardsLeft();
+signals:
+    void cardsLeft(int ile);
 };
 
 #endif // DECK_H

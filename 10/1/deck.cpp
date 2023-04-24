@@ -3,7 +3,7 @@
 #include <random>
 #include <chrono>
 
-Deck::Deck()
+Deck::Deck(QObject* parent) : QObject(parent)
 {
     for(int suit = 0; suit < Card::s_Suits.size(); suit++)
     {
@@ -12,6 +12,8 @@ Deck::Deck()
             push_back(new Card(Card::s_Faces.at(face) + " " + Card::s_Suits.at(suit)));
         }
     }
+
+    emit cardsLeft(this->size());
 }
 
 void Deck::shuffle()
@@ -23,18 +25,19 @@ void Deck::reset()
 {
     qDeleteAll(begin(), end());
     clear();
-    *this = Deck();
+
+    Deck();
+
+    emit cardsLeft(this->size());
 }
 
 Card *Deck::pick()
 {
-    return takeFirst();
+    auto card = takeFirst();
+    emit cardsLeft(this->size());
+    return card;
 }
 
-int Deck::cardsLeft()
-{
-    return size();
-}
 
 QString Deck::toString()
 {

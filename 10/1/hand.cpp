@@ -16,6 +16,6 @@ Hand::Hand(QVector<Card *> stos)
 Hand &Hand::operator <<(Card *card)
 {
     push_back(card);
+
     return *this;
 }
-

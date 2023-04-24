@@ -28,7 +28,7 @@ private:
     HandView* HW1;
     HandView* HW2;
 
-    Deck stos;
+    Deck* stos;
 };
 
 #endif // BLACKJACK_H

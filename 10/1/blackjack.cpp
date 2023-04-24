@@ -2,11 +2,14 @@
 #include "ui_blackjack.h"
 
 BlackJack::BlackJack(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::BlackJack), HW1(new HandView(this)), HW2(new HandView(this))
+    QMainWindow(parent), ui(new Ui::BlackJack), HW1(new HandView(this)), HW2(new HandView(this)), stos(new Deck(this))
 {
     ui->setupUi(this);
     ui->gridLayout->addWidget(HW1, 2, 0);
     ui->gridLayout->addWidget(HW2, 2, 1);
+    ui->spinBox->setValue(stos->size());
+
+    connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
 }
 
 BlackJack::~BlackJack()
@@ -24,8 +27,8 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
     if(ui->actionDobierz == action || ui->actionRozdaj == action)
     {
-        HW1->addCard(new Card("A Trefl"));
-        HW2->addCard(new Card("J Pik"));
+        HW1->addCard(stos->pick());
+        HW2->addCard(stos->pick());
     }
 
 }
