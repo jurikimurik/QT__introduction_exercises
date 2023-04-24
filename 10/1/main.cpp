@@ -1,6 +1,6 @@
 #include "blackjack.h"
 
-#include "card.h"
+#include "deck.h"
 #include <QDebug>
 
 template <typename T>
@@ -14,8 +14,22 @@ void debuguj(T co)
 
 int main(int argc, char* argv[])
 {
-    QApplication app(argc, argv);
+    /*QApplication app(argc, argv);
     BlackJack window;
     window.show();
-    return app.exec();
+    return app.exec();*/
+
+    Deck deck;
+
+    debuguj(deck.toString());
+    debuguj("Bierzemy...");
+    deck.pick();
+    deck.pick();
+    deck.pick();
+    debuguj("Sprawdzamy...");
+    debuguj(deck.toString());
+    deck.shuffle();
+    debuguj(deck.toString());
+    deck.reset();
+    debuguj(deck.toString());
 }

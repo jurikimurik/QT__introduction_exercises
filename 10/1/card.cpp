@@ -1,6 +1,6 @@
 #include "card.h"
 
-QStringList Card::s_Faces = {"NULL", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+QStringList Card::s_Faces = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 QStringList Card::s_Suits = {"Pik", "Kier", "Karo", "Trefl"};
 
 Card::Card(QString name)
@@ -23,7 +23,7 @@ QLabel *Card::label()
 
 int Card::value()
 {
-    return m_FaceNbr;
+    return m_FaceNbr+1;
 }
 
 bool Card::isAce()
