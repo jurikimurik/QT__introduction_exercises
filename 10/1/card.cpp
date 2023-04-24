@@ -1,9 +1,9 @@
 #include "card.h"
 
-QStringList Card::s_Faces = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+QStringList Card::s_Faces = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "t", "J", "Q", "K"};
 QStringList Card::s_Suits = {"Pik", "Kier", "Karo", "Trefl"};
 
-QStringList imageFace = {"a", "2", "3", "4", "5", "6", "7", "8", "9", "10", "j", "q", "k"};
+QStringList imageFace = {"a", "2", "3", "4", "5", "6", "7", "8", "9", "t", "j", "q", "k"};
 QStringList imageSuit = {"s", "h", "d", "c"};
 
 QString translateToImage(QString face, QString suit)
