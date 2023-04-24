@@ -1,6 +1,6 @@
 #include "blackjack.h"
 
-#include "deck.h"
+#include "hand.h"
 #include <QDebug>
 
 template <typename T>
@@ -19,17 +19,14 @@ int main(int argc, char* argv[])
     window.show();
     return app.exec();*/
 
-    Deck deck;
+    auto wsk1 = new Card("A Trefl");
+    auto wsk2 = new Card("9 Karo");
 
-    debuguj(deck.toString());
-    debuguj("Bierzemy...");
-    deck.pick();
-    deck.pick();
-    deck.pick();
-    debuguj("Sprawdzamy...");
-    debuguj(deck.toString());
-    deck.shuffle();
-    debuguj(deck.toString());
-    deck.reset();
-    debuguj(deck.toString());
+    Hand hand(wsk1);
+    hand << wsk2;
+
+    for(const auto& elem : hand)
+    {
+        debuguj(elem->toString());
+    }
 }

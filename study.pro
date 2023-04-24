@@ -10,6 +10,7 @@ CONFIG += c++17 cmdline
 SOURCES += \
     10/1/card.cpp \
     10/1/deck.cpp \
+    10/1/hand.cpp \
     10/1/handview.cpp \
     10/1/blackjack.cpp \
     10/1/main.cpp
@@ -32,6 +33,7 @@ INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 HEADERS += \
     10/1/card.h \
     10/1/deck.h \
+    10/1/hand.h \
     10/1/handview.h \
     10/1/blackjack.h
 
