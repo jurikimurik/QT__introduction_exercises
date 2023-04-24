@@ -13,3 +13,19 @@ BlackJack::~BlackJack()
 {
     delete ui;
 }
+
+// Obsluga przyciskow
+void BlackJack::buttonMenuClicked(QAction *action)
+{
+    if(ui->actionNowa_gra == action) {
+        HW1->clearHand();
+        HW2->clearHand();
+    }
+
+    if(ui->actionDobierz == action || ui->actionRozdaj == action)
+    {
+        HW1->addCard();
+        HW2->addCard();
+    }
+
+}

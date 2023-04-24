@@ -15,6 +15,11 @@ public:
     explicit HandView(QWidget *parent = nullptr);
     ~HandView();
 
+public slots:
+    void addCard();
+    void clearHand();
+
+
 private:
     Ui::HandView *ui;
 };

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>343</width>
-    <height>320</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,5 +109,25 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>toolBar</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>BlackJack</receiver>
+   <slot>buttonMenuClicked(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>159</x>
+     <y>196</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>buttonMenuClicked(QAction*)</slot>
+ </slots>
 </ui>

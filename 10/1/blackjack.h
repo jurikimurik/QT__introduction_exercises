@@ -16,6 +16,9 @@ public:
     explicit BlackJack(QWidget *parent = nullptr);
     ~BlackJack();
 
+public slots:
+    void buttonMenuClicked(QAction * action);
+
 private:
     Ui::BlackJack *ui;
 

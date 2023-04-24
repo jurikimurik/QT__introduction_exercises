@@ -53,4 +53,8 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>addCard()</slot>
+  <slot>clearHand()</slot>
+ </slots>
 </ui>
