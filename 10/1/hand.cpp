@@ -24,3 +24,9 @@ Hand &Hand::operator <<(Card *card)
 
     return *this;
 }
+
+void Hand::clearHand()
+{
+    qDeleteAll(begin(), end());
+    clear();
+}

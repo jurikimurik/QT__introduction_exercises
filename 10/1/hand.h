@@ -11,6 +11,8 @@ public:
     Hand(Card* karta, QObject* parent = nullptr);
     Hand(QVector<Card*> stos, QObject* parent = nullptr);
     Hand& operator <<(Card* card);
+
+    void clearHand();
 signals:
     void handChanged();
 };

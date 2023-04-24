@@ -42,10 +42,11 @@ void HandView::addCard(Card* karta)
 
 void HandView::clearHand()
 {
-    ui->groupBox->dumpObjectTree();
     for(auto elem : ui->groupBox->children())
     {
         if(elem->objectName().indexOf("label") != -1)
                 elem->deleteLater();
     }
+
+    m_karty->clearHand();
 }

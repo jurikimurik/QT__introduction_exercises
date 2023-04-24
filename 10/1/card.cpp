@@ -1,5 +1,7 @@
 #include "card.h"
 
+#include <QDebug>
+
 QStringList Card::s_Faces = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "t", "J", "Q", "K"};
 QStringList Card::s_Suits = {"Pik", "Kier", "Karo", "Trefl"};
 

@@ -21,8 +21,7 @@ public:
 
 public slots:
     void buttonMenuClicked(QAction * action);
-
-    void signalEmmitted();
+    void playerHandChanged();
 
 private:
     Ui::BlackJack *ui;

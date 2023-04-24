@@ -12,8 +12,7 @@ BlackJack::BlackJack(QWidget *parent) :
     ui->spinBox->setValue(stos->size());
 
     connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
-
-    connect(HW1->m_karty, &Hand::handChanged, this, &BlackJack::signalEmmitted);
+    connect(HW1->m_karty, &Hand::handChanged, this, &BlackJack::playerHandChanged);
 }
 
 BlackJack::~BlackJack()
@@ -31,13 +30,15 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
     if(ui->actionDobierz == action || ui->actionRozdaj == action)
     {
-        HW1->addCard(stos->pick());
         HW2->addCard(stos->pick());
+        HW1->addCard(stos->pick());
+
     }
 
 }
 
-void BlackJack::signalEmmitted()
+void BlackJack::playerHandChanged()
 {
-    qDebug() << "SYGNAL EMITOWANY!" << Qt::endl << Qt::flush;
+    qDebug() << "Lewy:" << HW1->getValue() << Qt::endl << Qt::flush;
+    qDebug() << "Prawy:" << HW2->getValue() << Qt::endl << Qt::flush;
 }
