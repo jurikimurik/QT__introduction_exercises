@@ -2,6 +2,7 @@
 #define BLACKJACK_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include "handview.h"
 #include "deck.h"
 

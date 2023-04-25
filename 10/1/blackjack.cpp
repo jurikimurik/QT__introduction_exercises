@@ -47,7 +47,13 @@ void BlackJack::buttonMenuClicked(QAction *action)
     }
 
     if(ui->actionRozdaj == action) {
+        HW1->clearHand();
+        HW2->clearHand();
 
+        HW1->addCard(stos->pick());
+        HW2->addCard(stos->pick());
+
+        computerTurn();
     }
 
     if(ui->actionTasuj == action) {
@@ -96,5 +102,20 @@ void BlackJack::computerTurn()
 
 void BlackJack::showResults()
 {
+    int roznicaKomputera = abs(HW1->getValue() - 21);
+    int roznicaGracza = abs(HW2->getValue() - 21);
 
+    if(roznicaKomputera > roznicaGracza) {
+        QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
+    } else {
+        QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
+    }
+
+    // Ustawiamy wszystkie opcje
+    ui->actionNowa_gra->setEnabled(true);
+    ui->actionRozdaj->setEnabled(true);
+    ui->actionTasuj->setEnabled(true);
+    ui->actionDobierz->setEnabled(false);
+    ui->actionZostan->setEnabled(false);
+    ui->actionWyjdz->setEnabled(false);
 }
