@@ -19,6 +19,7 @@ public:
     ~BlackJack();
     void deal();
     void loadSettings();
+    void ustawMenu(bool nowaGra, bool rozdaj, bool tasuj, bool dobierz = false, bool zostan = false, bool wyjdz = true);
 
 public slots:
     void buttonMenuClicked(QAction * action);

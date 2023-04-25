@@ -17,12 +17,8 @@ BlackJack::BlackJack(QWidget *parent) :
     connect(HW1->getHand(), &Hand::handChanged, this, &BlackJack::playerHandChanged);
 
     // Poczatkowe ustawienia przyciskow
-    ui->actionNowa_gra->setEnabled(true);
-    ui->actionRozdaj->setEnabled(false);
-    ui->actionTasuj->setEnabled(false);
-    ui->actionDobierz->setEnabled(false);
-    ui->actionZostan->setEnabled(false);
-    ui->actionWyjdz->setEnabled(true);
+    ustawMenu(true, false, false);
+
 
     // Nazwy uzytkownikow
 }
@@ -30,6 +26,16 @@ BlackJack::BlackJack(QWidget *parent) :
 BlackJack::~BlackJack()
 {
     delete ui;
+}
+
+void BlackJack::ustawMenu(bool nowaGra, bool rozdaj, bool tasuj, bool dobierz, bool zostan, bool wyjdz)
+{
+    ui->actionNowa_gra->setEnabled(nowaGra);
+    ui->actionRozdaj->setEnabled(rozdaj);
+    ui->actionTasuj->setEnabled(tasuj);
+    ui->actionDobierz->setEnabled(dobierz);
+    ui->actionZostan->setEnabled(zostan);
+    ui->actionWyjdz->setEnabled(wyjdz);
 }
 
 // Obsluga przyciskow
@@ -78,28 +84,25 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
 void BlackJack::playerHandChanged()
 {
-    if(HW1->getValue() >= 21 || HW2->getValue() >= 21)
-        showResults();
+    /*if(HW1->getValue() >= 21 || HW2->getValue() >= 21)
+        showResults();*/
 }
 
 void BlackJack::computerTurn()
 {
     // Ustawiamy wszystkie opcje na disable
+    ustawMenu(false, false, false);
     ui->actionNowa_gra->setEnabled(false);
     ui->actionRozdaj->setEnabled(false);
     ui->actionTasuj->setEnabled(false);
     ui->actionDobierz->setEnabled(false);
     ui->actionZostan->setEnabled(false);
-    ui->actionWyjdz->setEnabled(false);
 
     while(HW1->getValue() < 18)
         HW1->addCard(stos->pick());
 
     // Wlaczamy niezbedne opcje
-    ui->actionTasuj->setEnabled(true);
-    ui->actionDobierz->setEnabled(true);
-    ui->actionZostan->setEnabled(true);
-    ui->actionWyjdz->setEnabled(true);
+    ustawMenu(false, false, true, true, true);
 }
 
 void BlackJack::showResults()
@@ -121,10 +124,5 @@ void BlackJack::showResults()
     }
 
     // Ustawiamy wszystkie opcje
-    ui->actionNowa_gra->setEnabled(true);
-    ui->actionRozdaj->setEnabled(true);
-    ui->actionTasuj->setEnabled(true);
-    ui->actionDobierz->setEnabled(false);
-    ui->actionZostan->setEnabled(false);
-    ui->actionWyjdz->setEnabled(false);
+    ustawMenu(true, true, true);
 }
