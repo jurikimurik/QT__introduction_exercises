@@ -25,10 +25,26 @@ void HandView::setModel(Hand *hand)
 int HandView::getValue()
 {
     int suma = 0;
+    int ilosc_asow = 0;
     for(const auto& elem: *m_karty)
     {
-        suma += elem->value();
+        if(elem->isAce())
+            ilosc_asow++;
+        else
+            suma += elem->value();
     }
+
+    //Uwzgledniamy asy w najlepszym dopasowaniu
+    for(int i = 0; i < ilosc_asow; ++i)
+    {
+        if(suma + 11 <= 21)
+            suma += 11;
+        else
+            suma += 1;
+    }
+
+    qDebug() << suma << Qt::endl;
+
     return suma;
 }
 

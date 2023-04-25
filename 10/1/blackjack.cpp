@@ -111,13 +111,14 @@ void BlackJack::showResults()
     int roznicaGracza =     21 - HW2->getValue();
 
     //Sprawdzamy najpierw ujemność
-    if(roznicaGracza < 0)
+    if(roznicaGracza < 0) {
         QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
-    else if(roznicaKomputera < 0)
+    }
+    else if(roznicaKomputera < 0) {
         QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
-
+    }
     //Następnie lepsze dopasowanie
-    if(roznicaKomputera > roznicaGracza) {
+    else if(roznicaKomputera > roznicaGracza) {
         QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
     } else {
         QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
