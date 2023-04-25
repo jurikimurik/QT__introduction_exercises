@@ -11,8 +11,18 @@ BlackJack::BlackJack(QWidget *parent) :
     ui->gridLayout->addWidget(HW2, 2, 1);
     ui->spinBox->setValue(stos->size());
 
+
+    // Polaczenia
     connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
     connect(HW1->m_karty, &Hand::handChanged, this, &BlackJack::playerHandChanged);
+
+    // Poczatkowe ustawienia przyciskow
+    ui->actionNowa_gra->setEnabled(true);
+    ui->actionRozdaj->setEnabled(false);
+    ui->actionTasuj->setEnabled(false);
+    ui->actionDobierz->setEnabled(false);
+    ui->actionZostan->setEnabled(false);
+    ui->actionWyjdz->setEnabled(true);
 }
 
 BlackJack::~BlackJack()
@@ -26,13 +36,34 @@ void BlackJack::buttonMenuClicked(QAction *action)
     if(ui->actionNowa_gra == action) {
         HW1->clearHand();
         HW2->clearHand();
+
+        stos->reset();
+        stos->shuffle();
+
+        HW1->addCard(stos->pick());
+        HW2->addCard(stos->pick());
+
+        //computerTurn();
     }
 
-    if(ui->actionDobierz == action || ui->actionRozdaj == action)
-    {
-        HW2->addCard(stos->pick());
-        HW1->addCard(stos->pick());
+    if(ui->actionRozdaj == action) {
 
+    }
+
+    if(ui->actionTasuj == action) {
+        stos->shuffle();
+    }
+
+    if(ui->actionDobierz == action) {
+
+    }
+
+    if(ui->actionZostan == action) {
+
+    }
+
+    if(ui->actionWyjdz == action) {
+        exit(EXIT_SUCCESS);
     }
 
 }
@@ -41,4 +72,15 @@ void BlackJack::playerHandChanged()
 {
     qDebug() << "Lewy:" << HW1->getValue() << Qt::endl << Qt::flush;
     qDebug() << "Prawy:" << HW2->getValue() << Qt::endl << Qt::flush;
+}
+
+void BlackJack::computerTurn()
+{
+    // Ustawiamy wszystkie opcje na disable
+    ui->actionNowa_gra->setEnabled(false);
+    ui->actionRozdaj->setEnabled(false);
+    ui->actionTasuj->setEnabled(false);
+    ui->actionDobierz->setEnabled(false);
+    ui->actionZostan->setEnabled(false);
+    ui->actionWyjdz->setEnabled(false);
 }

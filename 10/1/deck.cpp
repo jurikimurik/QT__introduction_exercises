@@ -26,7 +26,13 @@ void Deck::reset()
     qDeleteAll(begin(), end());
     clear();
 
-    Deck();
+    for(int suit = 0; suit < Card::s_Suits.size(); suit++)
+    {
+        for(int face = 0; face < Card::s_Faces.size(); face++)
+        {
+            push_back(new Card(Card::s_Faces.at(face) + " " + Card::s_Suits.at(suit)));
+        }
+    }
 
     emit cardsLeft(this->size());
 }

@@ -30,6 +30,8 @@ private:
     HandView* HW2;
 
     Deck* stos;
+
+    void computerTurn();
 };
 
 #endif // BLACKJACK_H
