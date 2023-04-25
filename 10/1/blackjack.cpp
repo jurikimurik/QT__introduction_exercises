@@ -14,7 +14,7 @@ BlackJack::BlackJack(QWidget *parent) :
 
     // Polaczenia
     connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
-    connect(HW1->m_karty, &Hand::handChanged, this, &BlackJack::playerHandChanged);
+    connect(HW1->getHand(), &Hand::handChanged, this, &BlackJack::playerHandChanged);
 
     // Poczatkowe ustawienia przyciskow
     ui->actionNowa_gra->setEnabled(true);
@@ -23,6 +23,8 @@ BlackJack::BlackJack(QWidget *parent) :
     ui->actionDobierz->setEnabled(false);
     ui->actionZostan->setEnabled(false);
     ui->actionWyjdz->setEnabled(true);
+
+    // Nazwy uzytkownikow
 }
 
 BlackJack::~BlackJack()
@@ -76,8 +78,8 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
 void BlackJack::playerHandChanged()
 {
-    qDebug() << "Lewy:" << HW1->getValue() << Qt::endl << Qt::flush;
-    qDebug() << "Prawy:" << HW2->getValue() << Qt::endl << Qt::flush;
+    if(HW1->getValue() >= 21 || HW2->getValue() >= 21)
+        showResults();
 }
 
 void BlackJack::computerTurn()
@@ -102,9 +104,16 @@ void BlackJack::computerTurn()
 
 void BlackJack::showResults()
 {
-    int roznicaKomputera = abs(HW1->getValue() - 21);
-    int roznicaGracza = abs(HW2->getValue() - 21);
+    int roznicaKomputera =  21 - HW1->getValue();
+    int roznicaGracza =     21 - HW2->getValue();
 
+    //Sprawdzamy najpierw ujemność
+    if(roznicaGracza < 0)
+        QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
+    else if(roznicaKomputera < 0)
+        QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
+
+    //Następnie lepsze dopasowanie
     if(roznicaKomputera > roznicaGracza) {
         QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
     } else {

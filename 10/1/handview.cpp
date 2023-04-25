@@ -32,6 +32,11 @@ int HandView::getValue()
     return suma;
 }
 
+Hand *HandView::getHand()
+{
+    return m_karty;
+}
+
 void HandView::addCard(Card* karta)
 {
     *m_karty << karta;
