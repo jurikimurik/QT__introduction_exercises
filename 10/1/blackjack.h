@@ -32,6 +32,8 @@ private:
     Deck* stos;
 
     void computerTurn();
+
+    void showResults();
 };
 
 #endif // BLACKJACK_H

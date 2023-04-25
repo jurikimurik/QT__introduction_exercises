@@ -43,7 +43,7 @@ void BlackJack::buttonMenuClicked(QAction *action)
         HW1->addCard(stos->pick());
         HW2->addCard(stos->pick());
 
-        //computerTurn();
+        computerTurn();
     }
 
     if(ui->actionRozdaj == action) {
@@ -55,11 +55,11 @@ void BlackJack::buttonMenuClicked(QAction *action)
     }
 
     if(ui->actionDobierz == action) {
-
+        HW2->addCard(stos->pick());
     }
 
     if(ui->actionZostan == action) {
-
+        showResults();
     }
 
     if(ui->actionWyjdz == action) {
@@ -83,4 +83,18 @@ void BlackJack::computerTurn()
     ui->actionDobierz->setEnabled(false);
     ui->actionZostan->setEnabled(false);
     ui->actionWyjdz->setEnabled(false);
+
+    while(HW1->getValue() < 18)
+        HW1->addCard(stos->pick());
+
+    // Wlaczamy niezbedne opcje
+    ui->actionTasuj->setEnabled(true);
+    ui->actionDobierz->setEnabled(true);
+    ui->actionZostan->setEnabled(true);
+    ui->actionWyjdz->setEnabled(true);
+}
+
+void BlackJack::showResults()
+{
+
 }
