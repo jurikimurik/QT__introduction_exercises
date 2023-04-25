@@ -4,27 +4,40 @@
 #include <QDebug>
 
 BlackJack::BlackJack(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::BlackJack), HW1(new HandView(this)), HW2(new HandView(this)), stos(new Deck(this))
+    QMainWindow(parent), ui(new Ui::BlackJack), stos(new Deck(this))
 {
     ui->setupUi(this);
 
-    HW1->setName("Komputer");
-    ui->gridLayout->addWidget(HW1, 2, 0);
+    int ilosc_graczy = QInputDialog::getInt(this, "Ilosc graczy", "Wprowadz ilosc graczy: ", 2, 2);
+    for(int i = 0; i < ilosc_graczy; ++i)
+    {
+        HandView* HW;
 
-    HW2->setName("Gracz");
-    ui->gridLayout->addWidget(HW2, 2, 1);
+        QString imie = QInputDialog::getText(this, "Imie gracza " + QString::number(i), "Wprowadz imie uzytkownika. (Zostaw puste, jezeli jest to komputer)");
+        if(imie.size() == 0) {
+            HW = new HandView(this, true);
+            HW->setName("Komputer");
+        } else {
+            HW = new HandView(this);
+            HW->setName(imie);
+        }
+        HWs.push_back(HW);
+    }
+    // Tworzymy na razie tylko dwoch graczy
+
+    for(int i = 0; i < HWs.size(); ++i)
+    {
+        ui->gridLayout->addWidget(HWs.at(i), 2, i);
+    }
+
     ui->spinBox->setValue(stos->size());
 
 
     // Polaczenia
     connect(stos, &Deck::cardsLeft, ui->spinBox, &QSpinBox::setValue);
-    connect(HW1->getHand(), &Hand::handChanged, this, &BlackJack::playerHandChanged);
 
     // Poczatkowe ustawienia przyciskow
     ustawMenu(true, false, false);
-
-
-    // Nazwy uzytkownikow
 }
 
 BlackJack::~BlackJack()
@@ -46,29 +59,27 @@ void BlackJack::ustawMenu(bool nowaGra, bool rozdaj, bool tasuj, bool dobierz, b
 void BlackJack::buttonMenuClicked(QAction *action)
 {
     if(ui->actionNowa_gra == action) {
-        HW1->clearHand();
-        HW1->clearWins();
-
-        HW2->clearHand();
-        HW2->clearWins();
-
         stos->reset();
         stos->shuffle();
 
-        HW1->addCard(stos->pick());
-        HW2->addCard(stos->pick());
+        for(const auto& elem: HWs)
+        {
+            elem->clearHand();
+            elem->clearWins();
+            elem->addCard(stos->pick());
+        }
 
-        computerTurn();
+        nextTurn();
     }
 
     if(ui->actionRozdaj == action) {
-        HW1->clearHand();
-        HW2->clearHand();
+        for(const auto& elem: HWs)
+        {
+            elem->clearHand();
+            elem->addCard(stos->pick());
+        }
 
-        HW1->addCard(stos->pick());
-        HW2->addCard(stos->pick());
-
-        computerTurn();
+        nextTurn();
     }
 
     if(ui->actionTasuj == action) {
@@ -76,11 +87,12 @@ void BlackJack::buttonMenuClicked(QAction *action)
     }
 
     if(ui->actionDobierz == action) {
-        HW2->addCard(stos->pick());
+        if(HW_Turn != nullptr)
+            HW_Turn->addCard(stos->pick());
     }
 
     if(ui->actionZostan == action) {
-        showResults();
+        nextTurn();
     }
 
     if(ui->actionWyjdz == action) {
@@ -89,51 +101,73 @@ void BlackJack::buttonMenuClicked(QAction *action)
 
 }
 
-void BlackJack::playerHandChanged()
+void BlackJack::nextTurn()
 {
-    /*if(HW1->getValue() >= 21 || HW2->getValue() >= 21)
-        showResults();*/
+    if(HW_Turn == nullptr) {
+        HW_Turn = HWs.at(0);
+    }
+    else {
+        int index = HWs.indexOf(HW_Turn);
+        if(index == HWs.size()-1) {
+            showResults();
+            return;
+        }
+
+        else
+            HW_Turn = HWs.at(index + 1);
+    }
+
+    if(HW_Turn->isComputer())
+        computerTurn();
+    else
+        ustawMenu(false, false, true, true, true);
 }
 
 void BlackJack::computerTurn()
 {
     // Ustawiamy wszystkie opcje na disable
     ustawMenu(false, false, false);
-    ui->actionNowa_gra->setEnabled(false);
-    ui->actionRozdaj->setEnabled(false);
-    ui->actionTasuj->setEnabled(false);
-    ui->actionDobierz->setEnabled(false);
-    ui->actionZostan->setEnabled(false);
 
-    while(HW1->getValue() < 18)
-        HW1->addCard(stos->pick());
+    while(HW_Turn->getValue() < 18)
+        HW_Turn->addCard(stos->pick());
 
-    // Wlaczamy niezbedne opcje
-    ustawMenu(false, false, true, true, true);
+    nextTurn();
 }
 
 void BlackJack::showResults()
 {
-    int roznicaKomputera =  21 - HW1->getValue();
-    int roznicaGracza =     21 - HW2->getValue();
+    //Laczymy kazdego gracza z jego wynikiem
+    QVector<std::pair<HandView*, int>> roznice;
+    for(const auto elem : HWs)
+        roznice.push_back(std::make_pair(elem, (21-elem->getValue())));
 
-    //Sprawdzamy najpierw ujemność
-    if(roznicaGracza < 0) {
-        QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
-        HW1->won();
+    //Usuwamy przegranych
+    for(const auto& elem : roznice)
+    {
+        if(elem.second < 0)
+            roznice.removeAll(elem);
     }
-    else if(roznicaKomputera < 0) {
-        QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
-        HW2->won();
+
+    //Wybieramy najlepszego
+    //  - Zakladamy ze pierwszy wygrywa
+    auto winnerPair = roznice.at(0);
+    for(const auto& elem : roznice)
+    {
+        if(elem.second < winnerPair.second)
+            winnerPair = elem;
     }
-    //Następnie lepsze dopasowanie
-    else if(roznicaKomputera > roznicaGracza) {
-        QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
-        HW2->won();
+
+    // Oglaszamy wynik!
+    if(winnerPair.second >= 0) {
+        winnerPair.first->won();
+        QMessageBox::information(this, "Wynik", winnerPair.first->getName() + " wygrywa!", "Zrozumiano");
     } else {
-        QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
-        HW1->won();
+        QMessageBox::information(this, "Wynik", "Wszyscy przegrali!", "O nie!");
     }
+
+
+    // Tura teraz jest nieczyja
+    HW_Turn = nullptr;
 
     // Ustawiamy wszystkie opcje
     ustawMenu(true, true, true);

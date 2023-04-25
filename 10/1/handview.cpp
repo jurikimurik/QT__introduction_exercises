@@ -3,10 +3,11 @@
 
 #include <QDebug>
 
-HandView::HandView(QWidget *parent) :
+HandView::HandView(QWidget *parent, bool isComputer) :
     QWidget(parent),
     ui(new Ui::HandView),
-    m_karty(new Hand())
+    m_karty(new Hand()),
+    m_Komp(isComputer)
 {
     ui->setupUi(this);
 }
@@ -51,6 +52,11 @@ Hand *HandView::getHand()
     return m_karty;
 }
 
+QString HandView::getName()
+{
+    return ui->groupBox->title().split("-").at(0).trimmed();
+}
+
 void HandView::setName(QString name, int ilosc_wygranych)
 {
     name = name.trimmed();
@@ -69,6 +75,11 @@ void HandView::clearWins()
 {
     auto gracz = ui->groupBox->title().split("-");
     setName(gracz.at(0), 0);
+}
+
+bool HandView::isComputer()
+{
+    return m_Komp;
 }
 
 

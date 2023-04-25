@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QInputDialog>
+#include <QVector>
 #include "handview.h"
 #include "deck.h"
 
@@ -23,18 +25,18 @@ public:
 
 public slots:
     void buttonMenuClicked(QAction * action);
-    void playerHandChanged();
 
 private:
     Ui::BlackJack *ui;
 
-    HandView* HW1;
-    HandView* HW2;
+    QVector<HandView*> HWs;
+
+    HandView* HW_Turn = nullptr;
 
     Deck* stos;
 
+    void nextTurn();
     void computerTurn();
-
     void showResults();
 };
 
