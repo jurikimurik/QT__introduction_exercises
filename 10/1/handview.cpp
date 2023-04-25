@@ -5,8 +5,8 @@
 
 HandView::HandView(QWidget *parent) :
     QWidget(parent),
-    m_karty(new Hand()),
-    ui(new Ui::HandView)
+    ui(new Ui::HandView),
+    m_karty(new Hand())
 {
     ui->setupUi(this);
 }
@@ -43,8 +43,6 @@ int HandView::getValue()
             suma += 1;
     }
 
-    qDebug() << suma << Qt::endl;
-
     return suma;
 }
 
@@ -52,6 +50,27 @@ Hand *HandView::getHand()
 {
     return m_karty;
 }
+
+void HandView::setName(QString name, int ilosc_wygranych)
+{
+    name = name.trimmed();
+    ui->groupBox->setTitle(name + " - " + QString::number(ilosc_wygranych));
+}
+
+void HandView::won()
+{
+    auto gracz = ui->groupBox->title().split("-");
+    int ilosc_wygranych = gracz.at(1).toInt();
+
+    setName(gracz.at(0), ++ilosc_wygranych);
+}
+
+void HandView::clearWins()
+{
+    auto gracz = ui->groupBox->title().split("-");
+    setName(gracz.at(0), 0);
+}
+
 
 void HandView::addCard(Card* karta)
 {

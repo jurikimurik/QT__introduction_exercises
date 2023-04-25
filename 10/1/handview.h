@@ -19,7 +19,9 @@ public:
     int getValue();
     Hand* getHand();
 
-
+    void setName(QString name, int ilosc_wygranych = 0);
+    void won();
+    void clearWins();
 
 
 public slots:

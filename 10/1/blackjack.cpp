@@ -7,7 +7,11 @@ BlackJack::BlackJack(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::BlackJack), HW1(new HandView(this)), HW2(new HandView(this)), stos(new Deck(this))
 {
     ui->setupUi(this);
+
+    HW1->setName("Komputer");
     ui->gridLayout->addWidget(HW1, 2, 0);
+
+    HW2->setName("Gracz");
     ui->gridLayout->addWidget(HW2, 2, 1);
     ui->spinBox->setValue(stos->size());
 
@@ -43,7 +47,10 @@ void BlackJack::buttonMenuClicked(QAction *action)
 {
     if(ui->actionNowa_gra == action) {
         HW1->clearHand();
+        HW1->clearWins();
+
         HW2->clearHand();
+        HW2->clearWins();
 
         stos->reset();
         stos->shuffle();
@@ -113,15 +120,19 @@ void BlackJack::showResults()
     //Sprawdzamy najpierw ujemność
     if(roznicaGracza < 0) {
         QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
+        HW1->won();
     }
     else if(roznicaKomputera < 0) {
         QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
+        HW2->won();
     }
     //Następnie lepsze dopasowanie
     else if(roznicaKomputera > roznicaGracza) {
         QMessageBox::information(this, "Wygrana", "Wygrywa gracz!", "Najs!");
+        HW2->won();
     } else {
         QMessageBox::information(this, "Przegrana", "Gracz przegrywa!", "O nie!");
+        HW1->won();
     }
 
     // Ustawiamy wszystkie opcje
