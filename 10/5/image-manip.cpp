@@ -136,3 +136,30 @@ QRgb ThreeColors::pixelProcessing(int x, int y)
 
 /////////////////////////////////////////////////////////////////////////////////
 
+QRgb EdgeExtraction::pixelProcessing(int x, int y)
+{
+    QRgb oldpix = m_Image.pixel(x, y);
+    int r = qRed(oldpix);
+    int g = qGreen(oldpix);
+    int b = qBlue(oldpix);
+
+    if(y + 1 >= m_Image.height())
+        return qRgb(r, g, b);
+
+    QRgb downPixel = m_Image.pixel(x, y+1);
+    int d_r = qRed(downPixel);
+    int d_g = qGreen(downPixel);
+    int d_b = qBlue(downPixel);
+
+    int sredniaObecnego = (r + g + b) / 3;
+    int sredniaDolnego = (d_r + d_g + d_b) / 3;
+
+    int roznica = abs(sredniaObecnego - sredniaDolnego);
+    if(roznica > m_Prog)
+        return qRgb(0, 0, 0);
+    else
+        return qRgb(255, 255, 255);
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+

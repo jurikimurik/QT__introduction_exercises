@@ -54,6 +54,14 @@ void UndoMainWin::onThreeColorsButtonClicked()
     displayImage(m_Image);
 }
 
+void UndoMainWin::onEdgeExtractionButtonClicked()
+{
+    int prog = QInputDialog::getInt(this, "Prog", "Podaj prog dla krawedzi: ", 0, 0, 255);
+    EdgeExtraction* ex = new EdgeExtraction(m_Image, prog);
+    m_Stack.push(ex);
+    displayImage(m_Image);
+}
+
 void UndoMainWin::on_horizontalMirrorButton_clicked() {
     MirrorPixels* mp = new MirrorPixels(m_Image, true);
     m_Stack.push(mp);

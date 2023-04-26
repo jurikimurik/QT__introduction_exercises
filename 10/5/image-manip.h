@@ -81,6 +81,15 @@ private:
     QRgb pixelProcessing(int x, int y);
 };
 
+class EdgeExtraction : public ProcessColors {
+public:
+    EdgeExtraction(QImage& img, int prog) : ProcessColors(img), m_Prog(prog)
+    { setText("wyodrebnienie krawedzi");}
+private:
+    int m_Prog;
+    QRgb pixelProcessing(int x, int y);
+};
+
 
 
 #endif        //  #ifndef IMAGE-MANIP_H
