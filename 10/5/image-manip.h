@@ -4,6 +4,24 @@
 #include <QUndoCommand>
 #include <QImage>
 
+
+class MirrorPixels : public QUndoCommand {
+public:
+    virtual void undo();
+    virtual void redo();
+    //end
+    MirrorPixels(QImage& img, bool horiz): m_Image(img), m_Saved(img.size(),
+                  img.format()), m_Horizontal(horiz) {
+        setText(QString("odbicie krawędzi względem linii %1").arg(horiz
+                                                                      ?"poziomej":"pionowej"));
+    }
+private:
+    QImage& m_Image;
+    QImage m_Saved;
+    bool m_Horizontal;
+    void reflect();
+};
+
 //REFACTORING BY ME
 class ProcessColors : public QUndoCommand {
 public:
@@ -19,22 +37,6 @@ protected:
 };
 
 
-//start
-/*class AdjustColors : public QUndoCommand {
-public:
-   AdjustColors(QImage& img, double radj, double gadj, double badj)
-     : m_Image(img), m_Saved(img.size(), img.format()), m_RedAdj(radj), 
-     m_GreenAdj(gadj), m_BlueAdj(badj)   {setText("adjust colors"); }
-   virtual void undo();
-   virtual void redo();
-private:
-    QImage& m_Image;
-    QImage m_Saved;
-    double m_RedAdj, m_GreenAdj, m_BlueAdj;
-    void adjust(double radj, double gadj, double badj);
-};*/
-
-
 class AdjustColors : public ProcessColors {
 public:
     AdjustColors(QImage& img, double radj, double gadj, double badj)
@@ -45,69 +47,40 @@ private:
     QRgb pixelProcessing(int x, int y);
 };
 
-class MirrorPixels : public QUndoCommand {
-public:
-   virtual void undo();
-   virtual void redo();
-//end
-    MirrorPixels(QImage& img, bool horiz): m_Image(img), m_Saved(img.size(), 
-      img.format()), m_Horizontal(horiz) {
-      setText(QString("odbicie krawędzi względem linii %1").arg(horiz
-         ?"poziomej":"pionowej"));
-   }
-private:
-   QImage& m_Image;
-   QImage m_Saved;
-   bool m_Horizontal;
-   void reflect();
-};
 
-class GrayColors : public QUndoCommand {
+
+class GrayColors : public ProcessColors {
 public:
-   GrayColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
+   GrayColors(QImage& img) : ProcessColors(img)
     {setText("wyszaruj obrazek");}
-   virtual void undo();
-   virtual void redo();
 private:
-   QImage& m_Image;
-   QImage m_Saved;
-   void wyszaruj();
+    QRgb pixelProcessing(int x, int y);
 };
 
-class NegateColors : public QUndoCommand {
-   public:
-   NegateColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
-   {setText("negatyw obrazku");}
-   virtual void undo();
-   virtual void redo();
-   private:
-   QImage& m_Image;
-   QImage m_Saved;
-   void negatyw();
+class NegateColors : public ProcessColors {
+public:
+    NegateColors(QImage& img) : ProcessColors(img)
+    {setText("negatyw obrazka");}
+private:
+    QRgb pixelProcessing(int x, int y);
 };
 
-class SwapColors : public QUndoCommand {
-   public:
-   SwapColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
-   {setText("Zamiana kolorow obrazka");}
-   virtual void undo();
-   virtual void redo();
-   private:
-   QImage& m_Image;
-   QImage m_Saved;
-   void zamiana();
+class SwapColors : public ProcessColors {
+public:
+    SwapColors(QImage& img) : ProcessColors(img)
+    {setText("zamiana kolorow obrazka");}
+private:
+    QRgb pixelProcessing(int x, int y);
 };
 
-class ThreeColors : public QUndoCommand {
-   public:
-   ThreeColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
-   {setText("Trzy kolory obrazka");}
-   virtual void undo();
-   virtual void redo();
-   private:
-   QImage& m_Image;
-   QImage m_Saved;
-   void trzy_kolory();
+class ThreeColors : public ProcessColors {
+public:
+    ThreeColors(QImage& img) : ProcessColors(img)
+    {setText("trzy kolory obrazka");}
+private:
+    QRgb pixelProcessing(int x, int y);
 };
+
+
 
 #endif        //  #ifndef IMAGE-MANIP_H
