@@ -99,3 +99,31 @@ void GrayColors::wyszaruj()
        }
     }
 }
+
+void NegateColors::negatyw()
+{
+    int h(m_Image.height()), w(m_Image.width());
+    int r, g, b;
+    QRgb oldpix, newpix;
+    m_Saved = m_Image.copy(QRect()); // zachowaj kopię całego obrazu
+    for(int y = 0; y < h; ++y) {
+       for(int x = 0; x < w; ++x) {
+          oldpix = m_Image.pixel(x,y);
+          r = 255 - qRed(oldpix);
+          g = 255 - qGreen(oldpix);
+          b = 255 - qBlue(oldpix);
+          newpix = qRgb(r,g,b);
+          m_Image.setPixel(x,y,newpix);
+       }
+    }
+}
+
+void NegateColors::redo() {
+    qDebug() << "NegateColors::redo()";
+    negatyw();
+}
+
+void NegateColors::undo() {
+    qDebug() << "NegateColors::undo()";
+    m_Image = m_Saved.copy(QRect());
+}

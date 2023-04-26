@@ -46,6 +46,7 @@ private slots:
     void on_actionOpen_triggered();
 
     void onMonochromeButtonClicked();
+    void onNegateButtonClicked();
 };
 
 #endif // UNDOMAINWIN_H

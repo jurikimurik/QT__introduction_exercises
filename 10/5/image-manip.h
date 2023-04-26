@@ -49,4 +49,16 @@ private:
    void wyszaruj();
 };
 
+class NegateColors : public QUndoCommand {
+   public:
+   NegateColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
+   {setText("negatyw obrazku");}
+   virtual void undo();
+   virtual void redo();
+   private:
+   QImage& m_Image;
+   QImage m_Saved;
+   void negatyw();
+};
+
 #endif        //  #ifndef IMAGE-MANIP_H

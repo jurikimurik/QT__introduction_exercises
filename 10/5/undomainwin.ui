@@ -241,6 +241,8 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionVertical_Mirror"/>
     <addaction name="actionHorizontal_Mirror"/>
     <addaction name="actionUndo_The_Last_Action"/>
+    <addaction name="actionMonochrome"/>
+    <addaction name="actionNegate"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -272,6 +274,7 @@ p, li { white-space: pre-wrap; }
    <addaction name="actionVertical_Mirror"/>
    <addaction name="actionUndo_The_Last_Action"/>
    <addaction name="actionMonochrome"/>
+   <addaction name="actionNegate"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -345,6 +348,14 @@ p, li { white-space: pre-wrap; }
     <string>Zrob obrazek monochromicznym</string>
    </property>
   </action>
+  <action name="actionNegate">
+   <property name="text">
+    <string>Negatyw</string>
+   </property>
+   <property name="toolTip">
+    <string>Zrob negatyw obrazka</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -364,8 +375,25 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionNegate</sender>
+   <signal>triggered()</signal>
+   <receiver>UndoMainWin</receiver>
+   <slot>onNegateButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onMonochromeButtonClicked()</slot>
+  <slot>onNegateButtonClicked()</slot>
  </slots>
 </ui>
