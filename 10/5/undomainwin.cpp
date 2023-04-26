@@ -26,6 +26,13 @@ void UndoMainWin::on_actionOpen_triggered() {
     displayImage(m_Image);
 }
 
+void UndoMainWin::onMonochromeButtonClicked()
+{
+    GrayColors* gc = new GrayColors(m_Image);
+    m_Stack.push(gc);
+    displayImage(m_Image);
+}
+
 void UndoMainWin::on_horizontalMirrorButton_clicked() {
     MirrorPixels* mp = new MirrorPixels(m_Image, true);
     m_Stack.push(mp);

@@ -69,3 +69,33 @@ void MirrorPixels::undo() {
     m_Image = m_Saved.copy(QRect()); 
 }
 //end
+
+void GrayColors::redo() {
+    qDebug() << "GrayColors::redo()";
+    wyszaruj();
+}
+
+void GrayColors::undo()
+{
+    qDebug() << "GrayColors::undo()";
+    m_Image = m_Saved.copy(QRect());
+}
+
+void GrayColors::wyszaruj()
+{
+    int h(m_Image.height()), w(m_Image.width());
+    int r, g, b;
+    QRgb oldpix, newpix;
+    m_Saved = m_Image.copy(QRect()); // zachowaj kopię całego obrazu
+    for(int y = 0; y < h; ++y) {
+       for(int x = 0; x < w; ++x) {
+          oldpix = m_Image.pixel(x,y);
+          r = qRed(oldpix) * 0.30;
+          g = qGreen(oldpix) * 0.59;
+          b = qBlue(oldpix) * 0.11;
+          int lumination = (r + g + b) / 3 * 3;
+          newpix = qRgb(lumination,lumination,lumination);
+          m_Image.setPixel(x,y,newpix);
+       }
+    }
+}

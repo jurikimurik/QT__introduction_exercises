@@ -44,6 +44,8 @@ private slots:
     void on_verticalMirrorButton_clicked();
     void on_horizontalMirrorButton_clicked();
     void on_actionOpen_triggered();
+
+    void onMonochromeButtonClicked();
 };
 
 #endif // UNDOMAINWIN_H

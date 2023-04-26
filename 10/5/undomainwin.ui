@@ -271,6 +271,7 @@ p, li { white-space: pre-wrap; }
    <addaction name="actionHorizontal_Mirror"/>
    <addaction name="actionVertical_Mirror"/>
    <addaction name="actionUndo_The_Last_Action"/>
+   <addaction name="actionMonochrome"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -336,10 +337,35 @@ p, li { white-space: pre-wrap; }
     <string>Ctrl+U</string>
    </property>
   </action>
+  <action name="actionMonochrome">
+   <property name="text">
+    <string>Wyszaruj obrazek</string>
+   </property>
+   <property name="toolTip">
+    <string>Zrob obrazek monochromicznym</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionMonochrome</sender>
+   <signal>triggered()</signal>
+   <receiver>UndoMainWin</receiver>
+   <slot>onMonochromeButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
-  <slot>onMagicButtonClicked()</slot>
+  <slot>onMonochromeButtonClicked()</slot>
  </slots>
 </ui>
