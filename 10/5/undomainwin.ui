@@ -243,6 +243,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionUndo_The_Last_Action"/>
     <addaction name="actionMonochrome"/>
     <addaction name="actionNegate"/>
+    <addaction name="actionColorSwap"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -275,6 +276,7 @@ p, li { white-space: pre-wrap; }
    <addaction name="actionUndo_The_Last_Action"/>
    <addaction name="actionMonochrome"/>
    <addaction name="actionNegate"/>
+   <addaction name="actionColorSwap"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -356,6 +358,14 @@ p, li { white-space: pre-wrap; }
     <string>Zrob negatyw obrazka</string>
    </property>
   </action>
+  <action name="actionColorSwap">
+   <property name="text">
+    <string>Zamiana kolorow</string>
+   </property>
+   <property name="toolTip">
+    <string>Zamiana kolorow</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -391,9 +401,26 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionColorSwap</sender>
+   <signal>triggered()</signal>
+   <receiver>UndoMainWin</receiver>
+   <slot>onSwapColorsButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onMonochromeButtonClicked()</slot>
   <slot>onNegateButtonClicked()</slot>
+  <slot>onSwapColorsButtonClicked()</slot>
  </slots>
 </ui>

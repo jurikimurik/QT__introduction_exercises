@@ -40,6 +40,13 @@ void UndoMainWin::onNegateButtonClicked()
     displayImage(m_Image);
 }
 
+void UndoMainWin::onSwapColorsButtonClicked()
+{
+    SwapColors* sc = new SwapColors(m_Image);
+    m_Stack.push(sc);
+    displayImage(m_Image);
+}
+
 void UndoMainWin::on_horizontalMirrorButton_clicked() {
     MirrorPixels* mp = new MirrorPixels(m_Image, true);
     m_Stack.push(mp);

@@ -61,4 +61,16 @@ class NegateColors : public QUndoCommand {
    void negatyw();
 };
 
+class SwapColors : public QUndoCommand {
+   public:
+   SwapColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
+   {setText("Zamiana kolorow obrazka");}
+   virtual void undo();
+   virtual void redo();
+   private:
+   QImage& m_Image;
+   QImage m_Saved;
+   void zamiana();
+};
+
 #endif        //  #ifndef IMAGE-MANIP_H
