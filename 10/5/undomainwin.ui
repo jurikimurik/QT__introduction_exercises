@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
+    <width>946</width>
     <height>618</height>
    </rect>
   </property>
@@ -229,7 +229,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>881</width>
+     <width>946</width>
      <height>22</height>
     </rect>
    </property>
@@ -244,6 +244,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionMonochrome"/>
     <addaction name="actionNegate"/>
     <addaction name="actionColorSwap"/>
+    <addaction name="actionThreeColors"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -277,6 +278,7 @@ p, li { white-space: pre-wrap; }
    <addaction name="actionMonochrome"/>
    <addaction name="actionNegate"/>
    <addaction name="actionColorSwap"/>
+   <addaction name="actionThreeColors"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -366,6 +368,14 @@ p, li { white-space: pre-wrap; }
     <string>Zamiana kolorow</string>
    </property>
   </action>
+  <action name="actionThreeColors">
+   <property name="text">
+    <string>Trzy Kolory</string>
+   </property>
+   <property name="toolTip">
+    <string>Trzy kolory</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -417,10 +427,27 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionThreeColors</sender>
+   <signal>triggered()</signal>
+   <receiver>UndoMainWin</receiver>
+   <slot>onThreeColorsButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>472</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onMonochromeButtonClicked()</slot>
   <slot>onNegateButtonClicked()</slot>
   <slot>onSwapColorsButtonClicked()</slot>
+  <slot>onThreeColorsButtonClicked()</slot>
  </slots>
 </ui>

@@ -47,6 +47,13 @@ void UndoMainWin::onSwapColorsButtonClicked()
     displayImage(m_Image);
 }
 
+void UndoMainWin::onThreeColorsButtonClicked()
+{
+    ThreeColors *tc = new ThreeColors(m_Image);
+    m_Stack.push(tc);
+    displayImage(m_Image);
+}
+
 void UndoMainWin::on_horizontalMirrorButton_clicked() {
     MirrorPixels* mp = new MirrorPixels(m_Image, true);
     m_Stack.push(mp);

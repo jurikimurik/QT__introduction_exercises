@@ -157,3 +157,44 @@ void SwapColors::zamiana()
        }
     }
 }
+
+void ThreeColors::undo()
+{
+    qDebug() << "ThreeColors::undo()";
+    m_Image = m_Saved.copy(QRect());
+}
+
+void ThreeColors::redo()
+{
+    qDebug() << "ThreeColors::redo()";
+    trzy_kolory();
+}
+
+void ThreeColors::trzy_kolory()
+{
+    int h(m_Image.height()), w(m_Image.width());
+    int r, g, b;
+    QRgb oldpix, newpix;
+    m_Saved = m_Image.copy(QRect()); // zachowaj kopię całego obrazu
+    for(int y = 0; y < h; ++y) {
+       for(int x = 0; x < w; ++x) {
+          oldpix = m_Image.pixel(x,y);
+          r = qBlue(oldpix);
+          g = qRed(oldpix);
+          b = qGreen(oldpix);
+          int ci = (r+g+b) / 3;
+          if(ci < 85) {
+             r = 0;
+             b = 0;
+          } else if(ci >= 85 && ci < 170) {
+             b = 0;
+             g = 0;
+          } else {
+             r = 0;
+             g = 0;
+          }
+          newpix = qRgb(r,g,b);
+          m_Image.setPixel(x,y,newpix);
+       }
+    }
+}

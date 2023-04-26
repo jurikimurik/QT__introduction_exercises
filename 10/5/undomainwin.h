@@ -48,6 +48,7 @@ private slots:
     void onMonochromeButtonClicked();
     void onNegateButtonClicked();
     void onSwapColorsButtonClicked();
+    void onThreeColorsButtonClicked();
 };
 
 #endif // UNDOMAINWIN_H

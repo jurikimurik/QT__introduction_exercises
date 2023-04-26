@@ -73,4 +73,16 @@ class SwapColors : public QUndoCommand {
    void zamiana();
 };
 
+class ThreeColors : public QUndoCommand {
+   public:
+   ThreeColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
+   {setText("Trzy kolory obrazka");}
+   virtual void undo();
+   virtual void redo();
+   private:
+   QImage& m_Image;
+   QImage m_Saved;
+   void trzy_kolory();
+};
+
 #endif        //  #ifndef IMAGE-MANIP_H
