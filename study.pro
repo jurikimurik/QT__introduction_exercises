@@ -8,12 +8,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    10/1/card.cpp \
-    10/1/deck.cpp \
-    10/1/hand.cpp \
-    10/1/handview.cpp \
-    10/1/blackjack.cpp \
-    10/1/main.cpp
+        10/5/main.cpp    \
+        10/5/undomainwin.cpp \
+        10/5/image-manip.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -31,16 +28,12 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-    10/1/card.h \
-    10/1/deck.h \
-    10/1/hand.h \
-    10/1/handview.h \
-    10/1/blackjack.h
+        10/5/undomainwin.h   \
+        10/5/image-manip.h
 
 
 
 FORMS += \
-    10/1/handview.ui \
-    10/1/blackjack.ui
+    10/5/undomainwin.ui
 
-RESOURCES = cards2.qrc
+RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
