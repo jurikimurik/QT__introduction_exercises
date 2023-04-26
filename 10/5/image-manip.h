@@ -4,8 +4,23 @@
 #include <QUndoCommand>
 #include <QImage>
 
+//REFACTORING BY ME
+class ProcessColors : public QUndoCommand {
+public:
+    ProcessColors(QImage& img) : m_Image(img), m_Saved(img.size(), img.format())
+    {setText("jakies dzialanie na obrazku");}
+    virtual void undo();
+    virtual void redo();
+protected:
+    QImage& m_Image;
+    QImage m_Saved;
+    virtual void processing();
+    virtual QRgb pixelProcessing(int x, int y) = 0;
+};
+
+
 //start
-class AdjustColors : public QUndoCommand {
+/*class AdjustColors : public QUndoCommand {
 public:
    AdjustColors(QImage& img, double radj, double gadj, double badj)
      : m_Image(img), m_Saved(img.size(), img.format()), m_RedAdj(radj), 
@@ -17,7 +32,17 @@ private:
     QImage m_Saved;
     double m_RedAdj, m_GreenAdj, m_BlueAdj;
     void adjust(double radj, double gadj, double badj);
+};*/
 
+
+class AdjustColors : public ProcessColors {
+public:
+    AdjustColors(QImage& img, double radj, double gadj, double badj)
+        : ProcessColors(img), m_RedAdj(radj), m_GreenAdj(gadj), m_BlueAdj(badj)
+    {setText("adjust colors"); }
+private:
+    double m_RedAdj, m_GreenAdj, m_BlueAdj;
+    QRgb pixelProcessing(int x, int y);
 };
 
 class MirrorPixels : public QUndoCommand {

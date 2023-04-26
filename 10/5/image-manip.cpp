@@ -4,33 +4,39 @@
 #include <QDebug>
 
 
-//start id=adjustcolors
-void AdjustColors::adjust(double radj, double gadj, double badj) {
-   int h(m_Image.height()), w(m_Image.width());
-   int r, g, b;
-   QRgb oldpix, newpix;
-   m_Saved = m_Image.copy(QRect()); // zachowaj kopię całego obrazu
-   for(int y = 0; y < h; ++y) {
-      for(int x = 0; x < w; ++x) {
-         oldpix = m_Image.pixel(x,y);
-         r = qRed(oldpix) * radj;
-         g = qGreen(oldpix) * gadj;
-         b = qBlue(oldpix) * badj;
-         newpix = qRgb(r,g,b);
-         m_Image.setPixel(x,y,newpix);
-      }
-   }
+void ProcessColors::undo()
+{
+    qDebug() << "ProcessColors::undo()";
+    m_Image = m_Saved.copy(QRect());
 }
 
-void AdjustColors::redo() {
-   qDebug() << "AdjustColors::redo()";
-   adjust(m_RedAdj, m_GreenAdj, m_BlueAdj);
+void ProcessColors::redo()
+{
+    qDebug() << "ProcessColors::redo()";
+    processing();
 }
 
-void AdjustColors::undo() {
-    qDebug() << "AdjustColors::undo()";
-    m_Image = m_Saved.copy(QRect()); 
+void ProcessColors::processing()
+{
+    int h(m_Image.height()), w(m_Image.width());
+    m_Saved = m_Image.copy(QRect()); // zachowaj kopię całego obrazu
+    for(int y = 0; y < h; ++y) {
+        for(int x = 0; x < w; ++x) {
+            m_Image.setPixel(x,y,pixelProcessing(x, y));
+        }
+    }
 }
+
+
+QRgb AdjustColors::pixelProcessing(int x, int y)
+{
+    QRgb oldpix = m_Image.pixel(x,y);
+    int r = qRed(oldpix) * m_RedAdj;
+    int g = qGreen(oldpix) * m_GreenAdj;
+    int b = qBlue(oldpix) * m_BlueAdj;
+    return qRgb(r,g,b);
+}
+
 //end
 //start id=mirrorpixels
 void MirrorPixels::reflect() {
@@ -198,3 +204,6 @@ void ThreeColors::trzy_kolory()
        }
     }
 }
+
+
+
