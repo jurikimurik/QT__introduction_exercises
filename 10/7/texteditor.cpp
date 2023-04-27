@@ -56,8 +56,10 @@ void TextEditor::openFile()
     qDebug() << "TextEditor::openFile()";
     m_FileName = QFileDialog::getOpenFileName(this, "Otworz plik", "", "Text files (*.txt)");
     // BRAK PLIKU
-    if(m_FileName.size() == 0)
+    if(m_FileName.size() == 0) {
+        m_FileName = "NowyPlik.txt";
         return;
+    }
 
     QFile plik(m_FileName);
     if(!plik.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -94,17 +96,31 @@ void TextEditor::saveFile()
 void TextEditor::closeEvent(QCloseEvent *event)
 {
     qDebug() << "TextEditor::closeEvent()";
-    event->accept();
+    if(m_Saved)
+        event->accept();
+    else {
+        int odp = QMessageBox::warning(this, "UWAGA", "Tekst NIE zostal zapisany. Jestes pewnien, ze chcesz wyjsc?", "Tak", "NIE!", "Zapisz", 1);
+        if(odp == 0)
+            event->accept();
+        else if(odp == 1)
+            event->ignore();
+        else {
+            event->ignore();
+            saveFile();
+        }
+    }
 }
 
 void TextEditor::showAboutQT()
 {
     qDebug() << "TextEditor::showAboutQT()";
+    QMessageBox::information(this, "Informacja o QT","QT jest uniwersalnym i bardzo fajnym dodatkiem do C++!", "To napewno!");
 }
 
 void TextEditor::showAboutApp()
 {
     qDebug() << "TextEditor::showAboutApp()";
+    QMessageBox::information(this, "Informacja o aplikacji", "Ten program zostal stworzony przez Jerzego Makowskiego, QT Creator i jezyk C++! Wybuchowe polaczenie!", "Zrozumiano");
 }
 
 

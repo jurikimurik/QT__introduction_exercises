@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QMessageBox>
 
 namespace Ui {
 class TextEditor;
