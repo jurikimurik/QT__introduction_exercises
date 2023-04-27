@@ -2,6 +2,8 @@
 #define TEXTEDITOR_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QFileDialog>
 #include <QCloseEvent>
 
 namespace Ui {
