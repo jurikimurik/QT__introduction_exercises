@@ -8,8 +8,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        10/7/main.cpp \
-        10/7/texteditor.cpp
+        10/7/2/main.cpp \
+        10/7/2/textfileexplorer.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,11 +27,11 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-        10/7/texteditor.h
+        10/7/2/textfileexplorer.h
 
 
 
 FORMS += \
-    10/7/texteditor.ui
+    10/7/2/textfileexplorer.ui
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
