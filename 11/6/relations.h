@@ -12,8 +12,10 @@ public:
     void enterRelation();
     void processLine(QString line);
     void showRelationTo(QString what);
+    void takeback(int n);
 private:
     QMultiMap<QString, QString> relations;
+    QList<QString> buffor;
 };
 
 #endif // RELATIONS_H
