@@ -8,7 +8,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        11/1.1.1/2/main.cpp
+    11/1.1/3/main.cpp \
+    11/1.1/3/stack.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -25,7 +26,8 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS +=
+HEADERS += \
+    11/1.1/3/stack.h
 
 FORMS +=
 
