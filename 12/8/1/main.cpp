@@ -2,6 +2,7 @@
 #include <QTextStream>
 #include <QMetaObject>
 #include <QMetaProperty>
+#include <QMetaMethod>
 #include <QVariant>
 #include <QSpinBox>
 #include <QProcess>
@@ -29,6 +30,21 @@ void printObject(const QObject* obj) {
         cout << Qt::endl
              << Qt::flush;
     }
+
+    for(int i = 0; i < meta->methodCount(); ++i)
+    {
+        const QMetaMethod qmm = meta->method(i);
+        cout << QString("%1 %2(")
+                    .arg(qmm.returnMetaType().name())
+                    .arg(qmm.name());
+        for(const QByteArray& elem : qmm.parameterTypes())
+        {
+            cout << QString(elem) << ", ";
+        }
+        cout << ")" << Qt::endl;
+    }
+
+    cout << Qt::flush;
 }
 
 int main(int argc, char* argv[])
