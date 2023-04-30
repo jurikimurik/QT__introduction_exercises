@@ -5,6 +5,7 @@
 #include <QFileSystemModel>
 #include <QTreeView>
 #include <QTableView>
+#include <QComboBox>
 
 #include <QDebug>
 
@@ -21,12 +22,17 @@ public:
     ~FileExplorer();
 
 public slots:
-    void updateAddress(QModelIndex index);
+    void updateAddress(const QModelIndex &index);
 
 private slots:
     void on_treeView_doubleClicked(const QModelIndex &index);
 
     void on_tableView_doubleClicked(const QModelIndex &index);
+
+    void moveUp();
+
+private:
+    QString indexToPath(const QModelIndex &index);
 
 private:
     Ui::FileExplorer *ui;
@@ -34,6 +40,8 @@ private:
 
     QTreeView *tree;
     QTableView *table;
+
+    QComboBox *box;
 };
 
 #endif // FILEEXPLORER_H

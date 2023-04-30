@@ -43,7 +43,19 @@
     </item>
     <item>
      <widget class="QTreeView" name="treeView">
+      <property name="autoScroll">
+       <bool>false</bool>
+      </property>
+      <property name="showDropIndicator" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="verticalScrollMode">
+       <enum>QAbstractItemView::ScrollPerItem</enum>
+      </property>
       <property name="animated">
+       <bool>true</bool>
+      </property>
+      <property name="headerHidden">
        <bool>true</bool>
       </property>
      </widget>
@@ -69,7 +81,7 @@
  <connections>
   <connection>
    <sender>treeView</sender>
-   <signal>entered(QModelIndex)</signal>
+   <signal>expanded(QModelIndex)</signal>
    <receiver>tableView</receiver>
    <slot>setRootIndex(QModelIndex)</slot>
    <hints>
@@ -85,7 +97,7 @@
   </connection>
   <connection>
    <sender>treeView</sender>
-   <signal>entered(QModelIndex)</signal>
+   <signal>expanded(QModelIndex)</signal>
    <receiver>FileExplorer</receiver>
    <slot>updateAddress(QModelIndex)</slot>
    <hints>
