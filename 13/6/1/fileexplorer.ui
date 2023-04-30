@@ -46,6 +46,9 @@
       <property name="autoScroll">
        <bool>false</bool>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+      </property>
       <property name="showDropIndicator" stdset="0">
        <bool>false</bool>
       </property>
@@ -92,22 +95,6 @@
     <hint type="destinationlabel">
      <x>209</x>
      <y>300</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>treeView</sender>
-   <signal>entered(QModelIndex)</signal>
-   <receiver>FileExplorer</receiver>
-   <slot>updateAddress(QModelIndex)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>254</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>182</x>
-     <y>25</y>
     </hint>
    </hints>
   </connection>

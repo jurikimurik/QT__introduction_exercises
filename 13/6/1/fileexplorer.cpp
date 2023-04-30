@@ -28,6 +28,8 @@ FileExplorer::FileExplorer(QWidget *parent) :
     table->setColumnWidth(1, 100);
     table->setColumnWidth(2, 50);
     table->setColumnWidth(3, 200);
+
+    connect(m_Model, &QFileSystemModel::directoryLoaded, this, &FileExplorer::updateAddressOnLoad);
 }
 
 FileExplorer::~FileExplorer()
@@ -38,10 +40,18 @@ FileExplorer::~FileExplorer()
 void FileExplorer::updateAddress(const QModelIndex &index)
 {
     qDebug() << "FileExplorer::updateAddress(QModelIndex index)";
-    qDebug() << index.data().toString();
     box->clear();
     box->addItem(m_Model->filePath(index));
 }
+
+void FileExplorer::updateAddressOnLoad(const QString &path)
+{
+    qDebug() << "FileExplorer::updateAddressOnLoad(const QString &path)";
+    box->clear();
+    box->addItem(path);
+}
+
+
 
 void FileExplorer::on_treeView_doubleClicked(const QModelIndex &index)
 {
@@ -58,6 +68,7 @@ void FileExplorer::on_tableView_doubleClicked(const QModelIndex &index)
 void FileExplorer::moveUp()
 {
     qDebug() << "FileExplorer::moveUp()";
+    tree->collapse(tree->currentIndex().parent());
 }
 
 
