@@ -27,3 +27,20 @@ FileExplorer::~FileExplorer()
 {
     delete ui;
 }
+
+void FileExplorer::updateAddress(QModelIndex index)
+{
+    qDebug() << "FileExplorer::updateAddress(QModelIndex index)";
+}
+
+void FileExplorer::on_treeView_doubleClicked(const QModelIndex &index)
+{
+    qDebug() << "FileExplorer::on_treeView_doubleClicked(const QModelIndex &index)";
+}
+
+
+void FileExplorer::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    qDebug() << "FileExplorer::on_tableView_doubleClicked(const QModelIndex &index)";
+}
+

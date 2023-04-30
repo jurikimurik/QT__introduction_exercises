@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>494</width>
+    <width>653</width>
     <height>463</height>
    </rect>
   </property>
@@ -42,7 +42,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QTreeView" name="treeView"/>
+     <widget class="QTreeView" name="treeView">
+      <property name="animated">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QTableView" name="tableView"/>
@@ -54,7 +58,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>494</width>
+     <width>653</width>
      <height>22</height>
     </rect>
    </property>
@@ -62,5 +66,58 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>treeView</sender>
+   <signal>entered(QModelIndex)</signal>
+   <receiver>tableView</receiver>
+   <slot>setRootIndex(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>treeView</sender>
+   <signal>entered(QModelIndex)</signal>
+   <receiver>FileExplorer</receiver>
+   <slot>updateAddress(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>167</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>182</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FileExplorer</receiver>
+   <slot>moveUp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>87</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateAddress(QModelIndex)</slot>
+  <slot>moveUp()</slot>
+ </slots>
 </ui>
