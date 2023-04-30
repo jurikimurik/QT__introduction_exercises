@@ -97,7 +97,7 @@
   </connection>
   <connection>
    <sender>treeView</sender>
-   <signal>expanded(QModelIndex)</signal>
+   <signal>entered(QModelIndex)</signal>
    <receiver>FileExplorer</receiver>
    <slot>updateAddress(QModelIndex)</slot>
    <hints>

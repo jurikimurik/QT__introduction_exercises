@@ -38,7 +38,8 @@ FileExplorer::~FileExplorer()
 void FileExplorer::updateAddress(const QModelIndex &index)
 {
     qDebug() << "FileExplorer::updateAddress(QModelIndex index)";
-    box->removeItem(0);
+    qDebug() << index.data().toString();
+    box->clear();
     box->addItem(m_Model->filePath(index));
 }
 

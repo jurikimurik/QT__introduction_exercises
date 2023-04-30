@@ -8,6 +8,8 @@
 #include <QComboBox>
 
 #include <QDebug>
+#include <thread>
+#include <chrono>
 
 namespace Ui {
 class FileExplorer;
