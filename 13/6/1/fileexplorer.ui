@@ -130,9 +130,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>textActivated(QString)</signal>
+   <receiver>FileExplorer</receiver>
+   <slot>goTo(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>368</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>22</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateAddress()</slot>
   <slot>moveUp()</slot>
+  <slot>goTo(QString)</slot>
  </slots>
 </ui>

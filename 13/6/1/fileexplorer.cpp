@@ -90,5 +90,17 @@ void FileExplorer::moveUp()
     tree->collapse(tree->currentIndex().parent());
 }
 
+void FileExplorer::goTo(const QString &path)
+{
+    qDebug() << "FileExplorer::goTo(const QString &path)";
+    QModelIndex index = m_Model->index(path);
+    if(index.isValid()) {
+        tree->expand(index);
+        tree->setCurrentIndex(index);
+        tree->scrollTo(index);
+    }
+
+}
+
 
 

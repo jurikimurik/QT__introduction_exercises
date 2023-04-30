@@ -34,6 +34,7 @@ private slots:
 
     void moveUp();
 
+    void goTo(const QString &path);
 private:
     QString indexToPath(const QModelIndex &index);
 
