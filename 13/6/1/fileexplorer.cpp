@@ -37,18 +37,37 @@ FileExplorer::~FileExplorer()
     delete ui;
 }
 
-void FileExplorer::updateAddress(const QModelIndex &index)
+void FileExplorer::updateAddress()
 {
     qDebug() << "FileExplorer::updateAddress(QModelIndex index)";
     box->clear();
+    QModelIndex index = tree->currentIndex();
     box->addItem(m_Model->filePath(index));
+
+    int rowsNumber = m_Model->rowCount(index);
+    for(int i = 0; i < rowsNumber; ++i)
+    {
+        QModelIndex child = m_Model->index(i, 0, index);
+        if(m_Model->isDir(child))
+            box->addItem(m_Model->filePath(child));
+    }
 }
 
 void FileExplorer::updateAddressOnLoad(const QString &path)
 {
     qDebug() << "FileExplorer::updateAddressOnLoad(const QString &path)";
     box->clear();
-    box->addItem(path);
+    QModelIndex index = m_Model->index(path);
+    box->addItem(m_Model->filePath(index));
+
+
+    int rowsNumber = m_Model->rowCount(index);
+    for(int i = 0; i < rowsNumber; ++i)
+    {
+        QModelIndex child = m_Model->index(i, 0, index);
+        if(m_Model->isDir(child))
+            box->addItem(m_Model->filePath(child));
+    }
 }
 
 

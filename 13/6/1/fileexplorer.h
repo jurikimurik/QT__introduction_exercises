@@ -24,7 +24,7 @@ public:
     ~FileExplorer();
 
 public slots:
-    void updateAddress(const QModelIndex &index = QModelIndex());
+    void updateAddress();
     void updateAddressOnLoad(const QString &path);
 
 private slots:
