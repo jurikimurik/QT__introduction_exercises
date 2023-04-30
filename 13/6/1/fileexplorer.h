@@ -8,8 +8,9 @@
 #include <QComboBox>
 
 #include <QDebug>
-#include <thread>
-#include <chrono>
+
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace Ui {
 class FileExplorer;
@@ -35,6 +36,8 @@ private slots:
     void moveUp();
 
     void goTo(const QString &path);
+
+    void openFile(const QModelIndex& index);
 private:
     QString indexToPath(const QModelIndex &index);
 

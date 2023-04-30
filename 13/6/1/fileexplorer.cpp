@@ -102,5 +102,10 @@ void FileExplorer::goTo(const QString &path)
 
 }
 
+void FileExplorer::openFile(const QModelIndex &index)
+{
+    QDesktopServices::openUrl(QUrl("file:///"+m_Model->filePath(index)));
+}
+
 
 

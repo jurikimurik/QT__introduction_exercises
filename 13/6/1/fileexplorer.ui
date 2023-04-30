@@ -146,10 +146,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tableView</sender>
+   <signal>doubleClicked(QModelIndex)</signal>
+   <receiver>FileExplorer</receiver>
+   <slot>openFile(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateAddress()</slot>
   <slot>moveUp()</slot>
   <slot>goTo(QString)</slot>
+  <slot>openFile(QModelIndex)</slot>
  </slots>
 </ui>
