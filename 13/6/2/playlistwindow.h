@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMediaPlayer>
 #include "playlistmodel.h"
 
 namespace Ui {
@@ -23,6 +24,7 @@ private slots:
 private:
     Ui::PlayListWindow *ui;
 
+    QMediaPlayer *m_player;
     PlayListModel* m_model;
 };
 
