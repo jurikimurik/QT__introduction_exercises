@@ -26,6 +26,10 @@ public:
 protected:
     QList<QMediaMetaData> m_objects;
     int m_columns;
+
+    // QAbstractItemModel interface
+public:
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 };
 
 #endif // PLAYLISTMODEL_H

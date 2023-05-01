@@ -23,9 +23,22 @@ QVariant PlayListModel::data(const QModelIndex &index, int role) const
         return m_objects[row].MediaType;
     }
     if(role == Qt::DisplayRole) {
-        if(col == 1) return m_objects[row].Genre;
-        if(col == 2) return m_objects[row].Duration;
-        else return m_objects[row].Title;
+        if(col == 1) return m_objects[row].stringValue(QMediaMetaData::MediaType);
+        if(col == 2) return m_objects[row].stringValue(QMediaMetaData::Duration);
+        else return m_objects[row].stringValue(QMediaMetaData::Title);
+    }
+    return QVariant();
+}
+
+QVariant PlayListModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if(orientation == Qt::Vertical) return QVariant();
+    if(role != Qt::DisplayRole) return QVariant();
+    switch(section) {
+    case 0: return QString("Nazwa");
+    case 1: return QString("Typ");
+    case 2: return QString("Dlugosc");
+    default: QVariant();
     }
     return QVariant();
 }

@@ -35,11 +35,7 @@ void PlayListWindow::on_pushButton_clicked()
         list.push_back(m_player->metaData());
     }
 
-    for(const auto& elem :list)
-    {
-        qDebug() << elem.stringValue(QMediaMetaData::Title);
-    }
-
-    qDebug() << "KONIEC";
+    m_model = new PlayListModel(list, this);
+    ui->tableView->setModel(m_model);
 }
 
