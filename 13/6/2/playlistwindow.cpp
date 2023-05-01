@@ -34,8 +34,11 @@ void PlayListWindow::on_pushButton_clicked()
 
         list.push_back(m_player->metaData());
     }
-
+    if(m_model != nullptr)
+        delete m_model;
     m_model = new PlayListModel(list, this);
+    connect(m_model, &QAbstractTableModel::dataChanged, ui->tableView, &QTableView::reset);
+
     ui->tableView->setModel(m_model);
 }
 

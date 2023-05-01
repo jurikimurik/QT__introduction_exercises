@@ -25,7 +25,7 @@ private:
     Ui::PlayListWindow *ui;
 
     QMediaPlayer *m_player;
-    PlayListModel* m_model;
+    PlayListModel* m_model = nullptr;
 };
 
 #endif // PLAYLISTWINDOW_H
