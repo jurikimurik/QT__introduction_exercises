@@ -1,9 +1,10 @@
-#include "relations.h"
+#include <QApplication>
+#include "relationwindow.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    Relations relacje;
-
-    while(true)
-        relacje.enterRelation();
+    QApplication app(argc, argv);
+    RelationWindow window;
+    window.show();
+    return app.exec();
 }
