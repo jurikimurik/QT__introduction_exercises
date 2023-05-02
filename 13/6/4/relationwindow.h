@@ -2,6 +2,7 @@
 #define RELATIONWINDOW_H
 
 #include <QMainWindow>
+#include <QListView>
 #include "relations.h"
 
 namespace Ui {
@@ -18,6 +19,8 @@ public:
 
 private:
     Ui::RelationWindow *ui;
+    QListView* lewy;
+    QListView* prawy;
 };
 
 #endif // RELATIONWINDOW_H

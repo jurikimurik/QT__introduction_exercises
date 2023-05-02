@@ -6,6 +6,9 @@ RelationWindow::RelationWindow(QWidget *parent) :
     ui(new Ui::RelationWindow)
 {
     ui->setupUi(this);
+    lewy =  ui->listView;
+    prawy = ui->listView_2;
+
 }
 
 RelationWindow::~RelationWindow()
