@@ -30,6 +30,11 @@ QVariant PlayListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+QList<QMediaMetaData> PlayListModel::objects() const
+{
+    return m_objects;
+}
+
 QVariant PlayListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if(orientation == Qt::Vertical) return QVariant();

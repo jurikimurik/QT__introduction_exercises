@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QMediaPlayer>
 #include "playlistmodel.h"
+#include <QDataStream>
 
 namespace Ui {
 class PlayListWindow;
@@ -20,6 +21,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void savePlaylist();
+    void loadPlaylist();
 
 private:
     Ui::PlayListWindow *ui;

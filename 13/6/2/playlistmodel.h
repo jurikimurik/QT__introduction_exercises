@@ -30,6 +30,7 @@ protected:
     // QAbstractItemModel interface
 public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    QList<QMediaMetaData> objects() const;
 };
 
 #endif // PLAYLISTMODEL_H
