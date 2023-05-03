@@ -8,16 +8,8 @@ QTextStream cin(stdin);
 Relations::Relations(QObject* parent) : QAbstractTableModel(parent), m_columns(2)
 {
     relations = {qMakePair("a", "a"), qMakePair("b", "b"),
-                 qMakePair("c", "c"), qMakePair("d", "d")};
-
-    for(int y = 0; y < relations.keys().size(); ++y)
-    {
-        insertRow(y);
-        for(int x = 0; x < relations.values(relations.keys().at(y)).size(); x++)
-        {
-            insertRow(x, index(y, 1));
-        }
-    }
+                 qMakePair("c", "c"), qMakePair("d", "d"),
+                 qMakePair("a", "b"), qMakePair("b", "a")};
 }
 
 void Relations::enterRelation()
@@ -118,7 +110,7 @@ void Relations::addRelation(QString from, QString to)
 
 int Relations::rowCount(const QModelIndex &parent) const
 {
-    return relations.size();
+    return relations.uniqueKeys().size();
 }
 
 int Relations::columnCount(const QModelIndex &parent) const
@@ -129,19 +121,25 @@ int Relations::columnCount(const QModelIndex &parent) const
 QVariant Relations::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
-    if(row >= relations.size()) return QVariant();
+    if(row >= rowCount()) return QVariant();
     int col = index.column();
     if (col >= columnCount()) return QVariant();
 
     if (role == Qt::DisplayRole) {
-        if(col == 0) return relations.keys().at(row);
-        else return relations.keys().at(row);
+        return relations.uniqueKeys().at(row);
     }
-    qDebug() << rowCount() << columnCount();
-    qDebug() << "Ojciec: " << index.parent().data().toString() << "Ja: " << index.data().toString();
+
     if(role == Qt::CheckStateRole) {
-        if(col != 0)
-            return Qt::Checked;
+        if(col == 1 && selectedIndex.isValid())
+        {
+            QString key = selectedIndex.data().toString();
+            auto relacje = relationTo(key);
+            if(relacje.contains(index.data().toString()))
+                return Qt::Checked;
+            else
+                return Qt::Unchecked;
+        }
+
     }
     return QVariant();
 }
@@ -175,4 +173,10 @@ bool Relations::setData(const QModelIndex &index, const QVariant &value, int rol
         emit dataChanged(index,index,{role});
     }
     return true;
+}
+
+void Relations::showRelation(const QModelIndex &index)
+{
+    selectedIndex = index;
+    emit dataChanged(index, index);
 }

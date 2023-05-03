@@ -20,6 +20,7 @@ RelationWindow::RelationWindow(QWidget *parent) :
     prawy->setModelColumn(1);
     prawy->setSelectionRectVisible(true);
 
+    connect(lewy, &QListView::clicked, relation, &Relations::showRelation);
     connect(relation, &QAbstractTableModel::dataChanged, this, &RelationWindow::somethingChanged);
 }
 

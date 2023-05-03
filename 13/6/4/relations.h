@@ -5,6 +5,7 @@
 #include <QMultiMap>
 #include <QTextStream>
 #include <QAbstractTableModel>
+#include <QModelIndex>
 
 class Relations : public QAbstractTableModel
 {
@@ -28,11 +29,16 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index = QModelIndex()) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role);
 
+public slots:
+    void showRelation(const QModelIndex &index);
+
+
 private:
     QMultiMap<QString, QString> relations;
     QList<QString> buffor;
     const int m_columns;
 
+    QModelIndex selectedIndex;
 };
 
 #endif // RELATIONS_H
