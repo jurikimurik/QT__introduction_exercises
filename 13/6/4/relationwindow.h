@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListView>
 #include "relations.h"
+#include <QAbstractTableModel>
 
 namespace Ui {
 class RelationWindow;
@@ -17,10 +18,15 @@ public:
     explicit RelationWindow(QWidget *parent = nullptr);
     ~RelationWindow();
 
+private slots:
+    void somethingChanged();
+
 private:
     Ui::RelationWindow *ui;
     QListView* lewy;
     QListView* prawy;
+
+    Relations* relation;
 };
 
 #endif // RELATIONWINDOW_H
