@@ -15,7 +15,7 @@ public:
     void showRelationTo(QString what);
     void takeback(int n);
 
-    QStringList relationTo(QString what);
+    QStringList relationTo(QString what) const;
     void setRelations(const QMultiMap<QString, QString> &newRelations);
     QMultiMap<QString, QString> getRelations() const;
     void addRelation(QString from, QString to);

@@ -13,11 +13,11 @@ RelationWindow::RelationWindow(QWidget *parent) :
     prawy = ui->listView_2;
 
     lewy->setModel(relation);
-    lewy->setModelColumn(1);
+    lewy->setModelColumn(0);
     lewy->setSelectionRectVisible(true);
 
     prawy->setModel(relation);
-    prawy->setModelColumn(2);
+    prawy->setModelColumn(1);
     prawy->setSelectionRectVisible(true);
 
     connect(relation, &QAbstractTableModel::dataChanged, this, &RelationWindow::somethingChanged);

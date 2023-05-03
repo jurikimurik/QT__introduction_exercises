@@ -9,6 +9,15 @@ Relations::Relations(QObject* parent) : QAbstractTableModel(parent), m_columns(2
 {
     relations = {qMakePair("a", "a"), qMakePair("b", "b"),
                  qMakePair("c", "c"), qMakePair("d", "d")};
+
+    for(int y = 0; y < relations.keys().size(); ++y)
+    {
+        insertRow(y);
+        for(int x = 0; x < relations.values(relations.keys().at(y)).size(); x++)
+        {
+            insertRow(x, index(y, 1));
+        }
+    }
 }
 
 void Relations::enterRelation()
@@ -82,7 +91,7 @@ void Relations::takeback(int n)
 
 }
 
-QStringList Relations::relationTo(QString what)
+QStringList Relations::relationTo(QString what) const
 {
     QStringList lista;
     for(const auto& toRelation : relations.values(what))
@@ -123,9 +132,16 @@ QVariant Relations::data(const QModelIndex &index, int role) const
     if(row >= relations.size()) return QVariant();
     int col = index.column();
     if (col >= columnCount()) return QVariant();
+
     if (role == Qt::DisplayRole) {
-         return relations.keys().at(row);
-        //if(col == 2) return relations.keys().at(row);
+        if(col == 0) return relations.keys().at(row);
+        else return relations.keys().at(row);
+    }
+    qDebug() << rowCount() << columnCount();
+    qDebug() << "Ojciec: " << index.parent().data().toString() << "Ja: " << index.data().toString();
+    if(role == Qt::CheckStateRole) {
+        if(col != 0)
+            return Qt::Checked;
     }
     return QVariant();
 }
@@ -136,27 +152,16 @@ Qt::ItemFlags Relations::flags(const QModelIndex &index) const
     if(!index.isValid())
         return Qt::ItemFlags::fromInt(0);
 
-    /*if(index.data().toString() == index.parent().data().toString())
-        return Qt::ItemFlags::fromInt(0);*/
-
     Qt::ItemFlags flagi = QAbstractTableModel::flags(index);
 
-    if(index.column() == 0) {
-        qDebug() << "DOSTEPNY!";
+    if (index.column() != 0) {
+        return flagi | Qt::ItemIsUserCheckable;
+    } else {
         return flagi;
     }
 
-    else if (index.column() == 1) {
-        qDebug() << "CHECKABLE!";
-         return flagi | Qt::ItemIsUserCheckable;
-    }
+    return Qt::ItemIsEnabled;
 
-
-
-   /* if(index.column() == 2)
-        return Qt::ItemIsUserCheckable;
-    else
-        return Qt::ItemIsEnabled;*/
 
 }
 
@@ -165,7 +170,7 @@ bool Relations::setData(const QModelIndex &index, const QVariant &value, int rol
     if(!index.isValid())
         return false;
 
-    if(role == Qt::CheckStateRole && index.column() == 2)
+    if(role == Qt::CheckStateRole && index.column() == 1)
     {
         emit dataChanged(index,index,{role});
     }
