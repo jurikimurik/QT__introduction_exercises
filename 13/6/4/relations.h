@@ -4,11 +4,12 @@
 #include <QString>
 #include <QMultiMap>
 #include <QTextStream>
+#include <QAbstractTableModel>
 
-class Relations
+class Relations : public QAbstractTableModel
 {
 public:
-    Relations();
+    Relations(QObject* parent = nullptr);
     void enterRelation();
     void processLine(QString line);
     void showRelationTo(QString what);
@@ -22,6 +23,14 @@ public:
 private:
     QMultiMap<QString, QString> relations;
     QList<QString> buffor;
+    const int m_columns;
+
+    // QAbstractItemModel interface
+public:
+    int rowCount(const QModelIndex &parent) const;
+    int columnCount(const QModelIndex &parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const;
 };
 
 #endif // RELATIONS_H

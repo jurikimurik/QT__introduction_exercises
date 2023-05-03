@@ -3,7 +3,7 @@
 QTextStream cout(stdout);
 QTextStream cin(stdin);
 
-Relations::Relations()
+Relations::Relations(QObject* parent) : QAbstractTableModel(parent), m_columns(2)
 {
 
 }
@@ -102,4 +102,30 @@ QMultiMap<QString, QString> Relations::getRelations() const
 void Relations::addRelation(QString from, QString to)
 {
     relations.insert(from, to);
+}
+
+int Relations::rowCount(const QModelIndex &parent) const
+{
+    return relations.size();
+}
+
+int Relations::columnCount(const QModelIndex &parent) const
+{
+    return m_columns;
+}
+
+Qt::ItemFlags Relations::flags(const QModelIndex &index) const
+{
+    if(!index.isValid())
+        return 0;
+
+    if(index.data().toString() == index.parent().data().toString)
+        return 0;
+
+
+    if(index.column() == 2)
+        return Qt::ItemIsUserCheckable;
+    else
+        return Qt::ItemIsEnabled;
+
 }
