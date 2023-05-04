@@ -129,6 +129,7 @@ QVariant Relations::data(const QModelIndex &index, int role) const
         return relations.uniqueKeys().at(row);
     }
 
+
     if(role == Qt::CheckStateRole) {
         if(col == 1 && selectedIndex.isValid())
         {
@@ -141,6 +142,9 @@ QVariant Relations::data(const QModelIndex &index, int role) const
         }
 
     }
+
+
+
     return QVariant();
 }
 
@@ -165,8 +169,11 @@ Qt::ItemFlags Relations::flags(const QModelIndex &index) const
 
 bool Relations::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if(!index.isValid())
+    qDebug() << value.toString();
+    if(!index.isValid() || selectedIndex.data() == index.data()) {
         return false;
+    }
+
 
     if(role == Qt::CheckStateRole && index.column() == 1)
     {
