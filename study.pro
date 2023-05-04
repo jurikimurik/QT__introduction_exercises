@@ -8,9 +8,8 @@ CONFIG += c++17 cmdline
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += /Users/urijmakovskij/study2/13/6/4/main.cpp \
-    /Users/urijmakovskij/study2/13/6/4/relations.cpp \
-    13/6/4/relationwindow.cpp
+SOURCES += \
+    13/6/5/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,10 +26,20 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS += /Users/urijmakovskij/study2/13/6/4/relations.h \
-    13/6/4/relationwindow.h
+HEADERS +=
 
-FORMS += \
-    13/6/4/relationwindow.ui
+FORMS += 13/6/5/actioneditordialog.ui \
+13/6/5/actiontableeditor.ui
+
+
+
+HEADERS = 13/6/5/actiontableeditor.h \
+    13/6/5/actioneditordialog.h \
+    13/6/5/actiontablemodel.h
+SOURCES = 13/6/5/actiontableeditor.cpp \
+    13/6/5/actioneditordialog.cpp \
+    13/6/5/actiontablemodel.cpp \
+    13/6/5/main.cpp
+
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
