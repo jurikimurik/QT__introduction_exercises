@@ -5,6 +5,7 @@
 #include <QListView>
 #include "relations.h"
 #include <QAbstractTableModel>
+#include <QInputDialog>
 
 namespace Ui {
 class RelationWindow;
@@ -20,6 +21,7 @@ public:
 
 private slots:
     void somethingChanged();
+    void addNewItem();
 
 private:
     Ui::RelationWindow *ui;

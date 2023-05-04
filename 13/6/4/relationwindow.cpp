@@ -32,4 +32,15 @@ RelationWindow::~RelationWindow()
 void RelationWindow::somethingChanged()
 {
     qDebug() << "Cos sie zmienilo...";
+
+}
+
+void RelationWindow::addNewItem()
+{
+    QString co = QInputDialog::getText(this, "Dodawanie", "Wpisz nowy element relacyjny bazy danych:");
+
+    if(co.size() != 0) {
+        relation->addRelation(co, co);
+        emit relation->dataChanged(QModelIndex(), QModelIndex());
+    }
 }
