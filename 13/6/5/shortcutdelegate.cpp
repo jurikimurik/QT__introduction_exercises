@@ -6,7 +6,7 @@ QWidget *ShortcutDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
 {
     QString field = index.model()->headerData(index.column(), Qt::Horizontal).toString();
     if(field == "Shortcut") {
-        return new QLineEdit();
+        return new QLineEdit(parent);
     }
     return SUPER::createEditor(parent, option, index);
 }

@@ -19,6 +19,8 @@ ActionTableEditor::ActionTableEditor(QWidget* parent)
     m_model = new ActionTableModel(allActions(), this);
 
     m_ui->m_tableView->setItemDelegate(new ShortcutDelegate);
+    m_ui->m_tableView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::SelectedClicked);
+    m_ui->m_tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     setupSortFilter();
 }
@@ -47,7 +49,7 @@ QList<QAction*> ActionTableEditor::allActions() {
     return actions;
 }
 //start id=dialog
-void ActionTableEditor::
+/*void ActionTableEditor::
 on_m_tableView_activated(const QModelIndex& idx) {
     int row = idx.row();
     QAction* action = m_model->action(row);
@@ -60,7 +62,7 @@ on_m_tableView_activated(const QModelIndex& idx) {
         m_model->setData(idx, ks.toString());
         m_changedActions << action;
     }
-}
+}*/
 //end
 //start id=settings
 void ActionTableEditor::accept() {

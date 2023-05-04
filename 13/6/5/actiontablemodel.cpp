@@ -59,7 +59,14 @@ data(const QModelIndex& index, int role) const {
 //start id=flags
 Qt::ItemFlags ActionTableModel::
 flags(const QModelIndex& index) const {
-    if (index.isValid()) return Qt::ItemIsEnabled;
+
+    auto flags = QAbstractTableModel::flags(index);
+    if (index.isValid())  {
+        if(index.column() == 1)
+            return flags | Qt::ItemIsEditable;
+        else
+            return flags | Qt::ItemIsEnabled;
+    }
     else return Qt::ItemFlags::fromInt(0);
 }
 //end
