@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QList>
 #include "actioneditor_export.h"
+#include "shortcutdelegate.h"
 
 class QModelIndex;
 class QAction;
@@ -44,8 +45,8 @@ class ACTIONEDITOR_EXPORT ActionTableEditor : public QDialog {
 	static void restoreShortcuts(QList<QAction*> actions = allActions()) ;
 
 protected slots:
-	void on_m_tableView_activated(const QModelIndex& idx);      /* Slot podłączony automatycznie */
-	void on_m_filterField_textChanged(const QString& newText);  /* Slot podłączony automatyczniet */
+    //void on_m_tableView_activated(const QModelIndex& idx);      /* Slot podłączony automatycznie */
+    void on_m_filterField_textChanged(const QString& newText);  /* Slot podłączony automatyczniet */
 	/** Zapisz zmienione skróty w QSettings */
 	void accept();
 

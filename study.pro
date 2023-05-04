@@ -9,7 +9,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    13/6/5/main.cpp
+    13/6/5/main.cpp \
+    13/6/5/shortcutdelegate.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,7 +27,8 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS +=
+HEADERS += \
+    13/6/5/shortcutdelegate.h
 
 FORMS += 13/6/5/actioneditordialog.ui \
 13/6/5/actiontableeditor.ui
@@ -35,11 +37,13 @@ FORMS += 13/6/5/actioneditordialog.ui \
 
 HEADERS = 13/6/5/actiontableeditor.h \
     13/6/5/actioneditordialog.h \
-    13/6/5/actiontablemodel.h
+    13/6/5/actiontablemodel.h \
+    13/6/5/shortcutdelegate.h
 SOURCES = 13/6/5/actiontableeditor.cpp \
     13/6/5/actioneditordialog.cpp \
     13/6/5/actiontablemodel.cpp \
-    13/6/5/main.cpp
+    13/6/5/main.cpp \
+    13/6/5/shortcutdelegate.cpp
 
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc

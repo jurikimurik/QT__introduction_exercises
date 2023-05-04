@@ -9,12 +9,17 @@
 #include "actiontableeditor.h"
 #include "actioneditordialog.h"
 
+#include <QDebug>
+
 //start id="setup"
 ActionTableEditor::ActionTableEditor(QWidget* parent)
     :  QDialog(parent), m_ui(new Ui::ActionTableEditor) {
     // Inicjalizacja klasy UI Designera
     m_ui->setupUi(this);
     m_model = new ActionTableModel(allActions(), this);
+
+    m_ui->m_tableView->setItemDelegate(new ShortcutDelegate);
+
     setupSortFilter();
 }
 
@@ -46,6 +51,7 @@ void ActionTableEditor::
 on_m_tableView_activated(const QModelIndex& idx) {
     int row = idx.row();
     QAction* action = m_model->action(row);
+
     ActionEditorDialog aed(action);
 
     int result = aed.exec();
