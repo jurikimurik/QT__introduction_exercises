@@ -106,6 +106,13 @@ QMultiMap<QString, QString> Relations::getRelations() const
 void Relations::addRelation(QString from, QString to)
 {
     relations.insert(from, to);
+    relations.insert(to, from);
+}
+
+void Relations::removeRelation(QString from, QString to)
+{
+    relations.remove(from, to);
+    relations.remove(to, from);
 }
 
 int Relations::rowCount(const QModelIndex &parent) const
@@ -174,9 +181,16 @@ bool Relations::setData(const QModelIndex &index, const QVariant &value, int rol
         return false;
     }
 
-
     if(role == Qt::CheckStateRole && index.column() == 1)
     {
+        // Jezeli zaznaczony
+        if(index.data(Qt::CheckStateRole).toBool())
+        {
+            removeRelation(selectedIndex.data().toString(), index.data().toString());
+        } else {
+            addRelation(selectedIndex.data().toString(), index.data().toString());
+        }
+
         emit dataChanged(index,index,{role});
     }
     return true;

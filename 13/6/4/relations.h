@@ -20,6 +20,7 @@ public:
     void setRelations(const QMultiMap<QString, QString> &newRelations);
     QMultiMap<QString, QString> getRelations() const;
     void addRelation(QString from, QString to);
+    void removeRelation(QString from, QString to);
 
     // QAbstractItemModel interface
 public:
