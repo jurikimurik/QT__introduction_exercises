@@ -9,8 +9,7 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    14/2/inputform.cpp \
-    14/2/main.cpp
+    14/3/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,10 +26,8 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS += \
-    14/2/inputform.h
+HEADERS +=
 
-FORMS += \
-    14/2/inputform.ui
+FORMS +=
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
