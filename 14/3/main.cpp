@@ -31,7 +31,12 @@ int main(int argc, char* argv[])
     QTextStream reader(&plik);
     QString data = reader.readAll();
 
-    QRegularExpression exp("(\\b.*\\n)");
+    QRegularExpression exp_a(R"(\b(.)\1\w+\n)");
+    wypiszDopasowania(exp_a, data);
 
-    wypiszDopasowania(exp, data);
+    QRegularExpression exp_b(R"(\b.*[A-Z]\n)");
+    wypiszDopasowania(exp_b, data);
+
+    QRegularExpression exp_c(R"(\b\w*(.)\1\w*(.)\2\w*\n)");
+    wypiszDopasowania(exp_c, data);
 }
