@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MaskTestForm</class>
+ <widget class="QWidget" name="MaskTestForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>304</width>
+    <height>139</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="labelAlignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Maska:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="m_InputMask">
+     <property name="text">
+      <string>999-99-9999</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Dane wejsciowe:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="m_StringEntry">
+     <property name="inputMask">
+      <string/>
+     </property>
+     <property name="text">
+      <string>123-45-6789</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Wynik:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="m_Result">
+     <property name="text">
+      <string>123-45-6789</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Inna maska</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Koniec</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_InputMask</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MaskTestForm</receiver>
+   <slot>installMask()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_StringEntry</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MaskTestForm</receiver>
+   <slot>showResult()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>216</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MaskTestForm</receiver>
+   <slot>again()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MaskTestForm</receiver>
+   <slot>installMask()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showResult()</slot>
+  <slot>installMask()</slot>
+  <slot>again()</slot>
+ </slots>
+</ui>
