@@ -29,7 +29,9 @@ InputForm::~InputForm()
 void InputForm::calculate()
 {
     int godziny =  ui->m_IntEntry->text().toInt();
-    double stawka = ui->m_DoubleEntry->text().toDouble();
+    double stawka = ui->m_DoubleEntry->text().replace(',', '.').toDouble();
 
-    ui->m_Result->setText(QString::number(stawka*godziny));
+    double wynik = stawka * godziny;
+
+    ui->m_Result->setText(QString::number(wynik));
 }
