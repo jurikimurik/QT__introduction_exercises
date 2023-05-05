@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InputForm</class>
+ <widget class="QWidget" name="InputForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>410</width>
+    <height>120</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="workedHoursLabel">
+     <property name="text">
+      <string>Przepracowane godziny (pomiedzy %1 a %2):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="m_IntEntry"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="moneyPerHourLabel">
+     <property name="text">
+      <string>Stawka godzinowa (pomiedzy %1 a %2):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="m_DoubleEntry"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="revenueLabel">
+     <property name="text">
+      <string>Kwota wynagrodzenia za miniony tydzien:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="m_Result">
+     <property name="text">
+      <string>%1</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_DoubleEntry</sender>
+   <signal>returnPressed()</signal>
+   <receiver>InputForm</receiver>
+   <slot>calculate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>335</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_IntEntry</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_DoubleEntry</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_DoubleEntry</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_IntEntry</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>300</x>
+     <y>19</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>calculate()</slot>
+ </slots>
+</ui>
