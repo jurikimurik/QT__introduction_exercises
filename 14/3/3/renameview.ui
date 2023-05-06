@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RenameView</class>
+ <widget class="QMainWindow" name="RenameView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>497</width>
+    <height>242</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="loadButton">
+      <property name="text">
+       <string>LOAD PATH</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="nameChangeWidget" native="true">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="regexLabel">
+         <property name="text">
+          <string>Regex:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="m_regexEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="toNameLabel">
+         <property name="text">
+          <string>To name:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="m_toNameEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="statusEdit">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Status</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="generateButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>GENERATE</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>497</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>loadButton</sender>
+   <signal>pressed()</signal>
+   <receiver>RenameView</receiver>
+   <slot>loadPath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>255</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>281</x>
+     <y>63</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>generateButton</sender>
+   <signal>pressed()</signal>
+   <receiver>RenameView</receiver>
+   <slot>generate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_toNameEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>generateButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>259</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>386</x>
+     <y>193</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_regexEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_toNameEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>331</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>loadPath()</slot>
+  <slot>generate()</slot>
+ </slots>
+</ui>

@@ -10,7 +10,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     14/3/3/main.cpp \
-    14/3/3/renamemodel.cpp
+    14/3/3/renamemodel.cpp \
+    14/3/3/renameview.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -28,8 +29,10 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-    14/3/3/renamemodel.h
+    14/3/3/renamemodel.h \
+    14/3/3/renameview.h
 
-FORMS +=
+FORMS += \
+    14/3/3/renameview.ui
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
