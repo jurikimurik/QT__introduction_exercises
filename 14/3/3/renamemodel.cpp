@@ -2,7 +2,8 @@
 
 RenameModel::RenameModel(const QString &searchStringRegex, const QString &toName, const QString &folder) : m_searchRegex(searchStringRegex),
     m_toName(toName),
-    m_folderName(folder)
+    m_folderName(folder),
+    m_folder(m_folderName)
 {
     // Sprawdzamy dane
     if(!m_searchRegex.isValid())
@@ -10,6 +11,34 @@ RenameModel::RenameModel(const QString &searchStringRegex, const QString &toName
         throw std::runtime_error(m_searchRegex.errorString().toStdString());
     }
 
-    m_folder.setPath(m_folderName);
-    QDirIterator iterator(m_folder);
+    QDirIterator iterator(m_folder, QDirIterator::Subdirectories);
+    while(iterator.hasNext())
+    {
+        // Pobieramy nastepny plik/folder
+        QFile plik(iterator.next());
+
+        //Jezeli folder
+        //  - pomijaj
+        if(iterator.fileInfo().isDir())
+            continue;
+
+        //Sprawdzamy czy da sie otworzyc
+        if(!plik.open(QIODevice::ReadOnly))
+            throw std::runtime_error("Nie moge otworzyc pliku do czytania: " + plik.fileName().toStdString());
+
+        qDebug() << plik.fileName();
+
+        // Czytamy i zamieniamy w data
+        QString data(plik.readAll());
+        data.replace(m_searchRegex, toName);
+
+        // Generujemy plik wyjsciowy
+        QFileInfo info(plik.fileName());
+        QString nazwaWyjsciowa = info.path() + "/" + info.baseName() + "_EDITED." + info.completeSuffix();
+        QFile outputFile(nazwaWyjsciowa);
+        if(!outputFile.open(QIODevice::WriteOnly))
+            throw std::runtime_error("Nie moge stworzyc pliku do wpisywania: " + outputFile.fileName().toStdString());
+        outputFile.write(data.toUtf8());
+        outputFile.close();
+    }
 }

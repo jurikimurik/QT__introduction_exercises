@@ -10,5 +10,5 @@ QTextStream cin(stdin);
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
-    RenameModel model(QString(R"(\bm_*(\w+))"), "m_%1", QFileDialog::getExistingDirectory());
+    RenameModel model(QString(R"(\bm_*(\w+))"), "m_\\1", QFileDialog::getExistingDirectory());
 }
