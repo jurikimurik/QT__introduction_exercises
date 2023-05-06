@@ -26,8 +26,6 @@ RenameModel::RenameModel(const QString &searchStringRegex, const QString &toName
         if(!plik.open(QIODevice::ReadOnly))
             throw std::runtime_error("Nie moge otworzyc pliku do czytania: " + plik.fileName().toStdString());
 
-        qDebug() << plik.fileName();
-
         // Czytamy i zamieniamy w data
         QString data(plik.readAll());
         data.replace(m_searchRegex, toName);
