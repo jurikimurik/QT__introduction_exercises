@@ -1,12 +1,13 @@
 #include "addresswindow.h"
 #include "ui_addresswindow.h"
 
+#include "countryprops.h"
+
 AddressWindow::AddressWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AddressWindow)
 {
     ui->setupUi(this);
-
     //Dla make_pair
     using namespace std;
 
