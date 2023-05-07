@@ -25,8 +25,10 @@ public:
     CountryProps(QString name);
 public:
     void set(Type type, QString labelName, QString regex);
+    QString getC_countryName() const;
+
 private:
-    const QString c_countryName;
+    QString c_countryName;
 };
 
 #endif // COUNTRYPROPS_H

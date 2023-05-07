@@ -45,9 +45,37 @@ AddressWindow::AddressWindow(QWidget *parent) :
     m_okButton = ui->buttonsWidget->findChild<QPushButton*>("m_okButton");
     m_cancelButton = ui->buttonsWidget->findChild<QPushButton*>("m_cancelButton");
 
+    // Inicjalizacja typu USA i dodanie do QComboBox
+    CountryProps USA("USA");
+    m_countryProperties.push_back(USA);
+    CountryProps Canada("Canada");
+    m_countryProperties.push_back(Canada);
+
+    for(const auto& elem : m_countryProperties)
+    {
+        m_countryPair.second->addItem(elem.getC_countryName());
+    }
+
+    //Wybieramy i ustawiamy pierwsza opcję
+    countryChanged(m_countryProperties.first().getC_countryName());
 }
 
 AddressWindow::~AddressWindow()
 {
     delete ui;
+}
+
+void AddressWindow::proceed()
+{
+    qDebug() << "void AddressWindow::proceed()";
+}
+
+void AddressWindow::countryChanged(QString name)
+{
+    qDebug() << "AddressWindow::countryChanged(QString name = " + name + ")";
+}
+
+void AddressWindow::cancel()
+{
+    qDebug() << "void AddressWindow::cancel()";
 }

@@ -10,7 +10,8 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     14/6/1/addresswindow.cpp \
-    14/6/1/countryprops.cpp
+    14/6/1/countryprops.cpp \
+    14/6/1/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

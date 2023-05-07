@@ -19,3 +19,8 @@ void CountryProps::set(Type type, QString labelName, QString regex)
 {
     insert(type, std::make_pair(labelName, regex));
 }
+
+QString CountryProps::getC_countryName() const
+{
+    return c_countryName;
+}

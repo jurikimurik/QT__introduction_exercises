@@ -6,7 +6,8 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
-
+#include <QVector>
+#include "countryprops.h"
 
 
 namespace Ui {
@@ -20,6 +21,11 @@ class AddressWindow : public QMainWindow
 public:
     explicit AddressWindow(QWidget *parent = nullptr);
     ~AddressWindow();
+
+public slots:
+    void proceed();
+    void countryChanged(QString name);
+    void cancel();
 
 private:
     Ui::AddressWindow *ui;
@@ -39,6 +45,8 @@ private:
 
     QPushButton* m_okButton;
     QPushButton* m_cancelButton;
+
+    QVector<CountryProps> m_countryProperties;
 };
 
 #endif // ADDRESSWINDOW_H
