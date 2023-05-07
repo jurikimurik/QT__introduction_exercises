@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddressWindow</class>
+ <widget class="QMainWindow" name="AddressWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>387</width>
+    <height>363</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Address Form</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QWidget" name="infoWidget" native="true">
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="m_nameLabel">
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="m_nameEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="m_addressLabel">
+         <property name="text">
+          <string>Address</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="m_addressEdit"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="m_cityLabel">
+         <property name="text">
+          <string>City</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="m_cityEdit"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="m_stateLabel">
+         <property name="text">
+          <string>State</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="m_stateEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="m_zipLabel">
+         <property name="text">
+          <string>Zip</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="m_zipEdit"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="m_countryLabel">
+         <property name="text">
+          <string>Country</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="m_countryBox">
+         <item>
+          <property name="text">
+           <string>USA</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="m_phoneLabel">
+         <property name="text">
+          <string>Phone</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="m_phoneEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="buttonsWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="m_cancelButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="m_okButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>387</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_countryBox</sender>
+   <signal>textActivated(QString)</signal>
+   <receiver>AddressWindow</receiver>
+   <slot>countryChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AddressWindow</receiver>
+   <slot>proceed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AddressWindow</receiver>
+   <slot>cancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_nameEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_addressEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_addressEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_cityEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_cityEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_stateEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>293</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_stateEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_zipEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_zipEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_phoneEdit</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>332</x>
+     <y>183</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_phoneEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>m_okButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>246</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>proceed()</slot>
+  <slot>countryChanged(QString)</slot>
+  <slot>cancel()</slot>
+ </slots>
+</ui>
