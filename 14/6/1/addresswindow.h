@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QPushButton>
 #include <QVector>
+#include <QRegularExpressionValidator>
 #include "countryprops.h"
 
 

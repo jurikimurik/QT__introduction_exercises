@@ -45,9 +45,11 @@ AddressWindow::AddressWindow(QWidget *parent) :
     m_okButton = ui->buttonsWidget->findChild<QPushButton*>("m_okButton");
     m_cancelButton = ui->buttonsWidget->findChild<QPushButton*>("m_cancelButton");
 
-    // Inicjalizacja typu USA i dodanie do QComboBox
+    // Inicjalizacja typu USA oraz Kanady i dodanie do QComboBox
+    //  - "USA"
     CountryProps USA("USA");
     m_countryProperties.push_back(USA);
+    //  - "CANADA"
     CountryProps Canada("Canada");
     m_countryProperties.push_back(Canada);
 
@@ -72,10 +74,72 @@ void AddressWindow::proceed()
 
 void AddressWindow::countryChanged(QString name)
 {
+    cancel();
+
     qDebug() << "AddressWindow::countryChanged(QString name = " + name + ")";
+    CountryProps country("NONE");
+    for(const auto& elem : m_countryProperties)
+        if(elem.getC_countryName() == name) {
+            country = elem;
+            break;
+        }
+
+    // Jezeli nie znaleziona
+    if(country.getC_countryName() == "NONE")
+        return;
+
+    qDebug() << "DZIALAMY";
+
+    // Ustawiamy prawidlowo etykiety oraz walidatory
+    //  - ADDRESS
+    QPair<QString, QString> data = country.value(Type::Address);
+    m_addressPair.first->setText(data.first);
+    m_addressPair.second->setValidator(new QRegularExpressionValidator(
+                                    QRegularExpression(data.second),
+                                        m_addressPair.second));
+    //  - CITY
+    data = country.value(Type::City);
+    m_cityPair.first->setText(data.first);
+    m_cityPair.second->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(data.second),
+        m_cityPair.second));
+    //  - NAME
+    data = country.value(Type::Name);
+    m_namePair.first->setText(data.first);
+    m_namePair.second->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(data.second),
+        m_namePair.second));
+    //  - PHONE
+    data = country.value(Type::Phone);
+    m_phonePair.first->setText(data.first);
+    m_phonePair.second->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(data.second),
+        m_phonePair.second));
+    //  - STATE
+    data = country.value(Type::State);
+    m_statePair.first->setText(data.first);
+    m_statePair.second->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(data.second),
+        m_statePair.second));
+    //  - ZIP
+    data = country.value(Type::Zip);
+    m_zipPair.first->setText(data.first);
+    m_zipPair.second->setValidator(new QRegularExpressionValidator(
+        QRegularExpression(data.second),
+        m_zipPair.second));
+    //  - COUNTRY
+    data = country.value(Type::Country);
+    m_countryPair.first->setText(data.first);
 }
 
 void AddressWindow::cancel()
 {
+    // Oczyszczamy tekst
     qDebug() << "void AddressWindow::cancel()";
+    m_addressPair.second->setText("");
+    m_cityPair.second->setText("");
+    m_namePair.second->setText("");
+    m_phonePair.second->setText("");
+    m_statePair.second->setText("");
+    m_zipPair.second->setText("");
 }
