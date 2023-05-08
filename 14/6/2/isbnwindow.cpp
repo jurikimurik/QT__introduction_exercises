@@ -19,7 +19,6 @@ ISBNWindow::~ISBNWindow()
 
 void ISBNWindow::checkISBN()
 {
-    qDebug() << "ISBNWindow::checkISBN()";
     if(m_ISBNEdit->hasAcceptableInput())
         m_statusEdit->setText("Acceptable.");
     else
