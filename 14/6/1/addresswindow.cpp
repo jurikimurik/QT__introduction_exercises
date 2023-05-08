@@ -48,10 +48,24 @@ AddressWindow::AddressWindow(QWidget *parent) :
     // Inicjalizacja typu USA oraz Kanady i dodanie do QComboBox
     //  - "USA"
     CountryProps USA("USA");
+    USA.set(Type::Zip, "Zip-Code", R"([0-9]{2}-*[0-9]{3})");
+    USA.set(Type::State, "State", "[a-zA-Z]{2}");
     m_countryProperties.push_back(USA);
     //  - "CANADA"
     CountryProps Canada("Canada");
+    Canada.set(Type::State, "State", "[A-Z]{2}");
+    Canada.set(Type::Zip, "Postal Code", R"(([A-Z])([0-9])\g<1> ?\g<2>\g<1>\g<2>)");
     m_countryProperties.push_back(Canada);
+    //  - "POLAND"
+    CountryProps Poland("Poland");
+    Poland.set(Type::Zip, "Postal Code", R"([0-9]{2}-*[0-9]{3})");
+    Poland.set(Type::State, "Voivodeship", R"([^\s]+)");
+    m_countryProperties.push_back(Poland);
+    //  - "UKRAINE"
+    CountryProps Ukraine("Ukraine");
+    Ukraine.set(Type::Zip, "Postcode", R"([0-9]{2}-*[0-9]{3})");
+    Ukraine.set(Type::State, "Region", R"(.* OBL.)");
+    m_countryProperties.push_back(Ukraine);
 
     for(const auto& elem : m_countryProperties)
     {
@@ -70,6 +84,26 @@ AddressWindow::~AddressWindow()
 void AddressWindow::proceed()
 {
     qDebug() << "void AddressWindow::proceed()";
+    //Sprawdzamy poprawnosc
+    if(!m_addressPair.second->hasAcceptableInput() ||
+        !m_cityPair.second->hasAcceptableInput() ||
+        !m_namePair.second->hasAcceptableInput() ||
+        !m_phonePair.second->hasAcceptableInput() ||
+        !m_statePair.second->hasAcceptableInput() ||
+        !m_zipPair.second->hasAcceptableInput()) {
+        QMessageBox::warning(this, "UWAGA", "Pola zawieraja niepoprawny/niedokonczony tekst. Prosze sprawdzic go ponownie.", "Ok");
+        return;
+    }
+
+    QString allInOneText;
+    allInOneText += m_countryPair.second->currentText() + "\n";
+    allInOneText += m_statePair.second->text() + " " + m_zipPair.second->text() + " " + m_cityPair.second->text() + "\n";
+    allInOneText += m_addressPair.second->text() + "\n";
+    allInOneText += m_namePair.second->text() + " " + m_phonePair.second->text() + "\n";
+
+    QMessageBox::information(this, "List", allInOneText, "Wyslac list","Zaczekaj!");
+
+
 }
 
 void AddressWindow::countryChanged(QString name)

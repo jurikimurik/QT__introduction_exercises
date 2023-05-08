@@ -2,6 +2,7 @@
 #define ADDRESSWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
