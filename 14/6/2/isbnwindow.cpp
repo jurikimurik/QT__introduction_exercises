@@ -8,6 +8,8 @@ ISBNWindow::ISBNWindow(QWidget *parent) :
     ui->setupUi(this);
     m_ISBNEdit = ui->centralwidget->findChild<QLineEdit*>("m_ISBNEdit");
     m_statusEdit = ui->centralwidget->findChild<QLineEdit*>("m_statusEdit");
+
+    m_ISBNEdit->setValidator(new ISBNValidator(m_ISBNEdit));
 }
 
 ISBNWindow::~ISBNWindow()

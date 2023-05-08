@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
+#include "isbnvalidator.h"
 
 namespace Ui {
 class ISBNWindow;

@@ -9,6 +9,7 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    14/6/2/isbnvalidator.cpp \
     14/6/2/isbnwindow.cpp \
     14/6/2/main.cpp
 
@@ -28,6 +29,7 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
+    14/6/2/isbnvalidator.h \
     14/6/2/isbnwindow.h
 
 FORMS += \
