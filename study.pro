@@ -9,9 +9,8 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    14/6/1/addresswindow.cpp \
-    14/6/1/countryprops.cpp \
-    14/6/1/main.cpp
+    14/6/2/isbnwindow.cpp \
+    14/6/2/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -29,10 +28,9 @@ LIBS += -L$$(CPPLIBS) \
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
-    14/6/1/addresswindow.h \
-    14/6/1/countryprops.h
+    14/6/2/isbnwindow.h
 
 FORMS += \
-    14/6/1/addresswindow.ui
+    14/6/2/isbnwindow.ui
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
