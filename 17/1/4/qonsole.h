@@ -11,6 +11,7 @@ class Qonsole : public QMainWindow
     Q_OBJECT
 public:
     explicit Qonsole(QWidget *parent = nullptr);
+    ~Qonsole();
 
 public slots:
     void execute();
@@ -21,10 +22,13 @@ protected:
     void updateCursor();
 
 private:
-    QString m_UserInput;
-    QTextEdit* m_Logw;
-    QLineEdit* m_InputArea;
-    QProcess* m_Shell;
+    QTabWidget* m_tabWidget;
+
+    QVector<QString> m_UserInputs;
+    QVector<QTextEdit*> m_Logws;
+    //QLineEdit* m_InputArea;
+    QVector<QProcess*> m_Shells;
+    int getCurrentTabIndex();
 };
 
 #endif // QONSOLE_H
