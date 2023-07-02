@@ -68,14 +68,15 @@ bool Qonsole::eventFilter(QObject *watched, QEvent *event)
             execute();
             return true;
         } else if (key == Qt::Key_Backspace) {
-            m_UserInput.chop(1);
-            if(!m_UserInput.isEmpty())
+            if(m_UserInput.size() > 0)
             {
                 QString text = m_Logw->toPlainText();
                 text.chop(1);
                 m_Logw->setText(text);
             }
-
+            m_UserInput.chop(1);
+            updateCursor();
+            return true;
         } else {
             m_Logw->insertPlainText(str);
             return true;
@@ -87,7 +88,7 @@ bool Qonsole::eventFilter(QObject *watched, QEvent *event)
 void Qonsole::updateCursor()
 {
     QTextCursor cur = m_Logw->textCursor();
-    cur.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+    cur.movePosition(QTextCursor::End);
     m_Logw->setTextCursor(cur);
 }
 
