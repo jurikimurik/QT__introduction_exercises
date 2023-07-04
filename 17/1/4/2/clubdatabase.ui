@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ClubDatabase</class>
+ <widget class="QMainWindow" name="ClubDatabase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>497</width>
+    <height>542</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QComboBox" name="memberBox"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="idLabel">
+      <property name="text">
+       <string>ID:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="idEdit">
+      <property name="placeholderText">
+       <string>For new member, write unique ID...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="passLabel">
+      <property name="text">
+       <string>Password:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="passEdit">
+      <property name="placeholderText">
+       <string>Pasword will be displayed as MD5 hash...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="eMailLabel">
+      <property name="text">
+       <string>E-mail:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="eMailEdit">
+      <property name="placeholderText">
+       <string>Provide e-mail for member...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="addressLabel">
+      <property name="text">
+       <string>Address:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="addressEdit">
+      <property name="placeholderText">
+       <string>Provide address for member...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="telephoneLabel">
+      <property name="text">
+       <string>Telephone number:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="telephoneEdit">
+      <property name="placeholderText">
+       <string>Provide telephoneNumber for member...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Save member</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>497</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ClubDatabase</receiver>
+   <slot>trySaveMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>485</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>memberBox</sender>
+   <signal>textActivated(QString)</signal>
+   <receiver>ClubDatabase</receiver>
+   <slot>openMember(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>trySaveMember()</slot>
+  <slot>openMember(QString)</slot>
+ </slots>
+</ui>
