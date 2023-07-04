@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 10.0.0, 2023-07-02T12:56:51. -->
+<!-- Written by QtCreator 10.0.0, 2023-07-04T11:01:19. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -241,6 +241,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/urijmakovskij/study2/study.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/urijmakovskij/study2/study.pro</value>
+    <value type="QString" key="RunConfiguration.Arguments">&quot;moj wielki sekret&quot; Md5</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
