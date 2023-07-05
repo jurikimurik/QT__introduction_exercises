@@ -11,8 +11,10 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
     17/3/1-2/lifemainwindow.cpp \
+    17/3/1-2/lifeserver.cpp \
     17/3/1-2/lifeslice.cpp \
     17/3/1-2/lifewidget.cpp \
+    17/3/1-2/lifeworker.cpp \
     17/3/1-2/main.cpp
 
 # Default rules for deployment.
@@ -32,8 +34,10 @@ INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 HEADERS += \
     17/3/1-2/lifemainwindow.h \
+    17/3/1-2/lifeserver.h \
     17/3/1-2/lifeslice.h \
-    17/3/1-2/lifewidget.h
+    17/3/1-2/lifewidget.h \
+    17/3/1-2/lifeworker.h
 
 
 FORMS += \

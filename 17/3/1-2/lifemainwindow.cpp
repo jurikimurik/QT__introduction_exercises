@@ -7,7 +7,7 @@
 enum {DEAD=0, ALIVE=1};
 static QSize boardSize(1024, 768);
 
-LifeMainWindow::LifeMainWindow(QWidget *parent) :
+LifeMainWindow:: LifeMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LifeMainWindow)
 {
