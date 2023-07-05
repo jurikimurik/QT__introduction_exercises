@@ -1,6 +1,7 @@
 QT = core
 QT += widgets
 QT += multimedia
+QT += concurrent
 
 CONFIG += c++17 cmdline
 
@@ -9,10 +10,10 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    17/1/4/2/clubdatabase.cpp \
-    17/1/4/2/crhash.cpp \
-    17/1/4/2/main.cpp \
-    17/1/4/2/member.cpp
+    17/3/1-2/lifemainwindow.cpp \
+    17/3/1-2/lifeslice.cpp \
+    17/3/1-2/lifewidget.cpp \
+    17/3/1-2/main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -29,12 +30,13 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS += 17/1/4/2/crhash.h \
-    17/1/4/2/clubdatabase.h \
-    17/1/4/2/member.h
+HEADERS += \
+    17/3/1-2/lifemainwindow.h \
+    17/3/1-2/lifeslice.h \
+    17/3/1-2/lifewidget.h
 
 
 FORMS += \
-    17/1/4/2/clubdatabase.ui
+    17/3/1-2/lifemainwindow.ui
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
