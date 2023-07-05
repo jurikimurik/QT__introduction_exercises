@@ -13,6 +13,7 @@ public:
     explicit LifeWorker(LifeServer *parent, QRect, const QImage&);
     void run();
 private:
+    LifeServer* m_server;
     QRect m_rect;
     const QImage& m_image;
 };

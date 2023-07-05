@@ -7,12 +7,13 @@
 #include <QThread>
 #include <QRect>
 #include <QImage>
+#include "lifeworker.h"
 
 class LifeServer : public QObject
 {
     Q_OBJECT
 public:
-    explicit LifeServer(QObject *parent, const QImage&);
+    explicit LifeServer(QObject *parent, QImage&, const QSize&);
     void beginSimulation(int numThreads);
     void updatePartOfImage(QRect, QImage);
     bool isRunning() const;
@@ -21,7 +22,8 @@ public slots:
 private:
     int m_numThreads;
     bool m_isRunning;
-    const QImage& m_image;
+    QImage& m_image;
+    const QSize& m_size;
     QMutex m_imageMutex;
     QSet<QThread*> m_threads;
 };
