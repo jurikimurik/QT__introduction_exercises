@@ -13,7 +13,7 @@ class LifeServer : public QObject
 {
     Q_OBJECT
 public:
-    explicit LifeServer(QObject *parent, QImage&, const QSize&);
+    explicit LifeServer(QObject *parent, QImage&, const QSize&, int&);
     void beginSimulation(int numThreads);
     void updatePartOfImage(QRect, QImage);
     bool isRunning() const;
@@ -26,6 +26,8 @@ private:
     const QSize& m_size;
     QMutex m_imageMutex;
     QSet<QThread*> m_threads;
+
+    int& m_numGenerations;
 };
 
 #endif // LIFESERVER_H

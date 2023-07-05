@@ -2,8 +2,8 @@
 #include <QApplication>
 #include <QPainter>
 
-LifeServer::LifeServer(QObject *parent, QImage &image, const QSize &size)
-    : QObject{parent}, m_image(image), m_size(size)
+LifeServer::LifeServer(QObject *parent, QImage &image, const QSize &size, int& numGenerations)
+    : QObject{parent}, m_image(image), m_size(size), m_numGenerations(numGenerations)
 {
 
 }
@@ -42,17 +42,18 @@ void LifeServer::startStop(bool onOff)
         m_isRunning = false;
         for(QThread* thread : m_threads)
         {
-            thread->terminate();
+            thread->quit();
         }
+        m_threads.clear();
     }
 }
 
 void LifeServer::updatePartOfImage(QRect rect, QImage image)
 {
-    qApp->processEvents();
     QMutexLocker locker(&m_imageMutex);
     if(image.isNull())
         image = QImage(m_size, QImage::Format_Mono);
     QPainter painter(&m_image);
     painter.drawImage(rect.topLeft(), image);
+    m_numGenerations++;
 }

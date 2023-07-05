@@ -4,6 +4,7 @@
 #include "ui_lifemainwindow.h"
 #include "lifewidget.h"
 #include "lifeslice.h"
+
 enum {DEAD=0, ALIVE=1};
 static QSize boardSize(1024, 768);
 
@@ -44,18 +45,39 @@ void LifeMainWindow::on_actionPopulate_Randomly_triggered() {
 
 
 void LifeMainWindow::on_actionStartStop_triggered(bool checked) {
-    m_running = checked;
-    if (m_running) {
-        m_numGenerations = 0;
-        m_timer.start();
-        calculate();
-    }
-    else {
-        int elapsed = m_timer.elapsed();
-        double fps = 1000.0 * m_numGenerations / elapsed;
-        QString status = tr("Frames: %1. elapsed: %2  fps: %3")
-                         .arg(m_numGenerations).arg(elapsed).arg(fps);
-        statusBar()->showMessage(status);
+    if(ui->isConcurrentBox->isChecked())
+    {
+        m_running = checked;
+        if (m_running) {
+            m_numGenerations = 0;
+            m_timer.start();
+            calculate();
+        }
+        else {
+            int elapsed = m_timer.elapsed();
+            double fps = 1000.0 * m_numGenerations / elapsed;
+            QString status = tr("Frames: %1. elapsed: %2  fps: %3")
+                                 .arg(m_numGenerations).arg(elapsed).arg(fps);
+            statusBar()->showMessage(status);
+            ui->isConcurrentBox->setEnabled(true);
+            ui->threadSpinBox->setEnabled(true);
+        }
+    } else {
+        if(checked) {
+            m_numGenerations = 0;
+            m_timer.start();
+            calculate();
+        } else {
+            m_server->startStop(false);
+
+            int elapsed = m_timer.elapsed();
+            double fps = 1000.0 * m_numGenerations / elapsed;
+            QString status = tr("Frames: %1. elapsed: %2  fps: %3")
+                                 .arg(m_numGenerations).arg(elapsed).arg(fps);
+            statusBar()->showMessage(status);
+            ui->isConcurrentBox->setEnabled(true);
+            ui->threadSpinBox->setEnabled(true);
+        }
     }
 }
 
@@ -120,26 +142,41 @@ void stitchReduce(QImage& next, const LifeSlice &slice) {
 //end
 //start id="blockingMappedReduced"
 void LifeMainWindow::calculate() {
-    int w = boardSize.width();
-    // Być może nie jest to optymalne, ale zdaje się działać dobrze…
-    int segments = QThreadPool::globalInstance()->maxThreadCount() * 2; 
-    int ws = w/segments;                    /* Szerokość segmentu. */
-    LifeFunctor functor;                    /* Funktor operacji map. */
-    while (m_running) {
-        qApp->processEvents();              /* Zadbaj o ciągłe działanie GUI. */
-        m_numGenerations++;
-        QList<LifeSlice> slices;            /* Podziel na mniejsze elementy. */
-        for (int c=0; c<segments; ++c) {
-            int tlx = c*ws;
-            QRect rect(tlx, 0, ws, boardSize.height());
-            LifeSlice slice(rect, m_current);    
-            slices << slice;                /* Dodaj elementy do kolekcji, by zostały przetworzone w sposób równoległy. */
+    ui->isConcurrentBox->setEnabled(false);
+    ui->threadSpinBox->setEnabled(false);
+    if(ui->isConcurrentBox->isChecked())
+    {
+        int w = boardSize.width();
+        // Być może nie jest to optymalne, ale zdaje się działać dobrze…
+        int segments = QThreadPool::globalInstance()->maxThreadCount() * 2;
+        int ws = w/segments;                    /* Szerokość segmentu. */
+        LifeFunctor functor;                    /* Funktor operacji map. */
+        while (m_running) {
+            qApp->processEvents();              /* Zadbaj o ciągłe działanie GUI. */
+            m_numGenerations++;
+            QList<LifeSlice> slices;            /* Podziel na mniejsze elementy. */
+            for (int c=0; c<segments; ++c) {
+                int tlx = c*ws;
+                QRect rect(tlx, 0, ws, boardSize.height());
+                LifeSlice slice(rect, m_current);
+                slices << slice;                /* Dodaj elementy do kolekcji, by zostały przetworzone w sposób równoległy. */
+            }
+            m_current = QtConcurrent::blockingMappedReduced(slices, functor,
+                                                            stitchReduce, QtConcurrent::UnorderedReduce );  /* Wykonaj równoległe zadania.
+                Na gotowych elementach można wywołać stichReduce(). */
+            m_lifeWidget->setImage(m_current);
         }
-        m_current = QtConcurrent::blockingMappedReduced(slices, functor,
-                    stitchReduce, QtConcurrent::UnorderedReduce );  /* Wykonaj równoległe zadania. 
-				Na gotowych elementach można wywołać stichReduce(). */
-        m_lifeWidget->setImage(m_current);
+    } else {
+        if(m_server == nullptr)
+            m_server = new LifeServer(this, m_current, boardSize, m_numGenerations);
+        m_server->beginSimulation(ui->threadSpinBox->value());
+        while(m_server->isRunning())
+        {
+            qApp->processEvents();
+            m_lifeWidget->setImage(m_current);
+        }
     }
+
 }
 //end
 

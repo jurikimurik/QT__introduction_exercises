@@ -7,6 +7,7 @@
 #include <QRect>
 #include <QImage>
 #include "lifeslice.h"
+#include "lifeserver.h"
 #include <random>
 
 class LifeWidget;
@@ -35,6 +36,7 @@ private:
     bool m_running;
     std::default_random_engine m_engine;
     std::uniform_int_distribution<int> m_distribution;
+    LifeServer* m_server = nullptr;
 
 
 private slots:
