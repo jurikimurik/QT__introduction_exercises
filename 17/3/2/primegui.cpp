@@ -46,4 +46,17 @@ void PrimeGUI::accept()
     ui->buttonBox->setStandardButtons(QDialogButtonBox::Cancel);
     qApp->processEvents();
     m_primeServer.doCalc(nthreads, highestNumber, ui->concurrentBox->isChecked());
+    while(m_primeServer.isRunning())
+    {
+        qApp->processEvents();
+        if(ui->concurrentBox->isChecked()) {
+            if(m_primeServer.watcher()->isRunning()) {
+                QFutureWatcher<void>* watcher = m_primeServer.watcher();
+                ui->progressBar->setValue(watcher->progressValue()*100/watcher->progressMaximum());
+            }
+
+        }
+        else
+            ui->progressBar->setValue(m_primeServer.lastNumber()*100/highestNumber);
+    }
 }

@@ -19,6 +19,9 @@ public:
     int nextNumberToCheck();
     void foundPrime(int);
     bool isRunning() const;
+    int lastNumber() const;
+
+    QFutureWatcher<void> *watcher();
 
 public slots:
     void cancel();

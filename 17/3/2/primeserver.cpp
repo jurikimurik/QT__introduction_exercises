@@ -50,6 +50,11 @@ bool PrimeServer::isRunning() const
     return m_isRunning;
 }
 
+int PrimeServer::lastNumber() const
+{
+    return m_nextNumber;
+}
+
 void PrimeServer::cancel()
 {
     QMutexLocker locker(&m_nextMutex);
@@ -70,6 +75,8 @@ void PrimeServer::handleThreadFinished()
     emit results(result + r2);
     m_isRunning = false;
 }
+
+
 
 void PrimeServer::handleWatcherFinished()
 {
@@ -97,4 +104,9 @@ void PrimeServer::doConcurrent()
     qDebug() << m_generateTime << "Wygenerowano " << m_primes.length() << " liczb";
     connect(&m_watcher, &QFutureWatcher<void>::finished, this, &PrimeServer::handleWatcherFinished);
     m_watcher.setFuture(QtConcurrent::filter(m_primes, isPrime));
+}
+
+QFutureWatcher<void>* PrimeServer::watcher()
+{
+    return &m_watcher;
 }

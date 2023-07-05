@@ -53,6 +53,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="concurrentBox">
      <property name="text">
       <string>Filtr QtConcurrent</string>
