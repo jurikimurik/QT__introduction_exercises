@@ -9,14 +9,6 @@ CONFIG += c++17 cmdline
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    17/3/1-2/lifemainwindow.cpp \
-    17/3/1-2/lifeserver.cpp \
-    17/3/1-2/lifeslice.cpp \
-    17/3/1-2/lifewidget.cpp \
-    17/3/1-2/lifeworker.cpp \
-    17/3/1-2/main.cpp
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -32,15 +24,22 @@ LIBS += -L$$(CPPLIBS) \
 
 INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
-HEADERS += \
-    17/3/1-2/lifemainwindow.h \
-    17/3/1-2/lifeserver.h \
-    17/3/1-2/lifeslice.h \
-    17/3/1-2/lifewidget.h \
-    17/3/1-2/lifeworker.h
 
+SOURCES += \
+    17/3/2/isprime.cpp \
+    17/3/2/main.cpp \
+    17/3/2/primegui.cpp \
+    17/3/2/primeserver.cpp \
+    17/3/2/primethread.cpp
+
+HEADERS += \
+    17/3/2/isprime.h \
+    17/3/2/primegui.h \
+    17/3/2/primeserver.h \
+    17/3/2/primethread.h
 
 FORMS += \
-    17/3/1-2/lifemainwindow.ui
+    17/3/2/primegui.ui
+
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
