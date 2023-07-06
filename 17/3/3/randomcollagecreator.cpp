@@ -7,11 +7,13 @@
 #endif
 
 #include <QDir>
+#include <QPainter>
 
 RandomCollageCreator::RandomCollageCreator(int width, int height, const QString &inputFolder, const QString &outputFolder) : m_width(width),
     m_height(height),
     m_inputFolder(inputFolder),
-    m_outputFolder(outputFolder)
+    m_outputFolder(outputFolder),
+    m_engine(QTime::currentTime().msec())
 {}
 
 void RandomCollageCreator::generateImage()
@@ -52,17 +54,82 @@ void RandomCollageCreator::loadImages()
 
 void RandomCollageCreator::transformImagesRandomly()
 {
+    for(const QImage& image : m_images)
+    {
+        moreCopies(image, std::uniform_int_distribution(0, 10)(m_engine));
+    }
 
+    for(QImage& image : m_images)
+    {
+        transformRandomly(image);
+    }
 }
 
 void RandomCollageCreator::createOutputImage()
 {
+    QImage finalImage(m_width, m_height, QImage::Format_RGB32);
+    finalImage.fill(0);
+    QPainter painter(&finalImage);
+    for(const QImage& image : m_images)
+    {
+        painter.drawImage(getRandomSizeAndPosition(), image);
+    }
 
+    m_finalOutput = finalImage;
 }
 
 void RandomCollageCreator::saveToFile()
 {
+    m_finalOutput.save(m_outputFolder+"super-image.png");
     m_isReady = true;
+}
+
+void RandomCollageCreator::moreCopies(const QImage &image, int numberOfCopies)
+{
+    while(numberOfCopies-- > 0)
+    {
+        m_images << image;
+    }
+}
+
+void RandomCollageCreator::transformRandomly(QImage &image)
+{
+    std::uniform_int_distribution dist(0, 1);
+    //Inverting pixels
+    if(dist(m_engine))
+        image.invertPixels();
+
+    //Mirroring
+    if(dist(m_engine))
+        image.mirror(dist(m_engine), dist(m_engine));
+
+    //Rgb swapping (from RGB to BGR)
+    if(dist(m_engine))
+        image.rgbSwap();
+
+    //Color changing
+    if(dist(m_engine))
+    {
+        std::uniform_int_distribution colorDist(0, 256);
+        int repeat = colorDist(m_engine);
+
+        for(int i = 0; i < repeat; ++i)
+        {
+            int r = colorDist(m_engine);
+            int g = colorDist(m_engine);
+            int b = colorDist(m_engine);
+            image.setPixel(std::uniform_int_distribution(0, image.width()-1)(m_engine),
+                           std::uniform_int_distribution(0, image.height()-1)(m_engine), qRgb(r, g, b));
+        }
+    }
+
+}
+
+QRect RandomCollageCreator::getRandomSizeAndPosition()
+{
+    std::uniform_int_distribution xRand(0, m_width);
+    std::uniform_int_distribution yRand(0, m_height);
+    return QRect(xRand(m_engine), yRand(m_engine), xRand(m_engine), yRand(m_engine));
 }
 
 bool RandomCollageCreator::isReady() const
