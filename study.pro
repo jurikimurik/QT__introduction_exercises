@@ -26,20 +26,12 @@ INCLUDEPATH += . $$(CPPLIBS)/dataobjects
 
 
 SOURCES += \
-    17/3/2/isprime.cpp \
-    17/3/2/main.cpp \
-    17/3/2/primegui.cpp \
-    17/3/2/primeserver.cpp \
-    17/3/2/primethread.cpp
-
+    17/3/3/main.cpp \
+    17/3/3/randomcollagecreator.cpp
 HEADERS += \
-    17/3/2/isprime.h \
-    17/3/2/primegui.h \
-    17/3/2/primeserver.h \
-    17/3/2/primethread.h
+    17/3/3/randomcollagecreator.h
 
-FORMS += \
-    17/3/2/primegui.ui
+FORMS +=
 
 
 RESOURCES = /Users/urijmakovskij/Desktop/src/libs/icons/icons.qrc
