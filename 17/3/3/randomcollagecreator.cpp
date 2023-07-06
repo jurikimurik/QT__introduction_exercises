@@ -1,6 +1,11 @@
 #include "randomcollagecreator.h"
 
+#define DEBUG 0
+
+#if DEBUG == 1
 #include <QDebug>
+#endif
+
 #include <QDir>
 
 RandomCollageCreator::RandomCollageCreator(int width, int height, const QString &inputFolder, const QString &outputFolder) : m_width(width),
@@ -35,6 +40,14 @@ void RandomCollageCreator::loadImages()
         QImage image(filePath);
         m_images << image;
     }
+
+#if DEBUG == 1
+    for(const QString& filePath: filesPathes)
+    {
+        qDebug() << filePath;
+    }
+#endif
+
 }
 
 void RandomCollageCreator::transformImagesRandomly()
