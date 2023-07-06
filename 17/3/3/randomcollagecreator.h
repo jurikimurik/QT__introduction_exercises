@@ -23,13 +23,6 @@ private:
     void transformImagesRandomly();
     void createOutputImage();
     void saveToFile();
-
-    //-----FOR transformImagesRandomly------
-    void moreCopies(const QImage& image, int numberOfCopies);
-    void transformRandomly(QImage& image);
-
-    //-----FOR createOutputImage------------
-    QRect getRandomSizeAndPosition();
 private:
     int m_width;
     int m_height;
@@ -40,8 +33,6 @@ private:
     QImage m_finalOutput;
 
     bool m_isReady;
-
-    std::default_random_engine m_engine;
 };
 
 #endif // RANDOMCOLLAGECREATOR_H
