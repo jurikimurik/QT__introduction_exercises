@@ -2,9 +2,10 @@
 
 #include <QtConcurrent>
 
-#define DEBUG 0
+#define DEBUG 1
+#define USE_QTCONCURRENT 1
 
-#if DEBUG == 1
+#if DEBUG
 #include <QDebug>
 #endif
 
@@ -70,11 +71,20 @@ RandomCollageCreator::RandomCollageCreator(int width, int height, const QString 
 
 void RandomCollageCreator::generateImage()
 {
+#if DEBUG
+    QElapsedTimer timer;
+    timer.start();
+#endif
+
     m_isReady = false;
     loadImages();
     transformImagesRandomly();
     createOutputImage();
     saveToFile();
+
+#if DEBUG
+    qDebug() << "Elapsed: " << timer.elapsed();
+#endif
 }
 
 void RandomCollageCreator::loadImages()
@@ -95,7 +105,7 @@ void RandomCollageCreator::loadImages()
         m_images << image;
     }
 
-#if DEBUG == 1
+#if DEBUG
     for(const QString& filePath: filesPathes)
     {
         qDebug() << filePath;
@@ -111,7 +121,14 @@ void RandomCollageCreator::transformImagesRandomly()
     {
         moreCopies(m_images, image, std::uniform_int_distribution(0, 10)(m_engine));
     }
+#if USE_QTCONCURRENT
     QtConcurrent::map(m_images, transformRandomly);
+#else
+    for(QImage& image : m_images)
+    {
+        transformRandomly(image);
+    }
+#endif
 }
 
 void RandomCollageCreator::createOutputImage()
